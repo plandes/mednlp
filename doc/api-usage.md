@@ -183,7 +183,7 @@ atoms:
 }
 ```
 
-See the full [uts example] for the full example code.
+See the full [UTS example] for the full example code.
 
 
 ## Using CUI as Word Embeddings
@@ -284,7 +284,7 @@ source_dir = ${default:cache_dir}/ctakes/source
 ```
 For brevity the [CLI] application code and configuration is omitted, and other
 configuration given in previous sections (see [UMLS Access via UTS] for more
-detail). See the full [ctakes example] for the full example code.
+detail). See the full [cTAKES example] for the full example code.
 
 The pertinent snippet to get the [Pandas] data frame from the medical text is
 very simple:
@@ -330,7 +330,7 @@ API.
 
 [examples]: https://github.com/plandes/mednlp/tree/master/example
 [entity example]: https://github.com/plandes/mednlp/tree/master/example/features
-[ctakes example]: https://github.com/plandes/mednlp/tree/master/example/ctakes
+[cTAKES example]: https://github.com/plandes/mednlp/tree/master/example/ctakes
 [cui2vec example]: https://github.com/plandes/mednlp/tree/master/example/cui2vec
-[uts example]: https://github.com/plandes/mednlp/tree/master/example/uts
+[UTS example]: https://github.com/plandes/mednlp/tree/master/example/uts
 [UTS key file]: https://github.com/plandes/mednlp/tree/master/example/uts-key.json
