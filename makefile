@@ -8,10 +8,12 @@ PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
 PIP_ARGS +=		--use-deprecated=legacy-resolver
 PY_DEP_POST_DEPS +=	modeldeps
-ENTRY_BIN =		./mednlp
 INFO_TARGETS +=		appinfo
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
+
+# project
+ENTRY_BIN =		./mednlp
 
 
 ## project specific
