@@ -20,7 +20,7 @@ class Application(object):
     """
     # tell the application not mistake the `uts_client` as an option when
     # generating the online help with the -h option
-    CLI_META = {'option_excludes': {'uts_client'}}
+    CLI_META = {'option_excludes': {'ctakes_stash'}}
 
     ctakes_stash: CTakesParserStash = field()
     """Runs the cTAKES CUI entity linker on a directory of medical notes."""
