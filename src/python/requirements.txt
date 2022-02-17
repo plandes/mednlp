@@ -4,4 +4,4 @@ medcat==1.2.5
 ctakes-parser==0.1.0
 zensols.nlp~=1.0
 zensols.install>=0.0.8
-
+numpy<1.22.0,>=1.19.0
