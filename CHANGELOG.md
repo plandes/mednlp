@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changed
+- Use token instead of sentence level mapping in cases where MedCAT creates
+  unaligned sentence boundaries.
+
+
 ## [0.0.1] - 1/30/2022
 ### Added
 - Initial version.
