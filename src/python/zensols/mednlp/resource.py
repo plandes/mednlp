@@ -98,11 +98,15 @@ class MedCatResource(object):
         src_top: str
         src_conf = Dict[str, Any]
         for src_top, src_conf in src.items():
-            targ_conf: Dict[str, Any] = getattr(targ, src_top)
-            if logger.isEnabledFor(logging.DEBUG):
-                logger.debug(
-                    f"updating '{src_top}': <{targ_conf}> with <{src_conf}>")
-            targ_conf.update(src_conf)
+            targ_any: Any = getattr(targ, src_top)
+            if isinstance(targ_any, dict):
+                targ_conf: Dict[str, Any] = targ_any
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(
+                        f"updating '{src_top}': <{targ_conf}> with <{src_conf}>")
+                targ_conf.update(src_conf)
+            else:
+                setattr(targ, src_top, src_conf)
 
     def _add_filters(self, config: Config, cdb: CDB):
         filter_tuis = set()
