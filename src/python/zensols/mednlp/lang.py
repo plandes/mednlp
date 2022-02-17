@@ -117,7 +117,6 @@ class MedicalTokenFeatures(SpacyTokenFeatures):
         med_ent: Optional[_MedicalEntity] = ix2ent.get(self.i)
         if med_ent is None:
             med_ent = _MedicalEntity()
-        self.is_ent = med_ent.is_ent
         self.med_ent = med_ent
         self.is_ent = med_ent.is_ent
 
@@ -234,7 +233,7 @@ class MedicalLanguageResource(LanguageResource):
         super().__post_init__()
 
     def _create_model_key(self) -> str:
-        return 'name-{self.name}'
+        return f'name-{self.name}'
 
     def _create_model(self) -> Language:
         return self.medcat_resource.cat.get_spacy_nlp()
@@ -258,6 +257,9 @@ class MedicalLanguageResource(LanguageResource):
         for ent in doc.ents:
             for i in range(ent.start, ent.end):
                 ix2ent[i].concept_span = ent
+
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'normalizing with: {self.token_normalizer}')
 
         return map(map_feature, self.token_normalizer.normalize(doc))
 
