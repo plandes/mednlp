@@ -248,6 +248,9 @@ class MedicalLanguageResource(LanguageResource):
                     f._definition = e.definition
             return f
 
+        if logger.isEnabledFor(logging.INFO):
+            logger.info(f'parsing: {doc}')
+
         # load/create model resources
         res: MedCatResource = self.medcat_resource
         tf_type: Type[TokenFeatures] = self.feature_type
