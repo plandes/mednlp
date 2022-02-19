@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 import logging
 from functools import reduce
 import collections
+from frozendict import frozendict
 from spacy.tokens.token import Token
 from spacy.tokens.doc import Doc
 from spacy.tokens.span import Span
@@ -16,7 +17,10 @@ from spacy.language import Language
 from scispacy.linking_utils import Entity as SciSpacyEntity
 from medcat.cdb import CDB
 from zensols.config import Dictable
-from zensols.nlp import LanguageResource, TokenFeatures, SpacyTokenFeatures
+from zensols.nlp import (
+    FeatureDocumentParser, FeatureToken, SpacyFeatureToken,
+    MappingCombinerFeatureDocumentParser,
+)
 from . import (
     MedNLPError, MedCatResource, EntityLinkerResource, UTSClient,
 )
@@ -60,7 +64,7 @@ class Entity(Dictable):
 class EntitySimilarity(Entity):
     """A similarity measure of a medical concept in cui2vec.
 
-    :see: :meth:`.MedicalLanguageResource.similarity_by_term`
+    :see: :meth:`.MedicalFeatureDocumentParser.similarity_by_term`
     """
     similiarty: float = field()
 
@@ -92,25 +96,26 @@ class _MedicalEntity(object):
         return self.concept_span._.cui
 
 
-@dataclass
-class MedicalTokenFeatures(SpacyTokenFeatures):
+class MedicalFeatureToken(SpacyFeatureToken):
     """A set of token features that optionally contains a medical concept.
 
     """
-    FIELD_IDS_BY_TYPE = {
-        'str': frozenset('cui_ pref_name_ detected_name_ tuis_ definition_ tui_descs_'.split()),
+    FEATURE_IDS_BY_TYPE = frozendict({
+        'str': frozenset(('cui_ pref_name_ detected_name_ tuis_ ' +
+                          'definition_ tui_descs_').split()),
         'bool': frozenset('is_concept'.split()),
         'float': frozenset('context_similarity'.split()),
         'int': frozenset('cui'.split()),
-        'set': frozenset('tuis sub_names'.split()),
-    }
-    FIELD_IDS = frozenset(
-        reduce(lambda res, x: res | x, FIELD_IDS_BY_TYPE.values()))
-    NONE_SET = frozenset()
+        'list': frozenset('tuis sub_names'.split())})
+    FEATURE_IDS = frozenset(
+        reduce(lambda res, x: res | x, FEATURE_IDS_BY_TYPE.values()))
+    WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) +
+                                 'cui_'.split())
+    _NONE_SET = frozenset()
 
-    def __init__(self, doc: Doc, tok_or_ent: Union[Token, Span], norm: str,
+    def __init__(self, spacy_token: Union[Token, Span], norm: str,
                  res: MedCatResource, ix2ent: Dict[int, _MedicalEntity]):
-        super().__init__(doc, tok_or_ent, norm)
+        super().__init__(spacy_token, norm)
         self._definition: str = self.NONE
         self._cdb: CDB = res.cat.cdb
         self._res = res
@@ -160,12 +165,12 @@ class MedicalTokenFeatures(SpacyTokenFeatures):
             return self.NONE
 
     @property
-    def sub_names(self) -> Set[str]:
+    def sub_names(self) -> Tuple[str]:
         """Return other names for the concept."""
         if self.is_concept:
-            return self._cdb.cui2names[self.cui_]
+            return tuple(sorted(self._cdb.cui2names[self.cui_]))
         else:
-            return self.NONE
+            return []
 
     @property
     def context_similarity(self) -> float:
@@ -181,13 +186,13 @@ class MedicalTokenFeatures(SpacyTokenFeatures):
         return self._definition
 
     @property
-    def tuis(self) -> Set[str]:
+    def tuis(self) -> Tuple[str]:
         """The the CUI type of the concept."""
         if self.is_concept:
             cui: str = self.cui_
-            return self._cdb.cui2type_ids.get(cui)
+            return tuple(sorted(self._cdb.cui2type_ids.get(cui)))
         else:
-            return self.NONE_SET
+            return self._NONE_SET
 
     @property
     def tuis_(self) -> str:
@@ -207,12 +212,11 @@ class MedicalTokenFeatures(SpacyTokenFeatures):
 
 
 @dataclass
-class MedicalLanguageResource(LanguageResource):
+class MedicalFeatureDocumentParser(MappingCombinerFeatureDocumentParser):
     """A medical based language resources that parses concepts.
 
     """
-    feature_type: Type[SpacyTokenFeatures] = field(
-        default=MedicalTokenFeatures)
+    token_class: Type[FeatureToken] = field(default=MedicalFeatureToken)
     """The class to use for instances created by :meth:`features`."""
 
     medcat_resource: MedCatResource = field(default=None)
@@ -238,22 +242,22 @@ class MedicalLanguageResource(LanguageResource):
     def _create_model(self) -> Language:
         return self.medcat_resource.cat.get_spacy_nlp()
 
-    def features(self, doc: Doc) -> Iterable[TokenFeatures]:
-        def map_feature(t: Tuple[Token, str]):
-            """Add linked definitions if enabled."""
-            f: TokenFeatures = tf_type(doc, *t, res, ix2ent)
-            if self.include_definition and f.is_concept:
-                e: SciSpacyEntity = self.get_linked_entity(f.cui_)
-                if e is not None:
-                    f._definition = e.definition
-            return f
+    def _create_token(self, tok: Token, norm: Tuple[Token, str],
+                      *args, **kwargs) -> FeatureToken:
+        tp: Type[FeatureToken] = self.token_class
+        f: FeatureToken = tp(tok, norm, *args, **kwargs)
+        if self.include_definition and f.is_concept:
+            e: SciSpacyEntity = self.get_linked_entity(f.cui_)
+            if e is not None:
+                f._definition = e.definition
+        return f.detach(self.token_feature_ids)
 
+    def _normalize_tokens(self, doc: Doc) -> Iterable[FeatureToken]:
         if logger.isEnabledFor(logging.INFO):
             logger.info(f'parsing: {doc}')
 
         # load/create model resources
         res: MedCatResource = self.medcat_resource
-        tf_type: Type[TokenFeatures] = self.feature_type
         ix2ent: Dict[int, _MedicalEntity] = collections.defaultdict(_MedicalEntity)
 
         # add entities
@@ -264,7 +268,7 @@ class MedicalLanguageResource(LanguageResource):
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'normalizing with: {self.token_normalizer}')
 
-        return map(map_feature, self.token_normalizer.normalize(doc))
+        return super()._normalize_tokens(doc, res=res, ix2ent=ix2ent)
 
     def get_entities(self, text: str) -> Dict[str, Any]:
         """Return the all concept entity data

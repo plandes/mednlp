@@ -68,7 +68,10 @@ class Application(Dictable):
             for tok in sent:
                 if not only_medical or tok.is_ent:
                     self._write_line(f'{tok.norm}:', depth + 1, writer)
-                    tok.write_attributes(depth + 2, writer, include_type=False)
+                    tok.write_attributes(
+                        depth + 2, writer,
+                        feature_ids=self.doc_parser.token_feature_ids
+                    )
             self._write_line('entities:', depth, writer)
             for ents in sent.entities:
                 self._write_line(
@@ -205,3 +208,9 @@ class Application(Dictable):
         for sim in self.doc_parser.langres.similarity_by_term(term):
             print(sim.cui)
             sim.write(1)
+
+    # def proto(self, text):
+    #     "Test"
+    #     doc: FeatureDocument = self.doc_parser.parse(text)
+    #     for tok in doc.token_iter():
+    #         tok.write(feature_ids='norm cui_'.split())

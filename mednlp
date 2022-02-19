@@ -16,7 +16,7 @@ harn = ConfigurationImporterCliHarness(
     app_factory_class='zensols.mednlp.ApplicationFactory',
     config_path=None,
     proto_args={
-        -1: 'proto',
+        -1: ['proto', st],
         0: 'config',
         1: ['show', st],
         2: 'atom C0242379'.split(),

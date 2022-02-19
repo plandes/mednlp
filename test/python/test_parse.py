@@ -1,20 +1,12 @@
-import logging
 import unittest
 import sys
 import json
-from spacy.tokens.doc import Doc
 from pathlib import Path
 from zensols.cli import CliHarness
 from zensols.nlp import (
-    TokenFeatures, FeatureToken,
-    FeatureSentence, FeatureDocument, FeatureDocumentParser
+    FeatureToken, FeatureSentence, FeatureDocument, FeatureDocumentParser
 )
 from zensols.mednlp import Application, ApplicationFactory
-
-
-if 0:
-    logging.basicConfig(level=logging.DEBUG)
-    logger = logging.getLogger(__name__)
 
 
 class TestApp(unittest.TestCase):
@@ -30,19 +22,17 @@ class TestApp(unittest.TestCase):
         app: Application = self.app
         parser: FeatureDocumentParser = app.doc_parser
         self.assertTrue(isinstance(parser, FeatureDocumentParser))
-        doc: Doc = parser.langres.parse(self.text)
-        self.assertTrue(Doc, type(doc))
-        med_feats = []
-        for feat in parser.langres.features(doc):
-            fd = feat.asdict()
-            med_feats.append({k: fd[k] for k in fd.keys() & keeps})
-        none = TokenFeatures.NONE
+        med_toks = []
+        for tok in parser(self.text).token_iter():
+            fd = tok.asdict()
+            med_toks.append({k: fd[k] for k in fd.keys() & keeps})
+        none = FeatureToken.NONE
         self.assertEqual({'cui_': none, 'pref_name_': none},
-                         med_feats[0])
+                         med_toks[0])
         self.assertEqual({'cui_': 'C0011900', 'pref_name_': 'Diagnosis'},
-                         med_feats[2])
+                         med_toks[2])
         self.assertEqual({'cui_': 'C0035078', 'pref_name_': 'Kidney Failure'},
-                         med_feats[4])
+                         med_toks[4])
 
     def test_doc_parse(self):
         app = self.app
@@ -70,7 +60,8 @@ class TestApp(unittest.TestCase):
         for s in obj['sentences']:
             for t in s['tokens']:
                 del t['context_similarity']
-        # enable to re-write `should` test data for API changes
+        # enable to re-write `should` test data for API changes; but have to
+        # remove all `context_simirity` entries
         if 0:
             with open(path, 'w') as f:
                 f.write(json_str)
