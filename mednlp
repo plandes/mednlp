@@ -27,7 +27,7 @@ harn = ConfigurationImporterCliHarness(
         7: ['ctakes', st],
         8: ['group', 'byname', '-q', 'Disorders,Drugs'],
         9: ['similarity', 'heart'],
-    }[1],
+    }[9],
     proto_factory_kwargs={
         'reload_pattern': r'^(zensols.mednlp|zensols.nlp.combine|zensols.nlp.norm)'},
 )

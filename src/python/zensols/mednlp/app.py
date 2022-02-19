@@ -145,7 +145,7 @@ class Application(Dictable):
         :param term: the term to search for (eg 'lung cancer')
 
         """
-        pprint(self.doc_parser.langres.uts_client.search_term(term))
+        pprint(self.doc_parser.uts_client.search_term(term))
 
     def atom(self, cui: str):
         """Search the UMLS database using UTS and show results.
@@ -153,7 +153,7 @@ class Application(Dictable):
         :param cui: the concept ID to search for (eg 'C0242379')
 
         """
-        pprint(self.doc_parser.langres.uts_client.get_atoms(cui))
+        pprint(self.doc_parser.uts_client.get_atoms(cui))
 
     def define(self, cui: str):
         """Look up an entity by CUI.  This takes a long time.
@@ -161,7 +161,7 @@ class Application(Dictable):
         :param cui: the concept ID to search for (eg 'C0242379')
 
         """
-        entity = self.doc_parser.langres.get_linked_entity(cui)
+        entity = self.doc_parser.get_linked_entity(cui)
         print(entity)
 
     def group(self, info: GroupInfo, query: str = None):
@@ -172,7 +172,7 @@ class Application(Dictable):
         :param query: comma delimited name list used to subset the output data
 
         """
-        res: MedCatResource = self.doc_parser.langres.medcat_resource
+        res: MedCatResource = self.doc_parser.medcat_resource
         df: pd.DataFrame = res.groups
         if info == GroupInfo.csv:
             path = Path('tui-groups.csv')
@@ -196,8 +196,7 @@ class Application(Dictable):
 
         """
         text: str = self._get_text(text_or_file)
-        mc_res: MedCatResource = self.doc_parser.langres
-        stash: CTakesParserStash = mc_res.get_new_ctakes_parser_stash()
+        stash: CTakesParserStash = self.doc_parser.get_new_ctakes_parser_stash()
         stash.set_documents([text])
         print(stash['0'].to_string())
 
@@ -205,12 +204,6 @@ class Application(Dictable):
         """Get the cosine similarity between two CUIs.
 
         """
-        for sim in self.doc_parser.langres.similarity_by_term(term):
+        for sim in self.doc_parser.similarity_by_term(term):
             print(sim.cui)
             sim.write(1)
-
-    # def proto(self, text):
-    #     "Test"
-    #     doc: FeatureDocument = self.doc_parser.parse(text)
-    #     for tok in doc.token_iter():
-    #         tok.write(feature_ids='norm cui_'.split())

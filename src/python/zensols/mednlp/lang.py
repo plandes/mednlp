@@ -4,7 +4,7 @@ from __future__ import annotations
 """
 __author__ = 'Paul Landes'
 
-from typing import Type, Union, Iterable, Dict, Optional, Any, Set, Tuple, List
+from typing import Type, Union, Iterable, Dict, Optional, Any, Tuple, List
 from dataclasses import dataclass, field
 import logging
 from functools import reduce
@@ -16,10 +16,9 @@ from spacy.tokens.span import Span
 from spacy.language import Language
 from scispacy.linking_utils import Entity as SciSpacyEntity
 from medcat.cdb import CDB
-from zensols.config import Dictable
+from zensols.config import Dictable, ConfigFactory
 from zensols.nlp import (
-    FeatureDocumentParser, FeatureToken, SpacyFeatureToken,
-    MappingCombinerFeatureDocumentParser,
+    FeatureToken, SpacyFeatureToken, MappingCombinerFeatureDocumentParser
 )
 from . import (
     MedNLPError, MedCatResource, EntityLinkerResource, UTSClient,
@@ -35,23 +34,23 @@ class Entity(Dictable):
     """
     _DICTABLE_ATTRIBUTES = 'cui name definition'.split()
 
-    entity: SciSpacyEntity = field(repr=False)
+    sci_spacy_entity: SciSpacyEntity = field(repr=False)
     """The entity identified by :mod:`scispacy.linking_utils`."""
 
     @property
     def name(self) -> str:
         """The canonical name of the entity."""
-        return self.entity.canonical_name
+        return self.sci_spacy_entity.canonical_name
 
     @property
     def definition(self) -> str:
         """The human readable description of the entity."""
-        return self.entity.definition
+        return self.sci_spacy_entity.definition
 
     @property
     def cui(self) -> str:
         """The unique concept identifier."""
-        return self.entity.concept_id
+        return self.sci_spacy_entity.concept_id
 
     def __str__(self) -> str:
         return f'{self.name} ({self.cui})'
@@ -216,6 +215,9 @@ class MedicalFeatureDocumentParser(MappingCombinerFeatureDocumentParser):
     """A medical based language resources that parses concepts.
 
     """
+    config_factory: ConfigFactory = field(default=None)
+    """The configuration factory used to create cTAKES and cui2vec instances."""
+
     token_class: Type[FeatureToken] = field(default=MedicalFeatureToken)
     """The class to use for instances created by :meth:`features`."""
 
@@ -343,5 +345,5 @@ class MedicalFeatureDocumentParser(MappingCombinerFeatureDocumentParser):
             # name: str = entity.canonical_name.lower()
             # defn: str = entity.definition
             sim: float = embedding.keyed_vectors.similarity(cui, rel_cui)
-            sims.append(EntitySimilarity(entity, sim))
+            sims.append(EntitySimilarity(entity.sci_spacy_entity, sim))
         return sims
