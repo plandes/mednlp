@@ -24,6 +24,6 @@ class MedNLPError(APIError):
 
 from .uts import UTSError, NoResultsError, AuthenticationError, UTSClient
 from .resource import *
-from .lang import *
+from .parser import *
 from .app import *
 from .cli import *
