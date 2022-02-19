@@ -18,7 +18,7 @@ from . import (
     MedNLPError, MedCatResource, MedicalFeatureToken,
     EntityLinkerResource, UTSClient
 )
-from .domain import Entity, _MedicalEntity
+from .domain import Entity, _MedicalEntity, EntitySimilarity
 
 logger = logging.getLogger(__name__)
 
