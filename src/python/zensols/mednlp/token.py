@@ -41,7 +41,7 @@ class MedicalFeatureToken(SpacyFeatureToken):
         self._definition: str = self.NONE
         self._cdb: CDB = res.cat.cdb
         self._res = res
-        med_ent: Optional[_MedicalEntity] = ix2ent.get(self.i)
+        med_ent: Optional[_MedicalEntity] = ix2ent.get(self.idx)
         if med_ent is None:
             med_ent = _MedicalEntity()
         self.med_ent = med_ent

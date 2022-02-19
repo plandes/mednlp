@@ -78,7 +78,8 @@ class MedicalFeatureDocumentParser(MappingCombinerFeatureDocumentParser):
         # add entities
         for ent in doc.ents:
             for i in range(ent.start, ent.end):
-                ix2ent[i].concept_span = ent
+                tok = doc[i]
+                ix2ent[tok.idx].concept_span = ent
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'normalizing with: {self.token_normalizer}')
