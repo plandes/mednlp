@@ -22,12 +22,12 @@ harn = ConfigurationImporterCliHarness(
         2: 'atom C0242379'.split(),
         3: 'define C0242379'.split(),
         4: ['search', 'lung cancer'],
-        5: ['features', st] + '--ids cui_,tuis_,tui_descs_,pref_name_,loc -e'.split(),
-        6: ['features', st] + '--out a.csv --ids pref_name_,loc -e'.split(),
+        5: ['features', st] + '--ids cui_,tuis_,tui_descs_,pref_name_,lexspan -e'.split(),
+        6: ['features', st] + '--out a.csv --ids pref_name_,lexspan -e'.split(),
         7: ['ctakes', st],
         8: ['group', 'byname', '-q', 'Disorders,Drugs'],
         9: ['similarity', 'heart'],
-    }[9],
+    }[1],
     proto_factory_kwargs={
         'reload_pattern': r'^(zensols.mednlp|zensols.nlp.combine|zensols.nlp.norm)'},
 )

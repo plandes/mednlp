@@ -185,7 +185,7 @@ class Application(Dictable):
             df = df[df['name'].str.match(reg)]
             print(','.join(df['tui'].tolist()))
         else:
-            raise ApplicationError(f'Unkown query info type: {info}')
+            raise ApplicationError(f'Unknown query info type: {info}')
 
     def ctakes(self, text_or_file: str, only_medical: bool = False):
         """Invoke cTAKES on a directory with text files.
