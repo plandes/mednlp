@@ -4,210 +4,23 @@ from __future__ import annotations
 """
 __author__ = 'Paul Landes'
 
-from typing import Type, Union, Iterable, Dict, Optional, Any, Tuple, List
+from typing import Type, Iterable, Dict, Any, Tuple, List
 from dataclasses import dataclass, field
 import logging
-from functools import reduce
 import collections
-from frozendict import frozendict
 from spacy.tokens.token import Token
 from spacy.tokens.doc import Doc
-from spacy.tokens.span import Span
 from spacy.language import Language
 from scispacy.linking_utils import Entity as SciSpacyEntity
-from medcat.cdb import CDB
-from zensols.config import Dictable, ConfigFactory
-from zensols.nlp import (
-    FeatureToken, SpacyFeatureToken, MappingCombinerFeatureDocumentParser
-)
+from zensols.config import ConfigFactory
+from zensols.nlp import FeatureToken, MappingCombinerFeatureDocumentParser
 from . import (
-    MedNLPError, MedCatResource, EntityLinkerResource, UTSClient,
+    MedNLPError, MedCatResource, MedicalFeatureToken,
+    EntityLinkerResource, UTSClient
 )
+from .domain import Entity, _MedicalEntity
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class Entity(Dictable):
-    """A convenience container class that Wraps a SciSpacy entity.
-
-    """
-    _DICTABLE_ATTRIBUTES = 'cui name definition'.split()
-
-    sci_spacy_entity: SciSpacyEntity = field(repr=False)
-    """The entity identified by :mod:`scispacy.linking_utils`."""
-
-    @property
-    def name(self) -> str:
-        """The canonical name of the entity."""
-        return self.sci_spacy_entity.canonical_name
-
-    @property
-    def definition(self) -> str:
-        """The human readable description of the entity."""
-        return self.sci_spacy_entity.definition
-
-    @property
-    def cui(self) -> str:
-        """The unique concept identifier."""
-        return self.sci_spacy_entity.concept_id
-
-    def __str__(self) -> str:
-        return f'{self.name} ({self.cui})'
-
-    def __repr__(self):
-        return self.cui
-
-
-@dataclass
-class EntitySimilarity(Entity):
-    """A similarity measure of a medical concept in cui2vec.
-
-    :see: :meth:`.MedicalFeatureDocumentParser.similarity_by_term`
-    """
-    similiarty: float = field()
-
-
-@dataclass
-class _MedicalEntity(object):
-    """Container class for general and medical specific named entities.  Instances
-    of this class have the NER from a vanilla spaCy model output and the NER+L
-    linked UMLS concepts.
-
-    """
-    concept_span: Optional[Span] = field(default=None)
-    """The UMLS concept medical domain entity."""
-
-    @property
-    def is_concept(self) -> bool:
-        return self.concept_span is not None
-
-    @property
-    def is_ent(self) -> bool:
-        return self.concept_span is not None
-
-    @property
-    def cui(self) -> str:
-        return int(self.cui_[1:])
-
-    @property
-    def cui_(self) -> str:
-        return self.concept_span._.cui
-
-
-class MedicalFeatureToken(SpacyFeatureToken):
-    """A set of token features that optionally contains a medical concept.
-
-    """
-    FEATURE_IDS_BY_TYPE = frozendict({
-        'str': frozenset(('cui_ pref_name_ detected_name_ tuis_ ' +
-                          'definition_ tui_descs_').split()),
-        'bool': frozenset('is_concept'.split()),
-        'float': frozenset('context_similarity'.split()),
-        'int': frozenset('cui'.split()),
-        'list': frozenset('tuis sub_names'.split())})
-    FEATURE_IDS = frozenset(
-        reduce(lambda res, x: res | x, FEATURE_IDS_BY_TYPE.values()))
-    WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) +
-                                 'cui_'.split())
-    _NONE_SET = frozenset()
-
-    def __init__(self, spacy_token: Union[Token, Span], norm: str,
-                 res: MedCatResource, ix2ent: Dict[int, _MedicalEntity]):
-        super().__init__(spacy_token, norm)
-        self._definition: str = self.NONE
-        self._cdb: CDB = res.cat.cdb
-        self._res = res
-        med_ent: Optional[_MedicalEntity] = ix2ent.get(self.i)
-        if med_ent is None:
-            med_ent = _MedicalEntity()
-        self.med_ent = med_ent
-        self.is_ent = med_ent.is_ent
-
-    @property
-    def ent(self) -> str:
-        return self.med_ent.concept_span.label if self.is_concept else super().ent
-
-    @property
-    def ent_(self) -> str:
-        return self.med_ent.concept_span.label_ if self.is_concept else super().ent_
-
-    @property
-    def is_concept(self) -> bool:
-        """``True`` if this has a CUI and identifies a medical concept."""
-        return self.is_ent
-
-    @property
-    def cui_(self) -> str:
-        """The unique UMLS concept ID."""
-        return self.med_ent.cui_ if self.is_concept else self.NONE
-
-    @property
-    def cui(self) -> int:
-        """Returns the numeric part of the concept ID."""
-        return -1 if not self.is_concept else int(self.cui_[1:])
-
-    @property
-    def pref_name_(self) -> str:
-        """The preferred name of the concept."""
-        if self.is_concept:
-            return self._cdb.cui2preferred_name.get(self.cui_)
-        else:
-            return self.NONE
-
-    @property
-    def detected_name_(self) -> str:
-        """The detected name of the concept."""
-        if self.is_concept:
-            return self.med_ent.concept_span._.detected_name
-        else:
-            return self.NONE
-
-    @property
-    def sub_names(self) -> Tuple[str]:
-        """Return other names for the concept."""
-        if self.is_concept:
-            return tuple(sorted(self._cdb.cui2names[self.cui_]))
-        else:
-            return []
-
-    @property
-    def context_similarity(self) -> float:
-        """The similiarity of the concept."""
-        if self.is_concept:
-            return self.med_ent.concept_span._.context_similarity
-        else:
-            return -1
-
-    @property
-    def definition_(self) -> str:
-        """The definition if the concept."""
-        return self._definition
-
-    @property
-    def tuis(self) -> Tuple[str]:
-        """The the CUI type of the concept."""
-        if self.is_concept:
-            cui: str = self.cui_
-            return tuple(sorted(self._cdb.cui2type_ids.get(cui)))
-        else:
-            return self._NONE_SET
-
-    @property
-    def tuis_(self) -> str:
-        """All CUI TUIs (types) of the concept sorted as a comma delimited list.
-
-        """
-        return ','.join(sorted(self.tuis))
-
-    @property
-    def tui_descs_(self) -> str:
-        """Descriptions of :obj:`tuis_`."""
-        return ', '.join(map(lambda t: self._res.tuis[t], sorted(self.tuis)))
-
-    def __str__(self):
-        cui_str = f' ({self.cui_})' if self.is_concept else ''
-        return self.norm + cui_str
 
 
 @dataclass

@@ -14,16 +14,10 @@ def _intercept_medcat_logging():
 _intercept_medcat_logging()
 
 
-from zensols.util import APIError
-
-
-class MedNLPError(APIError):
-    """Raised by any medical NLP speicic reason in this library."""
-    pass
-
-
+from .domain import *
 from .uts import UTSError, NoResultsError, AuthenticationError, UTSClient
 from .resource import *
+from .token import *
 from .parser import *
 from .app import *
 from .cli import *
