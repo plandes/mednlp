@@ -17,7 +17,7 @@ from zensols.config import Dictable, ConfigFactory
 from zensols.cli import ApplicationError
 from zensols.nlp import FeatureDocumentParser, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
-from . import MedCatResource
+from . import MedCatResource, MedicalLibrary
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +47,9 @@ class Application(Dictable):
 
     doc_parser: FeatureDocumentParser = field()
     """Parses and NER tags medical terms."""
+
+    library: MedicalLibrary = field()
+    """Medical resource library that contains UMLS access, cui2vec etc.."""
 
     def _get_text(self, text_or_file: str) -> str:
         """Return the text from a file or the text passed based on if ``text_or_file``
@@ -145,7 +148,7 @@ class Application(Dictable):
         :param term: the term to search for (eg 'lung cancer')
 
         """
-        pprint(self.doc_parser.uts_client.search_term(term))
+        pprint(self.library.uts_client.search_term(term))
 
     def atom(self, cui: str):
         """Search the UMLS database using UTS and show results.
@@ -153,7 +156,7 @@ class Application(Dictable):
         :param cui: the concept ID to search for (eg 'C0242379')
 
         """
-        pprint(self.doc_parser.uts_client.get_atoms(cui))
+        pprint(self.library.uts_client.get_atoms(cui))
 
     def define(self, cui: str):
         """Look up an entity by CUI.  This takes a long time.
@@ -161,7 +164,7 @@ class Application(Dictable):
         :param cui: the concept ID to search for (eg 'C0242379')
 
         """
-        entity = self.doc_parser.get_linked_entity(cui)
+        entity = self.library.get_linked_entity(cui)
         print(entity)
 
     def group(self, info: GroupInfo, query: str = None):
@@ -172,7 +175,7 @@ class Application(Dictable):
         :param query: comma delimited name list used to subset the output data
 
         """
-        res: MedCatResource = self.doc_parser.medcat_resource
+        res: MedCatResource = self.library.medcat_resource
         df: pd.DataFrame = res.groups
         if info == GroupInfo.csv:
             path = Path('tui-groups.csv')
@@ -196,7 +199,7 @@ class Application(Dictable):
 
         """
         text: str = self._get_text(text_or_file)
-        stash: CTakesParserStash = self.doc_parser.get_new_ctakes_parser_stash()
+        stash: CTakesParserStash = self.library.get_new_ctakes_parser_stash()
         stash.set_documents([text])
         print(stash['0'].to_string())
 
@@ -204,6 +207,9 @@ class Application(Dictable):
         """Get the cosine similarity between two CUIs.
 
         """
-        for sim in self.doc_parser.similarity_by_term(term):
+        for sim in self.library.similarity_by_term(term):
             print(sim.cui)
             sim.write(1)
+
+    def proto(self, text):
+        print(self.doc_parser.token_feature_ids)
