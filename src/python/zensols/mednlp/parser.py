@@ -13,7 +13,7 @@ from spacy.tokens.doc import Doc
 from spacy.language import Language
 from scispacy.linking_utils import Entity as SciSpacyEntity
 from zensols.config import ConfigFactory
-from zensols.nlp import FeatureToken, MappingCombinerFeatureDocumentParser
+from zensols.nlp import FeatureToken, SpacyFeatureDocumentParser
 from . import (
     MedNLPError, MedCatResource, MedicalFeatureToken,
     EntityLinkerResource, UTSClient
@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class MedicalFeatureDocumentParser(MappingCombinerFeatureDocumentParser):
+class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
     """A medical based language resources that parses concepts.
 
     """
