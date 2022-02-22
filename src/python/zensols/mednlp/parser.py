@@ -4,7 +4,7 @@ from __future__ import annotations
 """
 __author__ = 'Paul Landes'
 
-from typing import Type, Iterable, Dict, Tuple
+from typing import Type, Iterable, Dict, Tuple, Set
 from dataclasses import dataclass, field
 import logging
 import collections
@@ -12,7 +12,9 @@ from spacy.tokens.token import Token
 from spacy.tokens.doc import Doc
 from spacy.language import Language
 from scispacy.linking_utils import Entity as SciSpacyEntity
-from zensols.nlp import FeatureToken, SpacyFeatureDocumentParser
+from zensols.nlp import (
+    FeatureToken, SpacyFeatureDocumentParser, FeatureDocumentParser
+)
 from . import MedNLPError, MedCatResource, MedicalFeatureToken
 from .domain import _MedicalEntity
 
@@ -22,6 +24,17 @@ logger = logging.getLogger(__name__)
 @dataclass
 class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
     """A medical based language resources that parses concepts.
+
+    """
+    TOKEN_FEATURE_IDS = frozenset(FeatureDocumentParser.TOKEN_FEATURE_IDS |
+                                  MedicalFeatureToken.FEATURE_IDS)
+    """Default token feature ID set for the medical parser.
+
+    """
+    token_feature_ids: Set[str] = field(default=TOKEN_FEATURE_IDS)
+    """The features to keep from spaCy tokens.
+
+    :see: :obj:`TOKEN_FEATURE_IDS`
 
     """
     token_class: Type[FeatureToken] = field(default=MedicalFeatureToken)
