@@ -60,6 +60,10 @@ class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
     def _create_token(self, tok: Token, norm: Tuple[Token, str],
                       *args, **kwargs) -> FeatureToken:
         tp: Type[FeatureToken] = self.token_class
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'create token: {tok}/{norm}')
+            logger.debug(f'args: <{args}>')
+            logger.debug(f'kwargs: <{kwargs}>')
         f: FeatureToken = tp(tok, norm, *args, **kwargs)
         if self.include_definition and f.is_concept:
             e: SciSpacyEntity = self.get_linked_entity(f.cui_)
