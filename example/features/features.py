@@ -14,6 +14,8 @@ from zensols.cli import ProgramNameConfigurator
 from zensols.nlp import FeatureDocumentParser, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory
 
+DEFAULT_SENT = 'He was diagnosed with kidney failure in the United States.'
+
 
 # the definition of the application class executed from the CLI glue code
 @dataclass
@@ -31,6 +33,12 @@ class Application(object):
     def _boundary(self, s: str):
         print(''.join(['-' * 5, s, '-' * 5]))
 
+    def dump(self, sent: str):
+        """Dump all features available to a CSV file."""
+        doc: FeatureDocument = self.doc_parser(sent)
+        df = pd.DataFrame(map(lambda t: t.asdict(), doc.tokens))
+        df.to_csv('features.csv')
+
     def show(self, sent: str = None):
         """Parse a sentence and print all features for each token.
 
@@ -38,7 +46,7 @@ class Application(object):
 
         """
         if sent is None:
-            sent = 'He was diagnosed with kidney failure in the United States.'
+            sent = DEFAULT_SENT
 
         self._boundary(f'sentence: <{sent}>')
 
@@ -69,6 +77,6 @@ if (__name__ == '__main__'):
         app_config_resource='features.conf',
         app_config_context=ProgramNameConfigurator(
             None, default='features').create_section(),
-        proto_args='',
+        proto_args=['dump', DEFAULT_SENT],
         proto_factory_kwargs={'reload_pattern': '^features'},
     ).run()
