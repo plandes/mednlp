@@ -126,7 +126,13 @@ class MedicalFeatureToken(SpacyFeatureToken):
     @property
     def tui_descs_(self) -> str:
         """Descriptions of :obj:`tuis_`."""
-        return ', '.join(map(lambda t: self._res.tuis[t], sorted(self.tuis)))
+        def map_tui(k: str) -> str:
+            v = self._res.tuis.get(k)
+            if v is None:
+                v = f'? ({k})'
+            return v
+
+        return ', '.join(map(map_tui, sorted(self.tuis)))
 
     def __str__(self):
         cui_str = f' ({self.cui_})' if self.is_concept else ''
