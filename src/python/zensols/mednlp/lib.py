@@ -14,6 +14,9 @@ from . import MedCatResource, EntityLinkerResource, UTSClient
 
 @dataclass
 class MedicalLibrary(object):
+    """A utility class that provides access to medical APIs.
+
+    """
     config_factory: ConfigFactory = field(default=None)
     """The configuration factory used to create cTAKES and cui2vec instances.
 
