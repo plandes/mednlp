@@ -14,8 +14,7 @@ from typing import Dict, List, Tuple
 from dataclasses import dataclass, field
 import logging
 from gensim.models.keyedvectors import KeyedVectors
-from zensols.cli import CliHarness
-from zensols.cli import ProgramNameConfigurator
+from zensols.cli import CliHarness, ProgramNameConfigurator, ApplicationError
 from zensols.mednlp import UTSClient
 from zensols.mednlp.cui2vec import Cui2VecEmbedModel
 
@@ -38,6 +37,30 @@ class Application(object):
     cui2vec_embedding: Cui2VecEmbedModel = field()
     """The cui2vec embedding model."""
 
+    def __post_init__(self):
+        # suppress gensim API warnings
+        import warnings
+        warnings.filterwarnings(
+            'ignore', message='invalid value encountered in true_divide')
+
+    @property
+    def kv(self) -> KeyedVectors:
+        embedding: Cui2VecEmbedModel = self.cui2vec_embedding
+        return embedding.keyed_vectors
+
+    def _search_cui(self, term: str) -> str:
+        kv: KeyedVectors = self.kv
+        res: List[Dict[str, str]] = self.uts_client.search_term(term)
+        cui: str = None
+        for rd in res:
+            cui = rd['ui']
+            if cui in kv:
+                logger.info(f"found cui: '{term}' -> {cui}")
+                break
+        if cui is None:
+            raise ApplicationError(f'CUI {cui} not found in cui2vec')
+        return cui
+
     def similarity(self, term: str = 'heart disease', topn: int = 5):
         """Get the cosine similarity between two CUIs.
 
@@ -46,15 +69,26 @@ class Application(object):
         :param topn: the top N count similarities to return
 
         """
-        embedding: Cui2VecEmbedModel = self.cui2vec_embedding
-        kv: KeyedVectors = embedding.keyed_vectors
-        res: List[Dict[str, str]] = self.uts_client.search_term(term)
-        cui: str = res[0]['ui']
+        kv: KeyedVectors = self.kv
+        cui: str = self._search_cui(term)
         sims_by_word: List[Tuple[str, float]] = kv.similar_by_word(cui, topn)
         for rel_cui, proba in sims_by_word:
             rel_atom: Dict[str, str] = self.uts_client.get_atoms(rel_cui)
             rel_name = rel_atom.get('name', 'Unknown')
-            print(f'{rel_name} ({rel_cui}): {proba * 100:.2f}%')
+            logger.info(f'{rel_name} ({rel_cui}): {proba * 100:.2f}%')
+
+    def distance(self, term_a: str, term_b: str) -> float:
+        """Get the cosine similarity between two CUIs.
+
+        :param term: the medical term
+
+        """
+        kv: KeyedVectors = self.kv
+        cui_a: str = self._search_cui(term_a)
+        cui_b: str = self._search_cui(term_b)
+        cos_dis: float = kv.distance(cui_a, cui_b)
+        logger.info(f'similarity: {cui_a} <-> {cui_b}: {cos_dis}')
+        return cos_dis
 
 
 if (__name__ == '__main__'):
