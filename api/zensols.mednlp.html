@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zensols.mednlp package &mdash; Medical natural language parsing and utility library 0.0.2 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../CONTRIBUTING.html" />
+    <link rel="prev" title="API Reference" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../top.html" class="icon icon-home"> Medical natural language parsing and utility library
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">zensols.mednlp package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-app">zensols.mednlp.app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-cli">zensols.mednlp.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-ctakes">zensols.mednlp.ctakes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-cui2vec">zensols.mednlp.cui2vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-domain">zensols.mednlp.domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-lib">zensols.mednlp.lib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-parser">zensols.mednlp.parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-resource">zensols.mednlp.resource</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-token">zensols.mednlp.token</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zensols-mednlp-uts">zensols.mednlp.uts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-zensols.mednlp">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../top.html">Medical natural language parsing and utility library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../top.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+      <li>zensols.mednlp package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/zensols.mednlp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zensols-mednlp-package">
+<h1>zensols.mednlp package<a class="headerlink" href="#zensols-mednlp-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="zensols-mednlp-app">
+<h2>zensols.mednlp.app<a class="headerlink" href="#zensols-mednlp-app" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-1546ba519df13c0daab8eee83671ba1c2f288463.png" alt="Inheritance diagram of zensols.mednlp.app" usemap="#inheritance3f45fd46e2" class="inheritance graphviz" /></div>
+<map id="inheritance3f45fd46e2" name="inheritance3f45fd46e2">
+<area shape="rect" id="node2" href="#zensols.mednlp.app.Application" target="_top" title="A natural language medical domain parsing library." alt="" coords="5,225,92,251"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.app.GroupInfo" target="_top" title="Used to group TUI information in :meth:`.Application.group`" alt="" coords="109,79,191,104"/>
+</map><span class="target" id="module-zensols.mednlp.app"></span><p>A natural language medical domain parsing library.</p>
+<dl class="py class">
+<dt id="zensols.mednlp.app.Application">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.app.</code><code class="sig-name descname">Application</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_factory</span></em>, <em class="sig-param"><span class="n">doc_parser</span></em>, <em class="sig-param"><span class="n">library</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/util/api/zensols.config.html#zensols.config.dictable.Dictable" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.config.dictable.Dictable</span></code></a></p>
+<p>A natural language medical domain parsing library.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.Application.CLI_META">
+<code class="sig-name descname">CLI_META</code><em class="property"> = {'mnemonic_excludes': {'write'}, 'mnemonic_overrides': {'show_config': 'conf'}, 'option_excludes': {'config_factory', 'doc_parser'}, 'option_overrides': {'input_dir': {'long_name': 'input', 'metavar': 'DIR', 'short_name': 'i'}}}</em><a class="headerlink" href="#zensols.mednlp.app.Application.CLI_META" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_factory</span></em>, <em class="sig-param"><span class="n">doc_parser</span></em>, <em class="sig-param"><span class="n">library</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.app.Application.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.atom">
+<code class="sig-name descname">atom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.atom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.atom" title="Permalink to this definition"></a></dt>
+<dd><p>Search the UMLS database using UTS and show results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID to search for (eg ‘C0242379’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.Application.config_factory">
+<code class="sig-name descname">config_factory</code><em class="property">: <a class="reference external" href="https://plandes.github.io/util/api/zensols.config.html#zensols.config.factory.ConfigFactory" title="(in Zensols Utilities v1.8.0)">zensols.config.factory.ConfigFactory</a></em><a class="headerlink" href="#zensols.mednlp.app.Application.config_factory" title="Permalink to this definition"></a></dt>
+<dd><p>Used to create a cTAKES stash.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.ctakes">
+<code class="sig-name descname">ctakes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text_or_file</span></em>, <em class="sig-param"><span class="n">only_medical</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.ctakes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.ctakes" title="Permalink to this definition"></a></dt>
+<dd><p>Invoke cTAKES on a directory with text files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_or_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – natural language to be processed</p></li>
+<li><p><strong>only_medical</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – only provide medical linked tokens</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.define">
+<code class="sig-name descname">define</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.define"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.define" title="Permalink to this definition"></a></dt>
+<dd><p>Look up an entity by CUI.  This takes a long time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID to search for (eg ‘C0242379’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.Application.doc_parser">
+<code class="sig-name descname">doc_parser</code><em class="property">: <a class="reference external" href="https://plandes.github.io/nlparse/api/zensols.nlp.html#zensols.nlp.parser.FeatureDocumentParser" title="(in Zensols Natural Language Parsing v1.1.0)">zensols.nlp.parser.FeatureDocumentParser</a></em><a class="headerlink" href="#zensols.mednlp.app.Application.doc_parser" title="Permalink to this definition"></a></dt>
+<dd><p>Parses and NER tags medical terms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.features">
+<code class="sig-name descname">features</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text_or_file</span></em>, <em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ids</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">only_medical</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.features" title="Permalink to this definition"></a></dt>
+<dd><p>Dump features as CSV output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_or_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – natural language to be processed</p></li>
+<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – the path to output the CSV file or stdout if missing</p></li>
+<li><p><strong>ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – the comma separate feature IDs to output</p></li>
+<li><p><strong>only_medical</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – only provide medical linked tokens</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.group">
+<code class="sig-name descname">group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">info</span></em>, <em class="sig-param"><span class="n">query</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.group" title="Permalink to this definition"></a></dt>
+<dd><p>Get TUI group information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<a class="reference internal" href="#zensols.mednlp.app.GroupInfo" title="zensols.mednlp.app.GroupInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupInfo</span></code></a>) – the type of information to return</p></li>
+<li><p><strong>query</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – comma delimited name list used to subset the output data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.Application.library">
+<code class="sig-name descname">library</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.lib.MedicalLibrary" title="zensols.mednlp.lib.MedicalLibrary">zensols.mednlp.lib.MedicalLibrary</a></em><a class="headerlink" href="#zensols.mednlp.app.Application.library" title="Permalink to this definition"></a></dt>
+<dd><p>Medical resource library that contains UMLS access, cui2vec etc..</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.proto">
+<code class="sig-name descname">proto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.proto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.proto" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.search" title="Permalink to this definition"></a></dt>
+<dd><p>Search the UMLS database using UTS and show results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>term</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the term to search for (eg ‘lung cancer’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text_or_file</span></em>, <em class="sig-param"><span class="n">only_medical</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.show" title="Permalink to this definition"></a></dt>
+<dd><p>Parse and output medical entities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text_or_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – natural language to be processed</p></li>
+<li><p><strong>only_medical</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – only provide medical linked tokens</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.app.Application.similarity">
+<code class="sig-name descname">similarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#Application.similarity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.Application.similarity" title="Permalink to this definition"></a></dt>
+<dd><p>Get the cosine similarity between two CUIs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zensols.mednlp.app.GroupInfo">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.app.</code><code class="sig-name descname">GroupInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/app.html#GroupInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.app.GroupInfo" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Used to group TUI information in <a class="reference internal" href="#zensols.mednlp.app.Application.group" title="zensols.mednlp.app.Application.group"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Application.group()</span></code></a></p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.GroupInfo.byname">
+<code class="sig-name descname">byname</code><em class="property"> = 2</em><a class="headerlink" href="#zensols.mednlp.app.GroupInfo.byname" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.app.GroupInfo.csv">
+<code class="sig-name descname">csv</code><em class="property"> = 1</em><a class="headerlink" href="#zensols.mednlp.app.GroupInfo.csv" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-cli">
+<h2>zensols.mednlp.cli<a class="headerlink" href="#zensols-mednlp-cli" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-df7c50711b03b5973e7312249afb270088ad090f.png" alt="Inheritance diagram of zensols.mednlp.cli" usemap="#inheritance269c2f6551" class="inheritance graphviz" /></div>
+<map id="inheritance269c2f6551" name="inheritance269c2f6551">
+<area shape="rect" id="node2" href="#zensols.mednlp.cli.ApplicationFactory" target="_top" title="Boots the application context from the command line. &#160;This first loads" alt="" coords="12,225,144,251"/>
+</map><span class="target" id="module-zensols.mednlp.cli"></span><p>Command line entry point to the application.</p>
+<dl class="py class">
+<dt id="zensols.mednlp.cli.ApplicationFactory">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.cli.</code><code class="sig-name descname">ApplicationFactory</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/cli.html#ApplicationFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.cli.ApplicationFactory" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/util/api/zensols.cli.html#zensols.cli.app.ApplicationFactory" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.cli.app.ApplicationFactory</span></code></a></p>
+<dl class="py method">
+<dt id="zensols.mednlp.cli.ApplicationFactory.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/cli.html#ApplicationFactory.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.cli.ApplicationFactory.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.cli.ApplicationFactory.package_resource">
+<code class="sig-name descname">package_resource</code><em class="property">: Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span><a class="reference external" href="https://plandes.github.io/util/api/zensols.util.html#zensols.util.pkgres.PackageResource" title="(in Zensols Utilities v1.8.0)">zensols.util.pkgres.PackageResource</a><span class="p">]</span></em><a class="headerlink" href="#zensols.mednlp.cli.ApplicationFactory.package_resource" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="zensols.mednlp.cli.main">
+<code class="sig-prename descclassname">zensols.mednlp.cli.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">['/Users/landes/opt/lib/python/bin/sphinx-build', '-M', 'html', '/Users/landes/view/nlp/med/mednlp/target/doc/src', '/Users/landes/view/nlp/med/mednlp/target/doc/build']</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/cli.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.cli.main" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://plandes.github.io/util/api/zensols.cli.html#zensols.cli.app.ActionResult" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionResult</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-ctakes">
+<h2>zensols.mednlp.ctakes<a class="headerlink" href="#zensols-mednlp-ctakes" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-c1795948ae62d7b44fb132a8c57afe6f54398d52.png" alt="Inheritance diagram of zensols.mednlp.ctakes" usemap="#inheritance620f7a9cf6" class="inheritance graphviz" /></div>
+<map id="inheritance620f7a9cf6" name="inheritance620f7a9cf6">
+<area shape="rect" id="node2" href="#zensols.mednlp.ctakes.CTakesParserStash" target="_top" title="Runs the cTAKES CUI entity linker on a directory of medical notes. &#160;For each" alt="" coords="78,225,218,251"/>
+</map><span class="target" id="module-zensols.mednlp.ctakes"></span><p>Parse and normalize discharge notes.</p>
+<dl class="py class">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.ctakes.</code><code class="sig-name descname">CTakesParserStash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entry_point_bin</span></em>, <em class="sig-param"><span class="n">entry_point_cmd</span></em>, <em class="sig-param"><span class="n">home</span></em>, <em class="sig-param"><span class="n">source_dir</span></em>, <em class="sig-param"><span class="n">output_dir</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.ReadOnlyStash" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.persist.domain.ReadOnlyStash</span></code></a>, <a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.Primeable" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.persist.domain.Primeable</span></code></a>, <a class="reference external" href="https://plandes.github.io/util/api/zensols.config.html#zensols.config.dictable.Dictable" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.config.dictable.Dictable</span></code></a></p>
+<p>Runs the cTAKES CUI entity linker on a directory of medical notes.  For each
+medical text file, it generates an <code class="docutils literal notranslate"><span class="pre">xmi</span></code> file, which is then parsed by
+the the <code class="xref py py-mod docutils literal notranslate"><span class="pre">ctakes_parser</span></code> library.</p>
+<p>This straightforward wrapper around the <code class="docutils literal notranslate"><span class="pre">ctparser</span></code> library automates the
+file system orchestration that needs to happen.  Configure an instance of
+this class as an application configuration and use a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ImportConfigFactory</span></code> to create the objects.  See
+the <code class="docutils literal notranslate"><span class="pre">examples/ctakes</span></code> directory for a quick start guide on how to use
+this class.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entry_point_bin</span></em>, <em class="sig-param"><span class="n">entry_point_cmd</span></em>, <em class="sig-param"><span class="n">home</span></em>, <em class="sig-param"><span class="n">source_dir</span></em>, <em class="sig-param"><span class="n">output_dir</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.clear" title="Permalink to this definition"></a></dt>
+<dd><p>Delete all data from the from the stash.</p>
+<p><strong>Important</strong>: Exercise caution with this method, of course.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.entry_point_bin">
+<code class="sig-name descname">entry_point_bin</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)">pathlib.Path</a></em><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.entry_point_bin" title="Permalink to this definition"></a></dt>
+<dd><p>Entry point script in to the cTAKES parser.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.entry_point_cmd">
+<code class="sig-name descname">entry_point_cmd</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></em><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.entry_point_cmd" title="Permalink to this definition"></a></dt>
+<dd><p>Command line arguments passed to cTAKES.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.exists">
+<code class="sig-name descname">exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.exists" title="Permalink to this definition"></a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if data with key <code class="docutils literal notranslate"><span class="pre">name</span></code> exists.</p>
+<p><strong>Implementation note</strong>: This <code class="xref py py-meth docutils literal notranslate"><span class="pre">Stash.exists()</span></code> method is very
+inefficient and should be overriden.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.home">
+<code class="sig-name descname">home</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)">pathlib.Path</a></em><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.home" title="Permalink to this definition"></a></dt>
+<dd><p>The directory where cTAKES is installed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.keys" title="Permalink to this definition"></a></dt>
+<dd><p>Return an iterable of keys in the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load a data value from the pickled data with key <code class="docutils literal notranslate"><span class="pre">name</span></code>.  Semantically,
+this method loads the using the stash’s implementation.  For example
+<code class="xref py py-class docutils literal notranslate"><span class="pre">DirectoryStash</span></code> loads the data from a file if it exists, but
+factory type stashes will always re-generate the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See</dt>
+<dd class="field-odd"><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.output_dir">
+<code class="sig-name descname">output_dir</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)">pathlib.Path</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.output_dir" title="Permalink to this definition"></a></dt>
+<dd><p>The directory where to output the xmi files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.prime">
+<code class="sig-name descname">prime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.prime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.prime" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.set_documents">
+<code class="sig-name descname">set_documents</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">docs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/ctakes.html#CTakesParserStash.set_documents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.set_documents" title="Permalink to this definition"></a></dt>
+<dd><p>Set the document to be parsed by cTAKES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>docs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – an iterable of string text documents to persist to the
+file system, and then be parsed by cTAKES.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.source_dir">
+<code class="sig-name descname">source_dir</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)">pathlib.Path</a></em><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.source_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Contains a path to the source directory where the text documents live.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.ctakes.CTakesParserStash.source_stash">
+<em class="property">property </em><code class="sig-name descname">source_stash</code><a class="headerlink" href="#zensols.mednlp.ctakes.CTakesParserStash.source_stash" title="Permalink to this definition"></a></dt>
+<dd><p>The stash that tracks the text documents that are to be parsed by cTAKES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.Stash" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stash</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-cui2vec">
+<h2>zensols.mednlp.cui2vec<a class="headerlink" href="#zensols-mednlp-cui2vec" title="Permalink to this headline"></a></h2>
+</section>
+<section id="zensols-mednlp-domain">
+<h2>zensols.mednlp.domain<a class="headerlink" href="#zensols-mednlp-domain" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-74c65770fdbc68bf8828bdc2b96076f2582b8aa3.png" alt="Inheritance diagram of zensols.mednlp.domain" usemap="#inheritance35b9269af5" class="inheritance graphviz" /></div>
+<map id="inheritance35b9269af5" name="inheritance35b9269af5">
+<area shape="rect" id="node7" href="#zensols.mednlp.domain.MedNLPError" target="_top" title="Raised by any medical NLP speicic reason in this library." alt="" coords="120,79,224,104"/>
+<area shape="rect" id="node5" href="#zensols.mednlp.domain.Entity" target="_top" title="A convenience container class that Wraps a SciSpacy entity." alt="" coords="24,225,96,251"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.domain.EntitySimilarity" target="_top" title="A similarity measure of a medical concept in cui2vec." alt="" coords="5,299,115,324"/>
+</map><span class="target" id="module-zensols.mednlp.domain"></span><dl class="py class">
+<dt id="zensols.mednlp.domain.Entity">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.domain.</code><code class="sig-name descname">Entity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sci_spacy_entity</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/domain.html#Entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.domain.Entity" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/util/api/zensols.config.html#zensols.config.dictable.Dictable" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.config.dictable.Dictable</span></code></a></p>
+<p>A convenience container class that Wraps a SciSpacy entity.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.domain.Entity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sci_spacy_entity</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.domain.Entity.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.domain.Entity.cui">
+<em class="property">property </em><code class="sig-name descname">cui</code><a class="headerlink" href="#zensols.mednlp.domain.Entity.cui" title="Permalink to this definition"></a></dt>
+<dd><p>The unique concept identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.domain.Entity.definition">
+<em class="property">property </em><code class="sig-name descname">definition</code><a class="headerlink" href="#zensols.mednlp.domain.Entity.definition" title="Permalink to this definition"></a></dt>
+<dd><p>The human readable description of the entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.domain.Entity.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#zensols.mednlp.domain.Entity.name" title="Permalink to this definition"></a></dt>
+<dd><p>The canonical name of the entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.domain.Entity.sci_spacy_entity">
+<code class="sig-name descname">sci_spacy_entity</code><em class="property">: scispacy.linking_utils.Entity</em><a class="headerlink" href="#zensols.mednlp.domain.Entity.sci_spacy_entity" title="Permalink to this definition"></a></dt>
+<dd><p>The entity identified by <code class="xref py py-mod docutils literal notranslate"><span class="pre">scispacy.linking_utils</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zensols.mednlp.domain.EntitySimilarity">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.domain.</code><code class="sig-name descname">EntitySimilarity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sci_spacy_entity</span></em>, <em class="sig-param"><span class="n">similiarty</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/domain.html#EntitySimilarity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.domain.EntitySimilarity" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zensols.mednlp.domain.Entity" title="zensols.mednlp.domain.Entity"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.mednlp.domain.Entity</span></code></a></p>
+<p>A similarity measure of a medical concept in cui2vec.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See</dt>
+<dd class="field-odd"><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">MedicalFeatureDocumentParser.similarity_by_term()</span></code></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zensols.mednlp.domain.EntitySimilarity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sci_spacy_entity</span></em>, <em class="sig-param"><span class="n">similiarty</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.domain.EntitySimilarity.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.domain.EntitySimilarity.similiarty">
+<code class="sig-name descname">similiarty</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></em><a class="headerlink" href="#zensols.mednlp.domain.EntitySimilarity.similiarty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zensols.mednlp.domain.MedNLPError">
+<em class="property">exception </em><code class="sig-prename descclassname">zensols.mednlp.domain.</code><code class="sig-name descname">MedNLPError</code><a class="reference internal" href="../_modules/zensols/mednlp/domain.html#MedNLPError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.domain.MedNLPError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/util/api/zensols.util.html#zensols.util.APIError" title="(in Zensols Utilities v1.8.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.util.APIError</span></code></a></p>
+<p>Raised by any medical NLP speicic reason in this library.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.domain.MedNLPError.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'zensols.mednlp.domain'</em><a class="headerlink" href="#zensols.mednlp.domain.MedNLPError.__module__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-lib">
+<h2>zensols.mednlp.lib<a class="headerlink" href="#zensols-mednlp-lib" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-eb6e98c462733d246bfdf3d4a20d94db47a085df.png" alt="Inheritance diagram of zensols.mednlp.lib" usemap="#inheritance1c754111cb" class="inheritance graphviz" /></div>
+<map id="inheritance1c754111cb" name="inheritance1c754111cb">
+<area shape="rect" id="node1" href="#zensols.mednlp.lib.MedicalLibrary" target="_top" title="A utility class that provides access to medical APIs." alt="" coords="5,5,115,31"/>
+</map><span class="target" id="module-zensols.mednlp.lib"></span><dl class="py class">
+<dt id="zensols.mednlp.lib.MedicalLibrary">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.lib.</code><code class="sig-name descname">MedicalLibrary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_factory</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">medcat_resource</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">entity_linker_resource</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uts_client</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A utility class that provides access to medical APIs.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_factory</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">medcat_resource</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">entity_linker_resource</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uts_client</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.lib.MedicalLibrary.config_factory">
+<code class="sig-name descname">config_factory</code><em class="property">: <a class="reference external" href="https://plandes.github.io/util/api/zensols.config.html#zensols.config.factory.ConfigFactory" title="(in Zensols Utilities v1.8.0)">zensols.config.factory.ConfigFactory</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.config_factory" title="Permalink to this definition"></a></dt>
+<dd><p>The configuration factory used to create cTAKES and cui2vec instances.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.cui2vec_embedding">
+<em class="property">property </em><code class="sig-name descname">cui2vec_embedding</code><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.cui2vec_embedding" title="Permalink to this definition"></a></dt>
+<dd><p>The cui2vec embedding model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Cui2VecEmbedModel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.lib.MedicalLibrary.entity_linker_resource">
+<code class="sig-name descname">entity_linker_resource</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.resource.EntityLinkerResource" title="zensols.mednlp.resource.EntityLinkerResource">zensols.mednlp.resource.EntityLinkerResource</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.entity_linker_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The entity linker resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.get_atom">
+<code class="sig-name descname">get_atom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.get_atom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.get_atom" title="Permalink to this definition"></a></dt>
+<dd><p>Get the UMLS atoms of a CUI from UTS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID used to query</p></li>
+<li><p><strong>preferred</strong> – if <code class="docutils literal notranslate"><span class="pre">True</span></code> only return preferred atoms</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of atom entries in dictionary form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.get_entities">
+<code class="sig-name descname">get_entities</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.get_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.get_entities" title="Permalink to this definition"></a></dt>
+<dd><p>Return the all concept entity data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>concepts as a multi-tiered dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.get_linked_entity">
+<code class="sig-name descname">get_linked_entity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.get_linked_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.get_linked_entity" title="Permalink to this definition"></a></dt>
+<dd><p>Get a scispaCy linked entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the unique concept ID</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.get_new_ctakes_parser_stash">
+<code class="sig-name descname">get_new_ctakes_parser_stash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.get_new_ctakes_parser_stash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.get_new_ctakes_parser_stash" title="Permalink to this definition"></a></dt>
+<dd><p>Return a new instance of a ctakes parser stash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zensols.mednlp.ctakes.CTakesParserStash" title="zensols.mednlp.ctakes.CTakesParserStash">CTakesParserStash</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.get_relations">
+<code class="sig-name descname">get_relations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.get_relations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.get_relations" title="Permalink to this definition"></a></dt>
+<dd><p>Get the UMLS related concepts connected to a concept by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID used to get related concepts</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of relation entries in dictionary form in the order
+returned by UTS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.lib.MedicalLibrary.medcat_resource">
+<code class="sig-name descname">medcat_resource</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.resource.MedCatResource" title="zensols.mednlp.resource.MedCatResource">zensols.mednlp.resource.MedCatResource</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.medcat_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The MedCAT factory resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.lib.MedicalLibrary.similarity_by_term">
+<code class="sig-name descname">similarity_by_term</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">term</span></em>, <em class="sig-param"><span class="n">topn</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/lib.html#MedicalLibrary.similarity_by_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.similarity_by_term" title="Permalink to this definition"></a></dt>
+<dd><p>Return similaries of a medical term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the medical term (i.e. <code class="docutils literal notranslate"><span class="pre">heart</span> <span class="pre">disease</span></code>)</p></li>
+<li><p><strong>topn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – the top N count similarities to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#zensols.mednlp.domain.EntitySimilarity" title="zensols.mednlp.domain.EntitySimilarity"><code class="xref py py-class docutils literal notranslate"><span class="pre">EntitySimilarity</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.lib.MedicalLibrary.uts_client">
+<code class="sig-name descname">uts_client</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.uts.UTSClient" title="zensols.mednlp.uts.UTSClient">zensols.mednlp.uts.UTSClient</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.lib.MedicalLibrary.uts_client" title="Permalink to this definition"></a></dt>
+<dd><p>Queries UMLS data.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-parser">
+<h2>zensols.mednlp.parser<a class="headerlink" href="#zensols-mednlp-parser" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-862fb5b99b4fd110f4c6764cf8bad426f0accd9a.png" alt="Inheritance diagram of zensols.mednlp.parser" usemap="#inheritance8ea4307af0" class="inheritance graphviz" /></div>
+<map id="inheritance8ea4307af0" name="inheritance8ea4307af0">
+<area shape="rect" id="node7" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator" target="_top" title="Adds linked SciSpacy definitions to tokens using the" alt="" coords="274,152,461,177"/>
+<area shape="rect" id="node9" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser" target="_top" title="A medical based language resources that parses concepts." alt="" coords="38,372,251,397"/>
+</map><span class="target" id="module-zensols.mednlp.parser"></span><dl class="py class">
+<dt id="zensols.mednlp.parser.LinkFeatureTokenDecorator">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.parser.</code><code class="sig-name descname">LinkFeatureTokenDecorator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lib</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/parser.html#LinkFeatureTokenDecorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/nlparse/api/zensols.nlp.html#zensols.nlp.parser.SpacyFeatureTokenDecorator" title="(in Zensols Natural Language Parsing v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.nlp.parser.SpacyFeatureTokenDecorator</span></code></a></p>
+<p>Adds linked SciSpacy definitions to tokens using the
+<a class="reference internal" href="#zensols.mednlp.lib.MedicalLibrary" title="zensols.mednlp.lib.MedicalLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">MedicalLibrary</span></code></a>.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.parser.LinkFeatureTokenDecorator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lib</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.parser.LinkFeatureTokenDecorator.decorate">
+<code class="sig-name descname">decorate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spacy_tok</span></em>, <em class="sig-param"><span class="n">feature_token</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/parser.html#LinkFeatureTokenDecorator.decorate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator.decorate" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.parser.LinkFeatureTokenDecorator.lib">
+<code class="sig-name descname">lib</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.lib.MedicalLibrary" title="zensols.mednlp.lib.MedicalLibrary">zensols.mednlp.lib.MedicalLibrary</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator.lib" title="Permalink to this definition"></a></dt>
+<dd><p>The medical library used for linking entities.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.parser.</code><code class="sig-name descname">MedicalFeatureDocumentParser</code><span class="sig-paren">(</span><em class="sig-param">config_factory</em>, <em class="sig-param">name</em>, <em class="sig-param">lang='en'</em>, <em class="sig-param">model_name=None</em>, <em class="sig-param">token_feature_ids=frozenset({'children'</em>, <em class="sig-param">'context_similarity'</em>, <em class="sig-param">'cui'</em>, <em class="sig-param">'cui_'</em>, <em class="sig-param">'definition_'</em>, <em class="sig-param">'dep'</em>, <em class="sig-param">'dep_'</em>, <em class="sig-param">'detected_name_'</em>, <em class="sig-param">'ent'</em>, <em class="sig-param">'ent_'</em>, <em class="sig-param">'i'</em>, <em class="sig-param">'i_sent'</em>, <em class="sig-param">'idx'</em>, <em class="sig-param">'is_concept'</em>, <em class="sig-param">'is_contraction'</em>, <em class="sig-param">'is_ent'</em>, <em class="sig-param">'is_pronoun'</em>, <em class="sig-param">'is_punctuation'</em>, <em class="sig-param">'is_space'</em>, <em class="sig-param">'is_stop'</em>, <em class="sig-param">'is_superlative'</em>, <em class="sig-param">'is_wh'</em>, <em class="sig-param">'lemma_'</em>, <em class="sig-param">'lexspan'</em>, <em class="sig-param">'norm'</em>, <em class="sig-param">'pos_'</em>, <em class="sig-param">'pref_name_'</em>, <em class="sig-param">'sent_i'</em>, <em class="sig-param">'shape'</em>, <em class="sig-param">'shape_'</em>, <em class="sig-param">'sub_names'</em>, <em class="sig-param">'tag'</em>, <em class="sig-param">'tag_'</em>, <em class="sig-param">'tui_descs_'</em>, <em class="sig-param">'tuis'</em>, <em class="sig-param">'tuis_'})</em>, <em class="sig-param">components=()</em>, <em class="sig-param">token_decorators=()</em>, <em class="sig-param">disable_component_names=None</em>, <em class="sig-param">token_normalizer=None</em>, <em class="sig-param">special_case_tokens=&lt;factory&gt;</em>, <em class="sig-param">doc_class=&lt;class 'zensols.nlp.container.FeatureDocument'&gt;</em>, <em class="sig-param">sent_class=&lt;class 'zensols.nlp.container.FeatureSentence'&gt;</em>, <em class="sig-param">token_class=&lt;class 'zensols.mednlp.token.MedicalFeatureToken'&gt;</em>, <em class="sig-param">remove_empty_sentences=False</em>, <em class="sig-param">medcat_resource=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/parser.html#MedicalFeatureDocumentParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/nlparse/api/zensols.nlp.html#zensols.nlp.parser.SpacyFeatureDocumentParser" title="(in Zensols Natural Language Parsing v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.nlp.parser.SpacyFeatureDocumentParser</span></code></a></p>
+<p>A medical based language resources that parses concepts.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser.TOKEN_FEATURE_IDS">
+<code class="sig-name descname">TOKEN_FEATURE_IDS</code><em class="property">: ClassVar<span class="p">[</span>Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><span class="p">]</span></em><em class="property"> = frozenset({'children', 'context_similarity', 'cui', 'cui_', 'definition_', 'dep', 'dep_', 'detected_name_', 'ent', 'ent_', 'i', 'i_sent', 'idx', 'is_concept', 'is_contraction', 'is_ent', 'is_pronoun', 'is_punctuation', 'is_space', 'is_stop', 'is_superlative', 'is_wh', 'lemma_', 'lexspan', 'norm', 'pos_', 'pref_name_', 'sent_i', 'shape', 'shape_', 'sub_names', 'tag', 'tag_', 'tui_descs_', 'tuis', 'tuis_'})</em><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.TOKEN_FEATURE_IDS" title="Permalink to this definition"></a></dt>
+<dd><p>Default token feature ID set for the medical parser.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">config_factory</em>, <em class="sig-param">name</em>, <em class="sig-param">lang='en'</em>, <em class="sig-param">model_name=None</em>, <em class="sig-param">token_feature_ids=frozenset({'children'</em>, <em class="sig-param">'context_similarity'</em>, <em class="sig-param">'cui'</em>, <em class="sig-param">'cui_'</em>, <em class="sig-param">'definition_'</em>, <em class="sig-param">'dep'</em>, <em class="sig-param">'dep_'</em>, <em class="sig-param">'detected_name_'</em>, <em class="sig-param">'ent'</em>, <em class="sig-param">'ent_'</em>, <em class="sig-param">'i'</em>, <em class="sig-param">'i_sent'</em>, <em class="sig-param">'idx'</em>, <em class="sig-param">'is_concept'</em>, <em class="sig-param">'is_contraction'</em>, <em class="sig-param">'is_ent'</em>, <em class="sig-param">'is_pronoun'</em>, <em class="sig-param">'is_punctuation'</em>, <em class="sig-param">'is_space'</em>, <em class="sig-param">'is_stop'</em>, <em class="sig-param">'is_superlative'</em>, <em class="sig-param">'is_wh'</em>, <em class="sig-param">'lemma_'</em>, <em class="sig-param">'lexspan'</em>, <em class="sig-param">'norm'</em>, <em class="sig-param">'pos_'</em>, <em class="sig-param">'pref_name_'</em>, <em class="sig-param">'sent_i'</em>, <em class="sig-param">'shape'</em>, <em class="sig-param">'shape_'</em>, <em class="sig-param">'sub_names'</em>, <em class="sig-param">'tag'</em>, <em class="sig-param">'tag_'</em>, <em class="sig-param">'tui_descs_'</em>, <em class="sig-param">'tuis'</em>, <em class="sig-param">'tuis_'})</em>, <em class="sig-param">components=()</em>, <em class="sig-param">token_decorators=()</em>, <em class="sig-param">disable_component_names=None</em>, <em class="sig-param">token_normalizer=None</em>, <em class="sig-param">special_case_tokens=&lt;factory&gt;</em>, <em class="sig-param">doc_class=&lt;class 'zensols.nlp.container.FeatureDocument'&gt;</em>, <em class="sig-param">sent_class=&lt;class 'zensols.nlp.container.FeatureSentence'&gt;</em>, <em class="sig-param">token_class=&lt;class 'zensols.mednlp.token.MedicalFeatureToken'&gt;</em>, <em class="sig-param">remove_empty_sentences=False</em>, <em class="sig-param">medcat_resource=None</em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser.medcat_resource">
+<code class="sig-name descname">medcat_resource</code><em class="property">: <a class="reference internal" href="#zensols.mednlp.resource.MedCatResource" title="zensols.mednlp.resource.MedCatResource">zensols.mednlp.resource.MedCatResource</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.medcat_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The MedCAT factory resource.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser.token_class">
+<code class="sig-name descname">token_class</code><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.token_class" title="Permalink to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#zensols.mednlp.token.MedicalFeatureToken" title="zensols.mednlp.token.MedicalFeatureToken"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.mednlp.token.MedicalFeatureToken</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.parser.MedicalFeatureDocumentParser.token_feature_ids">
+<code class="sig-name descname">token_feature_ids</code><em class="property">: Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></em><em class="property"> = frozenset({'children', 'context_similarity', 'cui', 'cui_', 'definition_', 'dep', 'dep_', 'detected_name_', 'ent', 'ent_', 'i', 'i_sent', 'idx', 'is_concept', 'is_contraction', 'is_ent', 'is_pronoun', 'is_punctuation', 'is_space', 'is_stop', 'is_superlative', 'is_wh', 'lemma_', 'lexspan', 'norm', 'pos_', 'pref_name_', 'sent_i', 'shape', 'shape_', 'sub_names', 'tag', 'tag_', 'tui_descs_', 'tuis', 'tuis_'})</em><a class="headerlink" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.token_feature_ids" title="Permalink to this definition"></a></dt>
+<dd><p>The features to keep from spaCy tokens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser.TOKEN_FEATURE_IDS" title="zensols.mednlp.parser.MedicalFeatureDocumentParser.TOKEN_FEATURE_IDS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TOKEN_FEATURE_IDS</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-resource">
+<h2>zensols.mednlp.resource<a class="headerlink" href="#zensols-mednlp-resource" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-87d3aa35d23478d39e24f7abb8cd6060bc9b8907.png" alt="Inheritance diagram of zensols.mednlp.resource" usemap="#inheritanced4dc7f15ef" class="inheritance graphviz" /></div>
+<map id="inheritanced4dc7f15ef" name="inheritanced4dc7f15ef">
+<area shape="rect" id="node1" href="#zensols.mednlp.resource.EntityLinkerResource" target="_top" title="EntityLinkerResource(params: Dict[str, Any] = &lt;factory&gt;, cache_global: dataclasses.InitVar[bool] = True)" alt="" coords="5,5,155,31"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.resource.MedCatResource" target="_top" title="A factory class that creates MedCAT resources." alt="" coords="179,5,304,31"/>
+</map><span class="target" id="module-zensols.mednlp.resource"></span><p>MedCAT wrapper.</p>
+<dl class="py class">
+<dt id="zensols.mednlp.resource.EntityLinkerResource">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.resource.</code><code class="sig-name descname">EntityLinkerResource</code><span class="sig-paren">(</span><em class="sig-param">params=&lt;factory&gt;</em>, <em class="sig-param">cache_global=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/resource.html#EntityLinkerResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt id="zensols.mednlp.resource.EntityLinkerResource.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">params=&lt;factory&gt;</em>, <em class="sig-param">cache_global=True</em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.EntityLinkerResource.cache_global">
+<code class="sig-name descname">cache_global</code><em class="property">: dataclasses.InitVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">]</span></em><em class="property"> = True</em><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource.cache_global" title="Permalink to this definition"></a></dt>
+<dd><p>Whether or not to globally cache resources, which saves load time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.EntityLinkerResource.get_linked_entity">
+<code class="sig-name descname">get_linked_entity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/resource.html#EntityLinkerResource.get_linked_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource.get_linked_entity" title="Permalink to this definition"></a></dt>
+<dd><p>Get a scispaCy linked entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the unique concept ID</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Entity</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.EntityLinkerResource.linker">
+<em class="property">property </em><code class="sig-name descname">linker</code><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource.linker" title="Permalink to this definition"></a></dt>
+<dd><p>The ScispaCy entity linker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">EntityLinker</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.EntityLinkerResource.params">
+<code class="sig-name descname">params</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span>Any<span class="p">]</span></em><a class="headerlink" href="#zensols.mednlp.resource.EntityLinkerResource.params" title="Permalink to this definition"></a></dt>
+<dd><p>Parameters given to the scispaCy entity linker.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zensols.mednlp.resource.MedCatResource">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.resource.</code><code class="sig-name descname">MedCatResource</code><span class="sig-paren">(</span><em class="sig-param">installer</em>, <em class="sig-param">vocab_resource</em>, <em class="sig-param">cdb_resource</em>, <em class="sig-param">mc_status_resource</em>, <em class="sig-param">umls_tuis</em>, <em class="sig-param">umls_groups</em>, <em class="sig-param">filter_tuis=None</em>, <em class="sig-param">filter_groups=None</em>, <em class="sig-param">spacy_enable_components=&lt;factory&gt;</em>, <em class="sig-param">cat_config=None</em>, <em class="sig-param">cache_global=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/resource.html#MedCatResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A factory class that creates MedCAT resources.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.resource.MedCatResource.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">installer</em>, <em class="sig-param">vocab_resource</em>, <em class="sig-param">cdb_resource</em>, <em class="sig-param">mc_status_resource</em>, <em class="sig-param">umls_tuis</em>, <em class="sig-param">umls_groups</em>, <em class="sig-param">filter_tuis=None</em>, <em class="sig-param">filter_groups=None</em>, <em class="sig-param">spacy_enable_components=&lt;factory&gt;</em>, <em class="sig-param">cat_config=None</em>, <em class="sig-param">cache_global=True</em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.cache_global">
+<code class="sig-name descname">cache_global</code><em class="property">: dataclasses.InitVar<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">]</span></em><em class="property"> = True</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.cache_global" title="Permalink to this definition"></a></dt>
+<dd><p>Whether or not to globally cache resources, which saves load time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.MedCatResource.cat">
+<em class="property">property </em><code class="sig-name descname">cat</code><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.cat" title="Permalink to this definition"></a></dt>
+<dd><p>The MedCAT NER tagger instance.</p>
+<p>When this property is accessed, all models are downloaded first, then
+loaded, if not already.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CAT</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.cat_config">
+<code class="sig-name descname">cat_config</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span>Any<span class="p">]</span><span class="p">]</span></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.cat_config" title="Permalink to this definition"></a></dt>
+<dd><p>If provieded, set the CDB configuration.  Keys are <code class="docutils literal notranslate"><span class="pre">general</span></code>,
+<code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> and all other attributes documented in the <a class="reference external" href="https://github.com/CogStack/MedCAT/blob/master/medcat/config.py">MedCAT Config</a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.cdb_resource">
+<code class="sig-name descname">cdb_resource</code><em class="property">: zensols.install.installer.Resource</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.cdb_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">cdb-medmen-v1.dat</span></code> file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.MedCatResource.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/resource.html#MedCatResource.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.clear" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.filter_groups">
+<code class="sig-name descname">filter_groups</code><em class="property">: Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.filter_groups" title="Permalink to this definition"></a></dt>
+<dd><p>Just like <a class="reference internal" href="#zensols.mednlp.resource.MedCatResource.filter_tuis" title="zensols.mednlp.resource.MedCatResource.filter_tuis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter_tuis</span></code></a> but each element is treated as a group used to
+generate a list of CUIs from those mapped from <code class="docutils literal notranslate"><span class="pre">name</span></code> to <a href="#id1"><span class="problematic" id="id2">``</span></a>tui` in
+<a class="reference internal" href="#zensols.mednlp.resource.MedCatResource.groups" title="zensols.mednlp.resource.MedCatResource.groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">groups</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.filter_tuis">
+<code class="sig-name descname">filter_tuis</code><em class="property">: Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.filter_tuis" title="Permalink to this definition"></a></dt>
+<dd><p>Types used to filter linked CUIs (i.e. <code class="docutils literal notranslate"><span class="pre">{'T047',</span> <span class="pre">'T048'}</span></code>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.MedCatResource.groups">
+<em class="property">property </em><code class="sig-name descname">groups</code><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.groups" title="Permalink to this definition"></a></dt>
+<dd><p>A dataframe of TUIs, their abbreviations, descriptions and a group name
+associated with each.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.installer">
+<code class="sig-name descname">installer</code><em class="property">: zensols.install.installer.Installer</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.installer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.mc_status_resource">
+<code class="sig-name descname">mc_status_resource</code><em class="property">: zensols.install.installer.Resource</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.mc_status_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The the <code class="docutils literal notranslate"><span class="pre">mc_status</span></code> directory.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.spacy_enable_components">
+<code class="sig-name descname">spacy_enable_components</code><em class="property">: Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span></em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.spacy_enable_components" title="Permalink to this definition"></a></dt>
+<dd><p>By default, MedCAT disables several pipeline components.  Some of these are
+needed for sentence chunking and other downstream tasks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://github.com/CogStack/MedCAT/blob/master/medcat/config.py">MedCAT Config</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.resource.MedCatResource.tuis">
+<em class="property">property </em><code class="sig-name descname">tuis</code><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.tuis" title="Permalink to this definition"></a></dt>
+<dd><p>A mapping of type identifiers (TUIs) to their descriptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.umls_groups">
+<code class="sig-name descname">umls_groups</code><em class="property">: zensols.install.installer.Resource</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.umls_groups" title="Permalink to this definition"></a></dt>
+<dd><p>Like <a class="reference internal" href="#zensols.mednlp.resource.MedCatResource.umls_tuis" title="zensols.mednlp.resource.MedCatResource.umls_tuis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">umls_tuis</span></code></a> but groups TUIs in gropus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.umls_tuis">
+<code class="sig-name descname">umls_tuis</code><em class="property">: zensols.install.installer.Resource</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.umls_tuis" title="Permalink to this definition"></a></dt>
+<dd><p>The UMLS TUIs (types) mapping resource that maps from TUIs to descriptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/documentation/SemanticTypesAndGroups.html">Semantic Types</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.resource.MedCatResource.vocab_resource">
+<code class="sig-name descname">vocab_resource</code><em class="property">: zensols.install.installer.Resource</em><a class="headerlink" href="#zensols.mednlp.resource.MedCatResource.vocab_resource" title="Permalink to this definition"></a></dt>
+<dd><p>The path to the <code class="docutils literal notranslate"><span class="pre">vocab.dat</span></code> file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-token">
+<h2>zensols.mednlp.token<a class="headerlink" href="#zensols-mednlp-token" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-1ff73b75672f21cf2f02b790d837410e18fecf82.png" alt="Inheritance diagram of zensols.mednlp.token" usemap="#inheritancedc7926b154" class="inheritance graphviz" /></div>
+<map id="inheritancedc7926b154" name="inheritancedc7926b154">
+<area shape="rect" id="node8" href="#zensols.mednlp.token.MedicalFeatureToken" target="_top" title="A set of token features that optionally contains a medical concept." alt="" coords="78,445,227,471"/>
+</map><span class="target" id="module-zensols.mednlp.token"></span><dl class="py class">
+<dt id="zensols.mednlp.token.MedicalFeatureToken">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.token.</code><code class="sig-name descname">MedicalFeatureToken</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spacy_token</span></em>, <em class="sig-param"><span class="n">norm</span></em>, <em class="sig-param"><span class="n">res</span></em>, <em class="sig-param"><span class="n">ix2ent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/token.html#MedicalFeatureToken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://plandes.github.io/nlparse/api/zensols.nlp.html#zensols.nlp.token.SpacyFeatureToken" title="(in Zensols Natural Language Parsing v1.1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.nlp.token.SpacyFeatureToken</span></code></a></p>
+<p>A set of token features that optionally contains a medical concept.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.FEATURE_IDS">
+<code class="sig-name descname">FEATURE_IDS</code><em class="property">: ClassVar<span class="p">[</span>Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><span class="p">]</span></em><em class="property"> = frozenset({'context_similarity', 'cui', 'cui_', 'definition_', 'detected_name_', 'is_concept', 'pref_name_', 'sub_names', 'tui_descs_', 'tuis', 'tuis_'})</em><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.FEATURE_IDS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.FEATURE_IDS_BY_TYPE">
+<code class="sig-name descname">FEATURE_IDS_BY_TYPE</code><em class="property">: ClassVar<span class="p">[</span>Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">, </span>Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></em><em class="property"> = {'bool': frozenset({'is_concept'}), 'float': frozenset({'context_similarity'}), 'int': frozenset({'cui'}), 'list': frozenset({'sub_names', 'tuis'}), 'str': frozenset({'cui_', 'definition_', 'detected_name_', 'pref_name_', 'tui_descs_', 'tuis_'})}</em><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.FEATURE_IDS_BY_TYPE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.WRITABLE_FEATURE_IDS">
+<code class="sig-name descname">WRITABLE_FEATURE_IDS</code><em class="property">: ClassVar<span class="p">[</span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><span class="p">]</span></em><em class="property"> = ('text', 'norm', 'idx', 'sent_i', 'i', 'i_sent', 'tag', 'pos', 'is_wh', 'entity', 'dep', 'children', 'cui_')</em><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.WRITABLE_FEATURE_IDS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spacy_token</span></em>, <em class="sig-param"><span class="n">norm</span></em>, <em class="sig-param"><span class="n">res</span></em>, <em class="sig-param"><span class="n">ix2ent</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/token.html#MedicalFeatureToken.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.context_similarity">
+<em class="property">property </em><code class="sig-name descname">context_similarity</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.context_similarity" title="Permalink to this definition"></a></dt>
+<dd><p>The similiarity of the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.cui">
+<em class="property">property </em><code class="sig-name descname">cui</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.cui" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the numeric part of the concept ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.cui_">
+<em class="property">property </em><code class="sig-name descname">cui_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.cui_" title="Permalink to this definition"></a></dt>
+<dd><p>The unique UMLS concept ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.definition_">
+<em class="property">property </em><code class="sig-name descname">definition_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.definition_" title="Permalink to this definition"></a></dt>
+<dd><p>The definition if the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.detected_name_">
+<em class="property">property </em><code class="sig-name descname">detected_name_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.detected_name_" title="Permalink to this definition"></a></dt>
+<dd><p>The detected name of the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.ent">
+<em class="property">property </em><code class="sig-name descname">ent</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.ent" title="Permalink to this definition"></a></dt>
+<dd><p>Return the entity numeric value or 0 if this is not an entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.ent_">
+<em class="property">property </em><code class="sig-name descname">ent_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.ent_" title="Permalink to this definition"></a></dt>
+<dd><p>Return the entity string label or <code class="docutils literal notranslate"><span class="pre">None</span></code> if this token has no entity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.is_concept">
+<em class="property">property </em><code class="sig-name descname">is_concept</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.is_concept" title="Permalink to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if this has a CUI and identifies a medical concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.pref_name_">
+<em class="property">property </em><code class="sig-name descname">pref_name_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.pref_name_" title="Permalink to this definition"></a></dt>
+<dd><p>The preferred name of the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.spacy_token">
+<code class="sig-name descname">spacy_token</code><em class="property">: Union<span class="p">[</span>spacy.tokens.token.Token<span class="p">, </span>spacy.tokens.span.Span<span class="p">]</span></em><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.spacy_token" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.sub_names">
+<em class="property">property </em><code class="sig-name descname">sub_names</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.sub_names" title="Permalink to this definition"></a></dt>
+<dd><p>Return other names for the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.tui_descs_">
+<em class="property">property </em><code class="sig-name descname">tui_descs_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.tui_descs_" title="Permalink to this definition"></a></dt>
+<dd><p>Descriptions of <a class="reference internal" href="#zensols.mednlp.token.MedicalFeatureToken.tuis_" title="zensols.mednlp.token.MedicalFeatureToken.tuis_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuis_</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.tuis">
+<em class="property">property </em><code class="sig-name descname">tuis</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.tuis" title="Permalink to this definition"></a></dt>
+<dd><p>The the CUI type of the concept.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.token.MedicalFeatureToken.tuis_">
+<em class="property">property </em><code class="sig-name descname">tuis_</code><a class="headerlink" href="#zensols.mednlp.token.MedicalFeatureToken.tuis_" title="Permalink to this definition"></a></dt>
+<dd><p>All CUI TUIs (types) of the concept sorted as a comma delimited list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="zensols-mednlp-uts">
+<h2>zensols.mednlp.uts<a class="headerlink" href="#zensols-mednlp-uts" title="Permalink to this headline"></a></h2>
+<div class="graphviz"><img src="../_images/inheritance-298682774d107400dea165d530f51e24438bdda7.png" alt="Inheritance diagram of zensols.mednlp.uts" usemap="#inheritance3d281c5408" class="inheritance graphviz" /></div>
+<map id="inheritance3d281c5408" name="inheritance3d281c5408">
+<area shape="rect" id="node5" href="#zensols.mednlp.domain.MedNLPError" target="_top" title="Raised by any medical NLP speicic reason in this library." alt="" coords="96,79,200,104"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.uts.Authentication" target="_top" title="Authentication(api_key: str, auth_endpoint: str = &#39;/cas/v1/api&#45;key&#39;)" alt="" coords="209,5,316,31"/>
+<area shape="rect" id="node3" href="#zensols.mednlp.uts.AuthenticationError" target="_top" title="Thrown when authentication fails." alt="" coords="5,225,141,251"/>
+<area shape="rect" id="node4" href="#zensols.mednlp.uts.UTSError" target="_top" title="An error thrown by wrapper of the UTS system." alt="" coords="109,152,187,177"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.uts.NoResultsError" target="_top" title="Thrown when no results, usually for a CUI not found." alt="" coords="166,225,279,251"/>
+<area shape="rect" id="node7" href="#zensols.mednlp.uts.UTSClient" target="_top" title="UTSClient(api_key: str, version: str = &#39;2020AA&#39;, request_stash: zensols.persist.domain.Stash = None)" alt="" coords="340,5,423,31"/>
+</map><span class="target" id="module-zensols.mednlp.uts"></span><p>Interface to the UTS (UMLS Terminology Services (UTS)) RESTful service,
+which was taken from the UTS example repo.</p>
+<p>:see <a class="reference external" href="https://github.com/HHS/uts-rest-api/">UTS GitHug repo</a></p>
+<dl class="py class">
+<dt id="zensols.mednlp.uts.Authentication">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.uts.</code><code class="sig-name descname">Authentication</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em>, <em class="sig-param"><span class="n">auth_endpoint</span><span class="o">=</span><span class="default_value">'/cas/v1/api-key'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#Authentication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.Authentication" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.Authentication.AUTH_URI">
+<code class="sig-name descname">AUTH_URI</code><em class="property"> = 'https://utslogin.nlm.nih.gov'</em><a class="headerlink" href="#zensols.mednlp.uts.Authentication.AUTH_URI" title="Permalink to this definition"></a></dt>
+<dd><p>The authetication service endpoint URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.Authentication.SERVICE">
+<code class="sig-name descname">SERVICE</code><em class="property"> = 'http://umlsks.nlm.nih.gov'</em><a class="headerlink" href="#zensols.mednlp.uts.Authentication.SERVICE" title="Permalink to this definition"></a></dt>
+<dd><p>The service endpoint URL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.Authentication.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em>, <em class="sig-param"><span class="n">auth_endpoint</span><span class="o">=</span><span class="default_value">'/cas/v1/api-key'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.uts.Authentication.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.Authentication.api_key">
+<code class="sig-name descname">api_key</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></em><a class="headerlink" href="#zensols.mednlp.uts.Authentication.api_key" title="Permalink to this definition"></a></dt>
+<dd><p>The API key used for the RESTful NIH service.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.Authentication.auth_endpoint">
+<code class="sig-name descname">auth_endpoint</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></em><em class="property"> = '/cas/v1/api-key'</em><a class="headerlink" href="#zensols.mednlp.uts.Authentication.auth_endpoint" title="Permalink to this definition"></a></dt>
+<dd><p>The path of the authentication service endpoint.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.Authentication.getst">
+<code class="sig-name descname">getst</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tgt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#Authentication.getst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.Authentication.getst" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.Authentication.gettgt">
+<code class="sig-name descname">gettgt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#Authentication.gettgt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.Authentication.gettgt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zensols.mednlp.uts.AuthenticationError">
+<em class="property">exception </em><code class="sig-prename descclassname">zensols.mednlp.uts.</code><code class="sig-name descname">AuthenticationError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#AuthenticationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.AuthenticationError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zensols.mednlp.uts.UTSError" title="zensols.mednlp.uts.UTSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.mednlp.uts.UTSError</span></code></a></p>
+<p>Thrown when authentication fails.</p>
+<dl class="py method">
+<dt id="zensols.mednlp.uts.AuthenticationError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#AuthenticationError.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.AuthenticationError.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.AuthenticationError.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'zensols.mednlp.uts'</em><a class="headerlink" href="#zensols.mednlp.uts.AuthenticationError.__module__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zensols.mednlp.uts.NoResultsError">
+<em class="property">exception </em><code class="sig-prename descclassname">zensols.mednlp.uts.</code><code class="sig-name descname">NoResultsError</code><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#NoResultsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.NoResultsError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zensols.mednlp.uts.UTSError" title="zensols.mednlp.uts.UTSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.mednlp.uts.UTSError</span></code></a></p>
+<p>Thrown when no results, usually for a CUI not found.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.NoResultsError.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'zensols.mednlp.uts'</em><a class="headerlink" href="#zensols.mednlp.uts.NoResultsError.__module__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zensols.mednlp.uts.UTSClient">
+<em class="property">class </em><code class="sig-prename descclassname">zensols.mednlp.uts.</code><code class="sig-name descname">UTSClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">'2020AA'</span></em>, <em class="sig-param"><span class="n">request_stash</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSClient" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.MISSING_VALUE">
+<code class="sig-name descname">MISSING_VALUE</code><em class="property"> = '&lt;missing&gt;'</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.MISSING_VALUE" title="Permalink to this definition"></a></dt>
+<dd><p>Value to store in the stash when there is a missing CUI.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.NO_RESULTS_ERR">
+<code class="sig-name descname">NO_RESULTS_ERR</code><em class="property"> = 'No results containing all your search terms were found.'</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.NO_RESULTS_ERR" title="Permalink to this definition"></a></dt>
+<dd><p>Error message from UTS indicating a missing CUI.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.REL_ID_REGEX">
+<code class="sig-name descname">REL_ID_REGEX</code><em class="property"> = re.compile('.*CUI\\/(.+)$')</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.REL_ID_REGEX" title="Permalink to this definition"></a></dt>
+<dd><p>Used to parse related CUIs in <a class="reference internal" href="#zensols.mednlp.uts.UTSClient.get_related_cuis" title="zensols.mednlp.uts.UTSClient.get_related_cuis"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_related_cuis()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.URI">
+<code class="sig-name descname">URI</code><em class="property"> = 'https://uts-ws.nlm.nih.gov'</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.URI" title="Permalink to this definition"></a></dt>
+<dd><p>The service URL endpoint.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.UTSClient.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_key</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">'2020AA'</span></em>, <em class="sig-param"><span class="n">request_stash</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.api_key">
+<code class="sig-name descname">api_key</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.api_key" title="Permalink to this definition"></a></dt>
+<dd><p>The API key used for the RESTful NIH service.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.UTSClient.get_atoms">
+<code class="sig-name descname">get_atoms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em>, <em class="sig-param"><span class="n">preferred</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">expect</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSClient.get_atoms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.get_atoms" title="Permalink to this definition"></a></dt>
+<dd><p>Get the UMLS atoms of a CUI from UTS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID used to query</p></li>
+<li><p><strong>preferred</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> only return preferred atoms</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of atom entries in dictionary form or a single dict if</p>
+</dd>
+</dl>
+<p>`        <code class="docutils literal notranslate"><span class="pre">preferred</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.UTSClient.get_related_cuis">
+<code class="sig-name descname">get_related_cuis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em>, <em class="sig-param"><span class="n">expect</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSClient.get_related_cuis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.get_related_cuis" title="Permalink to this definition"></a></dt>
+<dd><p>Get the UMLS related concept IDs connected to a concept by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID used to get related concepts</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of tuples, each the related CUIs and the relation
+entry, in the order returned by UTS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.UTSClient.get_relations">
+<code class="sig-name descname">get_relations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cui</span></em>, <em class="sig-param"><span class="n">expect</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSClient.get_relations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.get_relations" title="Permalink to this definition"></a></dt>
+<dd><p>Get the UMLS related concepts connected to a concept by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cui</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the concept ID used to get related concepts</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list of relation entries in dictionary form in the order
+returned by UTS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.request_stash">
+<code class="sig-name descname">request_stash</code><em class="property">: <a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.Stash" title="(in Zensols Utilities v1.8.0)">zensols.persist.domain.Stash</a></em><em class="property"> = None</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.request_stash" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zensols.mednlp.uts.UTSClient.search_term">
+<code class="sig-name descname">search_term</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">term</span></em>, <em class="sig-param"><span class="n">pages</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSClient.search_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.search_term" title="Permalink to this definition"></a></dt>
+<dd><p>Search for a string term in UMLS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>term</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the string term to match against</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a list (one for each page), each with a dictionary of matching
+terms that have the <code class="docutils literal notranslate"><span class="pre">name</span></code> of the term, the <code class="docutils literal notranslate"><span class="pre">ui</span></code> (CUI),
+the <code class="docutils literal notranslate"><span class="pre">uri</span></code> of the term and the <code class="docutils literal notranslate"><span class="pre">rootSource</span></code> of the
+orginitating system</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSClient.version">
+<code class="sig-name descname">version</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></em><em class="property"> = '2020AA'</em><a class="headerlink" href="#zensols.mednlp.uts.UTSClient.version" title="Permalink to this definition"></a></dt>
+<dd><p>The version of the UML we want.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zensols.mednlp.uts.UTSError">
+<em class="property">exception </em><code class="sig-prename descclassname">zensols.mednlp.uts.</code><code class="sig-name descname">UTSError</code><a class="reference internal" href="../_modules/zensols/mednlp/uts.html#UTSError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zensols.mednlp.uts.UTSError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zensols.mednlp.domain.MedNLPError" title="zensols.mednlp.domain.MedNLPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">zensols.mednlp.domain.MedNLPError</span></code></a></p>
+<p>An error thrown by wrapper of the UTS system.</p>
+<dl class="py attribute">
+<dt id="zensols.mednlp.uts.UTSError.__module__">
+<code class="sig-name descname">__module__</code><em class="property"> = 'zensols.mednlp.uts'</em><a class="headerlink" href="#zensols.mednlp.uts.UTSError.__module__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-zensols.mednlp">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-zensols.mednlp" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../api.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../CONTRIBUTING.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Paul Landes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<map id="inheritancedc7926b154" name="inheritancedc7926b154">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="126,5,198,31"/>
+<area shape="rect" id="node2" title="All subclasses have the ability to deallocate any resources. &#160;This is useful" alt="" coords="55,79,157,104"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="186,79,258,104"/>
+<area shape="rect" id="node6" title="Classes can extend this that want to persist :class:`.PersistableWork`" alt="" coords="5,225,151,251"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes and" alt="" coords="189,152,261,177"/>
+<area shape="rect" id="node7" title="A *writable* class that has a ``text`` property or attribute. &#160;All" alt="" coords="175,225,279,251"/>
+<area shape="rect" id="node5" title="A container class for features about a token. &#160;Subclasses such as" alt="" coords="101,299,205,324"/>
+<area shape="rect" id="node9" title="SpacyFeatureToken(spacy_token: &#39;Union[Token, Span]&#39;, norm: &#39;str&#39;)" alt="" coords="83,372,223,397"/>
+<area shape="rect" id="node8" href="#zensols.mednlp.token.MedicalFeatureToken" target="_top" title="A set of token features that optionally contains a medical concept." alt="" coords="78,445,227,471"/>
+</map>

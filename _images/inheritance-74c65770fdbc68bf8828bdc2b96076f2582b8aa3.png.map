@@ -1,0 +1,9 @@
+<map id="inheritance35b9269af5" name="inheritance35b9269af5">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="24,5,96,31"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="24,79,96,104"/>
+<area shape="rect" id="node2" title="Base exception from which almost all library raised errors extend." alt="" coords="135,5,209,31"/>
+<area shape="rect" id="node7" href="#zensols.mednlp.domain.MedNLPError" target="_top" title="Raised by any medical NLP speicic reason in this library." alt="" coords="120,79,224,104"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes and" alt="" coords="24,152,96,177"/>
+<area shape="rect" id="node5" href="#zensols.mednlp.domain.Entity" target="_top" title="A convenience container class that Wraps a SciSpacy entity." alt="" coords="24,225,96,251"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.domain.EntitySimilarity" target="_top" title="A similarity measure of a medical concept in cui2vec." alt="" coords="5,299,115,324"/>
+</map>

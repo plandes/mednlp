@@ -1,0 +1,9 @@
+<map id="inheritance620f7a9cf6" name="inheritance620f7a9cf6">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="112,5,184,31"/>
+<area shape="rect" id="node4" title="Any subclass that has the ability (and need) to do preprocessing. &#160;For" alt="" coords="5,152,88,177"/>
+<area shape="rect" id="node6" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="112,79,184,104"/>
+<area shape="rect" id="node7" title="A dictionary&#45;like pure virtual class for CRUDing data, most of which read" alt="" coords="219,79,291,104"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.ctakes.CTakesParserStash" target="_top" title="Runs the cTAKES CUI entity linker on a directory of medical notes. &#160;For each" alt="" coords="78,225,218,251"/>
+<area shape="rect" id="node3" title="An abstract base class for subclasses that do not support write methods" alt="" coords="209,152,325,177"/>
+<area shape="rect" id="node5" title="A class that that generates a dictionary recursively from data classes and" alt="" coords="112,152,184,177"/>
+</map>

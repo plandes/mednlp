@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zensols.mednlp.resource &mdash; Medical natural language parsing and utility library 0.0.2 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../top.html" class="icon icon-home"> Medical natural language parsing and utility library
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../top.html">Medical natural language parsing and utility library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../top.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>zensols.mednlp.resource</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zensols.mednlp.resource</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;MedCAT wrapper.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Paul Landes&#39;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">InitVar</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">frozendict</span> <span class="kn">import</span> <span class="n">frozendict</span>
+<span class="kn">from</span> <span class="nn">scispacy.linking</span> <span class="kn">import</span> <span class="n">EntityLinker</span>
+<span class="kn">from</span> <span class="nn">scispacy.linking_utils</span> <span class="kn">import</span> <span class="n">Entity</span>
+<span class="kn">from</span> <span class="nn">medcat.config</span> <span class="kn">import</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">medcat.vocab</span> <span class="kn">import</span> <span class="n">Vocab</span>
+<span class="kn">from</span> <span class="nn">medcat.cdb</span> <span class="kn">import</span> <span class="n">CDB</span>
+<span class="kn">from</span> <span class="nn">medcat.cat</span> <span class="kn">import</span> <span class="n">CAT</span>
+<span class="kn">from</span> <span class="nn">medcat.meta_cat</span> <span class="kn">import</span> <span class="n">MetaCAT</span>
+<span class="kn">from</span> <span class="nn">zensols.install</span> <span class="kn">import</span> <span class="n">Resource</span><span class="p">,</span> <span class="n">Installer</span>
+<span class="kn">from</span> <span class="nn">zensols.persist</span> <span class="kn">import</span> <span class="n">persisted</span><span class="p">,</span> <span class="n">PersistedWork</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MedCatResource"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MedCatResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A factory class that creates MedCAT resources.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">installer</span><span class="p">:</span> <span class="n">Installer</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+
+    <span class="n">vocab_resource</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;The path to the ``vocab.dat`` file.&quot;&quot;&quot;</span>
+
+    <span class="n">cdb_resource</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;The ``cdb-medmen-v1.dat`` file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mc_status_resource</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;The the ``mc_status`` directory.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">umls_tuis</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;The UMLS TUIs (types) mapping resource that maps from TUIs to descriptions.</span>
+
+<span class="sd">    :see: `Semantic Types &lt;https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/documentation/SemanticTypesAndGroups.html&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">umls_groups</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Like :obj:`umls_tuis` but groups TUIs in gropus.&quot;&quot;&quot;</span>
+
+    <span class="n">filter_tuis</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Types used to filter linked CUIs (i.e. ``{&#39;T047&#39;, &#39;T048&#39;}``).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">filter_groups</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Just like :obj:`filter_tuis` but each element is treated as a group used to</span>
+<span class="sd">    generate a list of CUIs from those mapped from ``name`` to ``tui` in</span>
+<span class="sd">    :obj:`groups`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">spacy_enable_components</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;sentencizer parser&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+    <span class="sd">&quot;&quot;&quot;By default, MedCAT disables several pipeline components.  Some of these are</span>
+<span class="sd">    needed for sentence chunking and other downstream tasks.</span>
+
+<span class="sd">    :see: `MedCAT Config &lt;https://github.com/CogStack/MedCAT/blob/master/medcat/config.py&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cat_config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;If provieded, set the CDB configuration.  Keys are ``general``,</span>
+<span class="sd">    ``preprocessing`` and all other attributes documented in the `MedCAT Config</span>
+<span class="sd">    &lt;https://github.com/CogStack/MedCAT/blob/master/medcat/config.py&gt;`_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cache_global</span><span class="p">:</span> <span class="n">InitVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Whether or not to globally cache resources, which saves load time.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_global</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tuis</span> <span class="o">=</span> <span class="n">PersistedWork</span><span class="p">(</span><span class="s1">&#39;_tuis&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cache_global</span><span class="o">=</span><span class="n">cache_global</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cat</span> <span class="o">=</span> <span class="n">PersistedWork</span><span class="p">(</span><span class="s1">&#39;_cat&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cache_global</span><span class="o">=</span><span class="n">cache_global</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_installed</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_assert_installed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_installed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_installed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_override_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">targ</span><span class="p">:</span> <span class="n">Config</span><span class="p">,</span> <span class="n">src</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]):</span>
+        <span class="n">src_top</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="n">src_conf</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">src_top</span><span class="p">,</span> <span class="n">src_conf</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">targ_any</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">targ</span><span class="p">,</span> <span class="n">src_top</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">targ_any</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">targ_conf</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">targ_any</span>
+                <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;updating &#39;</span><span class="si">{</span><span class="n">src_top</span><span class="si">}</span><span class="s2">&#39;: &lt;</span><span class="si">{</span><span class="n">targ_conf</span><span class="si">}</span><span class="s2">&gt; with &lt;</span><span class="si">{</span><span class="n">src_conf</span><span class="si">}</span><span class="s2">&gt;&quot;</span><span class="p">)</span>
+                <span class="n">targ_conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">src_conf</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">targ</span><span class="p">,</span> <span class="n">src_top</span><span class="p">,</span> <span class="n">src_conf</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Config</span><span class="p">,</span> <span class="n">cdb</span><span class="p">:</span> <span class="n">CDB</span><span class="p">):</span>
+        <span class="n">filter_tuis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_tuis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filter_tuis</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_tuis</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_groups</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="s1">&#39;.*(&#39;</span> <span class="o">+</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_groups</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">reg</span><span class="p">)]</span>
+            <span class="n">filter_tuis</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tui&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;filtering on tuis: </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filter_tuis</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_tuis</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cui_filters</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">tui</span> <span class="ow">in</span> <span class="n">filter_tuis</span><span class="p">:</span>
+                <span class="n">cui_filters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cdb</span><span class="o">.</span><span class="n">addl_info</span><span class="p">[</span><span class="s1">&#39;type_id2cuis&#39;</span><span class="p">][</span><span class="n">tui</span><span class="p">])</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">linking</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">][</span><span class="s1">&#39;cuis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cui_filters</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_tuis&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">tuis</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;A mapping of type identifiers (TUIs) to their descriptions.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assert_installed</span><span class="p">()</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">umls_tuis</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;abbrev tui desc&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">df_tups</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;tui&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">frozendict</span><span class="p">(</span><span class="n">df_tups</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_groups&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;A dataframe of TUIs, their abbreviations, descriptions and a group name</span>
+<span class="sd">        associated with each.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assert_installed</span><span class="p">()</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">umls_groups</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;abbrev name tui desc&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_cat&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CAT</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The MedCAT NER tagger instance.</span>
+
+<span class="sd">        When this property is accessed, all models are downloaded first, then</span>
+<span class="sd">        loaded, if not already.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assert_installed</span><span class="p">()</span>
+        <span class="c1"># Load the vocab model you downloaded</span>
+        <span class="n">vocab</span> <span class="o">=</span> <span class="n">Vocab</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_resource</span><span class="p">])</span>
+        <span class="c1"># Load the cdb model you downloaded</span>
+        <span class="n">cdb</span> <span class="o">=</span> <span class="n">CDB</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cdb_resource</span><span class="p">])</span>
+        <span class="c1"># mc status model</span>
+        <span class="n">mc_status</span> <span class="o">=</span> <span class="n">MetaCAT</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">installer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mc_status_resource</span><span class="p">])</span>
+        <span class="c1"># enable sentence boundary annotation</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacy_enable_components</span><span class="p">:</span>
+            <span class="n">cdb</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">general</span><span class="p">[</span><span class="s1">&#39;spacy_disabled_components&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># override configuration</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cat_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_override_config</span><span class="p">(</span><span class="n">cdb</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cat_config</span><span class="p">)</span>
+        <span class="c1">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_filters</span><span class="p">(</span><span class="n">cdb</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">cdb</span><span class="p">)</span>
+        <span class="c1"># create cat - each cdb comes with a config that was used to train it;</span>
+        <span class="c1"># you can change that config in any way you want, before or after</span>
+        <span class="c1"># creating cat</span>
+        <span class="n">cat</span> <span class="o">=</span> <span class="n">CAT</span><span class="p">(</span><span class="n">cdb</span><span class="o">=</span><span class="n">cdb</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">cdb</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">,</span>
+                  <span class="n">meta_cats</span><span class="o">=</span><span class="p">[</span><span class="n">mc_status</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">cat</span>
+
+<div class="viewcode-block" id="MedCatResource.clear"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tuis</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cat</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="EntityLinkerResource"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.resource.EntityLinkerResource">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">EntityLinkerResource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;resolve_abbreviations&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                                 <span class="s1">&#39;linker_name&#39;</span><span class="p">:</span> <span class="s1">&#39;umls&#39;</span><span class="p">})</span>
+    <span class="sd">&quot;&quot;&quot;Parameters given to the scispaCy entity linker.&quot;&quot;&quot;</span>
+
+    <span class="n">cache_global</span><span class="p">:</span> <span class="n">InitVar</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Whether or not to globally cache resources, which saves load time.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_global</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_linker</span> <span class="o">=</span> <span class="n">PersistedWork</span><span class="p">(</span>
+            <span class="s1">&#39;_linker&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cache_global</span><span class="o">=</span><span class="n">cache_global</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@persisted</span><span class="p">(</span><span class="s1">&#39;_linker&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EntityLinker</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The ScispaCy entity linker.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">EntityLinker</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EntityLinkerResource.get_linked_entity"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.resource.EntityLinkerResource.get_linked_entity">[docs]</a>    <span class="k">def</span> <span class="nf">get_linked_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Entity</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a scispaCy linked entity.</span>
+
+<span class="sd">        :param cui: the unique concept ID</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">linker</span><span class="p">:</span> <span class="n">EntityLinker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linker</span>
+        <span class="k">return</span> <span class="n">linker</span><span class="o">.</span><span class="n">kb</span><span class="o">.</span><span class="n">cui_to_entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cui</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Paul Landes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

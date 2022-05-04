@@ -1,0 +1,12 @@
+<map id="inheritance8ea4307af0" name="inheritance8ea4307af0">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="171,5,243,31"/>
+<area shape="rect" id="node2" title="All subclasses have the ability to deallocate any resources. &#160;This is useful" alt="" coords="37,79,140,104"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="171,79,243,104"/>
+<area shape="rect" id="node8" title="Implementations can add, remove or modify features on a token." alt="" coords="268,79,467,104"/>
+<area shape="rect" id="node6" title="Classes can extend this that want to persist :class:`.PersistableWork`" alt="" coords="5,152,151,177"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes and" alt="" coords="175,152,247,177"/>
+<area shape="rect" id="node5" title="This class parses text in to instances of :class:`.FeatureDocument`" alt="" coords="61,225,229,251"/>
+<area shape="rect" id="node10" title="This langauge resource parses text in to Spacy documents. &#160;Loaded spaCy" alt="" coords="42,299,247,324"/>
+<area shape="rect" id="node7" href="#zensols.mednlp.parser.LinkFeatureTokenDecorator" target="_top" title="Adds linked SciSpacy definitions to tokens using the" alt="" coords="274,152,461,177"/>
+<area shape="rect" id="node9" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser" target="_top" title="A medical based language resources that parses concepts." alt="" coords="38,372,251,397"/>
+</map>

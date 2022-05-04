@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zensols.mednlp.parser &mdash; Medical natural language parsing and utility library 0.0.2 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../top.html" class="icon icon-home"> Medical natural language parsing and utility library
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../top.html">Medical natural language parsing and utility library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../top.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>zensols.mednlp.parser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zensols.mednlp.parser</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="sd">&quot;&quot;&quot;Medical langauge parser.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Paul Landes&#39;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens.token</span> <span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens.doc</span> <span class="kn">import</span> <span class="n">Doc</span>
+<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
+<span class="kn">from</span> <span class="nn">scispacy.linking_utils</span> <span class="kn">import</span> <span class="n">Entity</span> <span class="k">as</span> <span class="n">SciSpacyEntity</span>
+<span class="kn">from</span> <span class="nn">zensols.nlp</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FeatureToken</span><span class="p">,</span> <span class="n">SpacyFeatureDocumentParser</span><span class="p">,</span> <span class="n">FeatureDocumentParser</span><span class="p">,</span>
+    <span class="n">SpacyFeatureTokenDecorator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MedNLPError</span><span class="p">,</span> <span class="n">MedCatResource</span><span class="p">,</span> <span class="n">MedicalFeatureToken</span><span class="p">,</span> <span class="n">MedicalLibrary</span>
+<span class="kn">from</span> <span class="nn">.domain</span> <span class="kn">import</span> <span class="n">_MedicalEntity</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LinkFeatureTokenDecorator"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.parser.LinkFeatureTokenDecorator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">LinkFeatureTokenDecorator</span><span class="p">(</span><span class="n">SpacyFeatureTokenDecorator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Adds linked SciSpacy definitions to tokens using the</span>
+<span class="sd">    :class:`.MedicalLibrary`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lib</span><span class="p">:</span> <span class="n">MedicalLibrary</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The medical library used for linking entities.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LinkFeatureTokenDecorator.decorate"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.parser.LinkFeatureTokenDecorator.decorate">[docs]</a>    <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spacy_tok</span><span class="p">:</span> <span class="n">Token</span><span class="p">,</span> <span class="n">feature_token</span><span class="p">:</span> <span class="n">FeatureToken</span><span class="p">):</span>
+        <span class="n">e</span><span class="p">:</span> <span class="n">SciSpacyEntity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">get_linked_entity</span><span class="p">(</span><span class="n">feature_token</span><span class="o">.</span><span class="n">cui_</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">e</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">feature_token</span><span class="o">.</span><span class="n">_definition</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">definition</span></div></div>
+
+
+<div class="viewcode-block" id="MedicalFeatureDocumentParser"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.parser.MedicalFeatureDocumentParser">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MedicalFeatureDocumentParser</span><span class="p">(</span><span class="n">SpacyFeatureDocumentParser</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A medical based language resources that parses concepts.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TOKEN_FEATURE_IDS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">FeatureDocumentParser</span><span class="o">.</span><span class="n">TOKEN_FEATURE_IDS</span> <span class="o">|</span>
+                                  <span class="n">MedicalFeatureToken</span><span class="o">.</span><span class="n">FEATURE_IDS</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Default token feature ID set for the medical parser.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">token_feature_ids</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">TOKEN_FEATURE_IDS</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The features to keep from spaCy tokens.</span>
+
+<span class="sd">    :see: :obj:`TOKEN_FEATURE_IDS`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">token_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">FeatureToken</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">MedicalFeatureToken</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The class to use for instances created by :meth:`features`.&quot;&quot;&quot;</span>
+
+    <span class="n">medcat_resource</span><span class="p">:</span> <span class="n">MedCatResource</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The MedCAT factory resource.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">medcat_resource</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MedNLPError</span><span class="p">(</span><span class="s1">&#39;No medcat resource set&#39;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_create_model_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;name-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_create_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Language</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">medcat_resource</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">get_spacy_nlp</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_normalize_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">Doc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">FeatureToken</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parsing: </span><span class="si">{</span><span class="n">doc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1"># load/create model resources</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">MedCatResource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">medcat_resource</span>
+        <span class="n">ix2ent</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">_MedicalEntity</span><span class="p">]</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">_MedicalEntity</span><span class="p">)</span>
+
+        <span class="c1"># add entities</span>
+        <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end</span><span class="p">):</span>
+                <span class="n">tok</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">ix2ent</span><span class="p">[</span><span class="n">tok</span><span class="o">.</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">concept_span</span> <span class="o">=</span> <span class="n">ent</span>
+
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;normalizing with: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">token_normalizer</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_normalize_tokens</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">ix2ent</span><span class="o">=</span><span class="n">ix2ent</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Paul Landes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

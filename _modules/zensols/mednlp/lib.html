@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zensols.mednlp.lib &mdash; Medical natural language parsing and utility library 0.0.2 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../top.html" class="icon icon-home"> Medical natural language parsing and utility library
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../top.html">Medical natural language parsing and utility library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../top.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>zensols.mednlp.lib</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zensols.mednlp.lib</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="sd">&quot;&quot;&quot;Medical resource library that contains UMLS access, cui2vec etc..</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Paul Landes&#39;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">scispacy.linking_utils</span> <span class="kn">import</span> <span class="n">Entity</span> <span class="k">as</span> <span class="n">SciSpacyEntity</span>
+<span class="kn">from</span> <span class="nn">zensols.config</span> <span class="kn">import</span> <span class="n">ConfigFactory</span>
+<span class="kn">from</span> <span class="nn">.domain</span> <span class="kn">import</span> <span class="n">Entity</span><span class="p">,</span> <span class="n">EntitySimilarity</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MedCatResource</span><span class="p">,</span> <span class="n">EntityLinkerResource</span><span class="p">,</span> <span class="n">UTSClient</span>
+
+
+<div class="viewcode-block" id="MedicalLibrary"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">MedicalLibrary</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A utility class that provides access to medical APIs.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config_factory</span><span class="p">:</span> <span class="n">ConfigFactory</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The configuration factory used to create cTAKES and cui2vec instances.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">medcat_resource</span><span class="p">:</span> <span class="n">MedCatResource</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The MedCAT factory resource.&quot;&quot;&quot;</span>
+
+    <span class="n">entity_linker_resource</span><span class="p">:</span> <span class="n">EntityLinkerResource</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;The entity linker resource.&quot;&quot;&quot;</span>
+
+    <span class="n">uts_client</span><span class="p">:</span> <span class="n">UTSClient</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Queries UMLS data.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MedicalLibrary.get_entities"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_entities">[docs]</a>    <span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the all concept entity data</span>
+
+<span class="sd">        :return: concepts as a multi-tiered dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">medcat_resource</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicalLibrary.get_linked_entity"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_linked_entity">[docs]</a>    <span class="k">def</span> <span class="nf">get_linked_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SciSpacyEntity</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get a scispaCy linked entity.</span>
+
+<span class="sd">        :param cui: the unique concept ID</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">se</span><span class="p">:</span> <span class="n">SciSpacyEntity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_linker_resource</span><span class="o">.</span><span class="n">get_linked_entity</span><span class="p">(</span><span class="n">cui</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">se</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Entity</span><span class="p">(</span><span class="n">se</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicalLibrary.get_atom"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_atom">[docs]</a>    <span class="k">def</span> <span class="nf">get_atom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Get the UMLS atoms of a CUI from UTS.</span>
+
+<span class="sd">        :param cui: the concept ID used to query</span>
+
+<span class="sd">        :param preferred: if ``True`` only return preferred atoms</span>
+
+<span class="sd">        :return: a list of atom entries in dictionary form</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">(</span><span class="n">cui</span><span class="p">,</span> <span class="n">preferred</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicalLibrary.get_relations"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_relations">[docs]</a>    <span class="k">def</span> <span class="nf">get_relations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Get the UMLS related concepts connected to a concept by ID.</span>
+
+<span class="sd">        :param cui: the concept ID used to get related concepts</span>
+
+<span class="sd">        :return: a list of relation entries in dictionary form in the order</span>
+<span class="sd">                 returned by UTS</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">get_relations</span><span class="p">(</span><span class="n">cui</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedicalLibrary.get_new_ctakes_parser_stash"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_new_ctakes_parser_stash">[docs]</a>    <span class="k">def</span> <span class="nf">get_new_ctakes_parser_stash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CTakesParserStash</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a new instance of a ctakes parser stash.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_factory</span><span class="o">.</span><span class="n">new_instance</span><span class="p">(</span><span class="s1">&#39;ctakes_parser_stash&#39;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cui2vec_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cui2VecEmbedModel</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The cui2vec embedding model.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_factory</span><span class="p">(</span><span class="s1">&#39;cui2vec_500_embedding&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MedicalLibrary.similarity_by_term"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.similarity_by_term">[docs]</a>    <span class="k">def</span> <span class="nf">similarity_by_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">EntitySimilarity</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return similaries of a medical term.</span>
+
+<span class="sd">        :param term: the medical term (i.e. ``heart disease``)</span>
+
+<span class="sd">        :param topn: the top N count similarities to return</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">embedding</span><span class="p">:</span> <span class="n">Cui2VecEmbedModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cui2vec_embedding</span>
+        <span class="n">kv</span><span class="p">:</span> <span class="n">KeyedVectors</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">keyed_vectors</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">search_term</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+        <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;ui&#39;</span><span class="p">]</span>
+        <span class="n">sims_by_word</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">similar_by_word</span><span class="p">(</span><span class="n">cui</span><span class="p">,</span> <span class="n">topn</span><span class="p">)</span>
+        <span class="n">sims</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">EntitySimilarity</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">rel_cui</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">sims_by_word</span><span class="p">:</span>
+            <span class="n">entity</span><span class="p">:</span> <span class="n">Entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_linked_entity</span><span class="p">(</span><span class="n">rel_cui</span><span class="p">)</span>
+            <span class="c1"># name: str = entity.canonical_name.lower()</span>
+            <span class="c1"># defn: str = entity.definition</span>
+            <span class="n">sim</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">keyed_vectors</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">cui</span><span class="p">,</span> <span class="n">rel_cui</span><span class="p">)</span>
+            <span class="n">sims</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">EntitySimilarity</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">sci_spacy_entity</span><span class="p">,</span> <span class="n">sim</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">sims</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Paul Landes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

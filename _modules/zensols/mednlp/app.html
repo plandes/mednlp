@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zensols.mednlp.app &mdash; Medical natural language parsing and utility library 0.0.2 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../top.html" class="icon icon-home"> Medical natural language parsing and utility library
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../top.html">Medical natural language parsing and utility library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../top.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>zensols.mednlp.app</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zensols.mednlp.app</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A natural language medical domain parsing library.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Paul Landes&#39;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">TextIOBase</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">zensols.config</span> <span class="kn">import</span> <span class="n">Dictable</span><span class="p">,</span> <span class="n">ConfigFactory</span>
+<span class="kn">from</span> <span class="nn">zensols.cli</span> <span class="kn">import</span> <span class="n">ApplicationError</span>
+<span class="kn">from</span> <span class="nn">zensols.nlp</span> <span class="kn">import</span> <span class="n">FeatureDocumentParser</span><span class="p">,</span> <span class="n">FeatureDocument</span>
+<span class="kn">from</span> <span class="nn">zensols.nlp.dataframe</span> <span class="kn">import</span> <span class="n">FeatureDataFrameFactory</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MedCatResource</span><span class="p">,</span> <span class="n">MedicalLibrary</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GroupInfo"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.GroupInfo">[docs]</a><span class="k">class</span> <span class="nc">GroupInfo</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Used to group TUI information in :meth:`.Application.group`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">csv</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">byname</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Application"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="n">Dictable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A natural language medical domain parsing library.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">CLI_META</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mnemonic_excludes&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;write&#39;</span><span class="p">},</span>
+                <span class="s1">&#39;mnemonic_overrides&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;show_config&#39;</span><span class="p">:</span> <span class="s1">&#39;conf&#39;</span><span class="p">},</span>
+                <span class="s1">&#39;option_excludes&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;doc_parser&#39;</span><span class="p">,</span> <span class="s1">&#39;config_factory&#39;</span><span class="p">},</span>
+                <span class="s1">&#39;option_overrides&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;input_dir&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;long_name&#39;</span><span class="p">:</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;short_name&#39;</span><span class="p">:</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;metavar&#39;</span><span class="p">:</span> <span class="s1">&#39;DIR&#39;</span><span class="p">}}}</span>
+
+    <span class="n">config_factory</span><span class="p">:</span> <span class="n">ConfigFactory</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Used to create a cTAKES stash.&quot;&quot;&quot;</span>
+
+    <span class="n">doc_parser</span><span class="p">:</span> <span class="n">FeatureDocumentParser</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Parses and NER tags medical terms.&quot;&quot;&quot;</span>
+
+    <span class="n">library</span><span class="p">:</span> <span class="n">MedicalLibrary</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;Medical resource library that contains UMLS access, cui2vec etc..&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_or_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the text from a file or the text passed based on if ``text_or_file``</span>
+<span class="sd">        is a file on the file system.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">text_or_file</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">text_or_file</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">text_or_file</span>
+
+    <span class="k">def</span> <span class="nf">_write_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">FeatureDocument</span><span class="p">,</span> <span class="n">only_medical</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                   <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">writer</span><span class="p">:</span> <span class="n">TextIOBase</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_line</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">only_medical</span> <span class="ow">or</span> <span class="n">tok</span><span class="o">.</span><span class="n">is_ent</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_write_line</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tok</span><span class="o">.</span><span class="n">norm</span><span class="si">}</span><span class="s1">:&#39;</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+                    <span class="n">tok</span><span class="o">.</span><span class="n">write_attributes</span><span class="p">(</span>
+                        <span class="n">depth</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span>
+                        <span class="n">feature_ids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">token_feature_ids</span>
+                    <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_line</span><span class="p">(</span><span class="s1">&#39;entities:&#39;</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ents</span> <span class="ow">in</span> <span class="n">sent</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_write_line</span><span class="p">(</span>
+                    <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span> <span class="n">ents</span><span class="p">)),</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">writer</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Application.show"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_or_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">only_medical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse and output medical entities.</span>
+
+<span class="sd">        :param text_or_file: natural language to be processed</span>
+
+<span class="sd">        :param only_medical: only provide medical linked tokens</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parsing: &lt;</span><span class="si">{</span><span class="n">text_or_file</span><span class="si">}</span><span class="s1">&gt;...&#39;</span><span class="p">)</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_text</span><span class="p">(</span><span class="n">text_or_file</span><span class="p">)</span>
+        <span class="n">doc</span><span class="p">:</span> <span class="n">FeatureDocument</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">only_medical</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_output_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Output the dataframe generated by other actions of the app.</span>
+
+<span class="sd">        :param df: the dataframe to output:</span>
+
+<span class="sd">        :param out: the output path, or ``None`` standard out</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">row_s</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="o">!=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;wrote </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1"> row</span><span class="si">{</span><span class="n">row_s</span><span class="si">}</span><span class="s1"> to </span><span class="si">{</span><span class="n">out</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Application.features"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.features">[docs]</a>    <span class="k">def</span> <span class="nf">features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_or_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">only_medical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Dump features as CSV output.</span>
+
+<span class="sd">        :param text_or_file: natural language to be processed</span>
+
+<span class="sd">        :param out: the path to output the CSV file or stdout if missing</span>
+
+<span class="sd">        :param ids: the comma separate feature IDs to output</span>
+
+<span class="sd">        :param only_medical: only provide medical linked tokens</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parsing: &lt;</span><span class="si">{</span><span class="n">text_or_file</span><span class="si">}</span><span class="s1">&gt;...&#39;</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">token_feature_ids</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\W+&#39;</span><span class="p">,</span> <span class="n">ids</span><span class="p">))</span>
+        <span class="n">needs</span> <span class="o">=</span> <span class="s1">&#39;norm cui_ is_concept&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">missing</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">,</span> <span class="n">needs</span><span class="p">))</span>
+        <span class="n">ids</span> <span class="o">|=</span> <span class="n">missing</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;token_feature_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ids</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;priority_feature_ids&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">needs</span>
+        <span class="n">df_fac</span> <span class="o">=</span> <span class="n">FeatureDataFrameFactory</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">token_feature_ids</span> <span class="o">=</span> <span class="n">ids</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_text</span><span class="p">(</span><span class="n">text_or_file</span><span class="p">)</span>
+        <span class="n">doc</span><span class="p">:</span> <span class="n">FeatureDocument</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">df_fac</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">only_medical</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;is_concept&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Application.search"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search the UMLS database using UTS and show results.</span>
+
+<span class="sd">        :param term: the term to search for (eg &#39;lung cancer&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">search_term</span><span class="p">(</span><span class="n">term</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Application.atom"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.atom">[docs]</a>    <span class="k">def</span> <span class="nf">atom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search the UMLS database using UTS and show results.</span>
+
+<span class="sd">        :param cui: the concept ID to search for (eg &#39;C0242379&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">(</span><span class="n">cui</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Application.define"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.define">[docs]</a>    <span class="k">def</span> <span class="nf">define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Look up an entity by CUI.  This takes a long time.</span>
+
+<span class="sd">        :param cui: the concept ID to search for (eg &#39;C0242379&#39;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_linked_entity</span><span class="p">(</span><span class="n">cui</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Application.group"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.group">[docs]</a>    <span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">GroupInfo</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get TUI group information.</span>
+
+<span class="sd">        :param info: the type of information to return</span>
+
+<span class="sd">        :param query: comma delimited name list used to subset the output data</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span><span class="p">:</span> <span class="n">MedCatResource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">medcat_resource</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">groups</span>
+        <span class="k">if</span> <span class="n">info</span> <span class="o">==</span> <span class="n">GroupInfo</span><span class="o">.</span><span class="n">csv</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;tui-groups.csv&#39;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;wrote TUI groups to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">info</span> <span class="o">==</span> <span class="n">GroupInfo</span><span class="o">.</span><span class="n">byname</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">query</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ApplicationError</span><span class="p">(</span><span class="s1">&#39;Missing query string for grouping&#39;</span><span class="p">)</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="s1">&#39;.*(&#39;</span> <span class="o">+</span> <span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">reg</span><span class="p">)]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tui&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ApplicationError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown query info type: </span><span class="si">{</span><span class="n">info</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Application.ctakes"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.ctakes">[docs]</a>    <span class="k">def</span> <span class="nf">ctakes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_or_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">only_medical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invoke cTAKES on a directory with text files.</span>
+
+<span class="sd">        :param text_or_file: natural language to be processed</span>
+
+<span class="sd">        :param only_medical: only provide medical linked tokens</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_text</span><span class="p">(</span><span class="n">text_or_file</span><span class="p">)</span>
+        <span class="n">stash</span><span class="p">:</span> <span class="n">CTakesParserStash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_new_ctakes_parser_stash</span><span class="p">()</span>
+        <span class="n">stash</span><span class="o">.</span><span class="n">set_documents</span><span class="p">([</span><span class="n">text</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">stash</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Application.similarity"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.similarity">[docs]</a>    <span class="k">def</span> <span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the cosine similarity between two CUIs.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">sim</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">similarity_by_term</span><span class="p">(</span><span class="n">term</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">cui</span><span class="p">)</span>
+            <span class="n">sim</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Application.proto"><a class="viewcode-back" href="../../../api/zensols.mednlp.html#zensols.mednlp.app.Application.proto">[docs]</a>    <span class="k">def</span> <span class="nf">proto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="o">.</span><span class="n">token_feature_ids</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Paul Landes.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

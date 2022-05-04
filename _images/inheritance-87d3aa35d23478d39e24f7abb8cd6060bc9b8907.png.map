@@ -1,0 +1,4 @@
+<map id="inheritanced4dc7f15ef" name="inheritanced4dc7f15ef">
+<area shape="rect" id="node1" href="#zensols.mednlp.resource.EntityLinkerResource" target="_top" title="EntityLinkerResource(params: Dict[str, Any] = &lt;factory&gt;, cache_global: dataclasses.InitVar[bool] = True)" alt="" coords="5,5,155,31"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.resource.MedCatResource" target="_top" title="A factory class that creates MedCAT resources." alt="" coords="179,5,304,31"/>
+</map>
