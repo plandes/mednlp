@@ -187,6 +187,12 @@ class MedCatResource(object):
 
 @dataclass
 class EntityLinkerResource(object):
+    """Provides a way resolve :class:`scispacy.linking_utils.Entity` instances from
+    CUIs.
+
+    :see: :meth:`.get_linked_entity`
+
+    """
     params: Dict[str, Any] = field(
         default_factory=lambda: {'resolve_abbreviations': True,
                                  'linker_name': 'umls'})
