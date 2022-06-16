@@ -63,7 +63,6 @@ cleanexample:
 
 .PHONY:			testall
 testall:		test testrun testfeatures clinicaltuis
-			@for i in uts features cui2vec ; do \
-				echo "testing $$i" ; \
-				$(PYTHON_BIN) example/$$i/$$i.py ; \
-			done
+			example/uts/uts.py
+			example/features/features.py show
+			example/cui2vec/cui2vec.py similarity -t heart

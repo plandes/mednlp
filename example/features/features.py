@@ -25,7 +25,7 @@ class Application(object):
     """
     # tell the application not mistake the `doc_parser` as an option when
     # generating the online help with the -h option
-    CLI_META = {'option_excludes': {'doc_paraser'}}
+    CLI_META = {'option_excludes': {'doc_parser'}}
 
     doc_parser: FeatureDocumentParser = field()
     """Parses and NER tags medical terms."""
