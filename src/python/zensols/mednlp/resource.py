@@ -204,6 +204,7 @@ class EntityLinkerResource(object):
     @persisted('_linker')
     def linker(self) -> EntityLinker:
         """The ScispaCy entity linker."""
+        self._silence_scispacy_warn()
         return EntityLinker(**self.params)
 
     @staticmethod
@@ -223,5 +224,4 @@ class EntityLinkerResource(object):
 
         """
         linker: EntityLinker = self.linker
-        self._silence_scispacy_warn()
         return linker.kb.cui_to_entity.get(cui)
