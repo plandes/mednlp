@@ -208,6 +208,10 @@ class EntityLinkerResource(object):
 
     @staticmethod
     def _silence_scispacy_warn():
+        """This warning has should have no bearing on this application as we're simply
+        doing a CUI looking.
+
+        """
         import warnings
         s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
         warnings.filterwarnings('ignore', message=s)
