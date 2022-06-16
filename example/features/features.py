@@ -61,7 +61,7 @@ class Application(object):
         # level
         self._boundary('named entities:')
         for e in doc.entities:
-            print(e)
+            print(f'{e}: cui={e[0].cui_}')
 
         # generate a set of features from the document as a Pandas data frame
         # and print it
