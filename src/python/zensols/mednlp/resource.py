@@ -206,6 +206,12 @@ class EntityLinkerResource(object):
         """The ScispaCy entity linker."""
         return EntityLinker(**self.params)
 
+    @staticmethod
+    def _silence_scispacy_warn():
+        import warnings
+        s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
+        warnings.filterwarnings('ignore', message=s)
+
     def get_linked_entity(self, cui: str) -> Entity:
         """Get a scispaCy linked entity.
 
@@ -213,4 +219,5 @@ class EntityLinkerResource(object):
 
         """
         linker: EntityLinker = self.linker
+        self._silence_scispacy_warn()
         return linker.kb.cui_to_entity.get(cui)
