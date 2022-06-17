@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+- Support for Python 3.7, 3.8 from dropped support in `zensols.util`.
+
 
 ## [0.0.2] - 2022-05-04
-
 ### Added
 - A CSV features dump example.
 
