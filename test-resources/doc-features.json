@@ -40,7 +40,9 @@
                     "i": 0,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "PRON"
+                    "pos_": "PRON",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -83,7 +85,9 @@
                     "i": 1,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "VERB"
+                    "pos_": "VERB",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -123,7 +127,9 @@
                     "i": 2,
                     "pref_name_": "chicago",
                     "is_contraction": false,
-                    "pos_": "PROPN"
+                    "pos_": "PROPN",
+		    "ent_iob": 3,
+		    "ent_iob_": "B"
                 },
                 {
                     "is_space": false,
@@ -161,7 +167,9 @@
                     "i": 3,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "CCONJ"
+                    "pos_": "CCONJ",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -199,7 +207,9 @@
                     "i": 4,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "PROPN"
+                    "pos_": "PROPN",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -239,7 +249,9 @@
                     "i": 5,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "PROPN"
+                    "pos_": "PROPN",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -282,7 +294,9 @@
                     "i": 6,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "VERB"
+                    "pos_": "VERB",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -320,7 +334,9 @@
                     "i": 7,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "PRON"
+                    "pos_": "PRON",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 },
                 {
                     "is_space": false,
@@ -361,7 +377,9 @@
                     "i": 8,
                     "pref_name_": "Malignant neoplasm of lung",
                     "is_contraction": false,
-                    "pos_": "NOUN"
+                    "pos_": "NOUN",
+		    "ent_iob": 3,
+		    "ent_iob_": "B"
                 },
                 {
                     "is_space": false,
@@ -404,7 +422,9 @@
                     "i": 9,
                     "pref_name_": "Malignant neoplasm of lung",
                     "is_contraction": false,
-                    "pos_": "NOUN"
+                    "pos_": "NOUN",
+		    "ent_iob": 1,
+		    "ent_iob_": "I"
                 },
                 {
                     "is_space": false,
@@ -442,7 +462,9 @@
                     "i": 10,
                     "pref_name_": "<none>",
                     "is_contraction": false,
-                    "pos_": "PUNCT"
+                    "pos_": "PUNCT",
+		    "ent_iob": 0,
+		    "ent_iob_": "O"
                 }
             ]
         }
