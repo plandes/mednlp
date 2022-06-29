@@ -36,19 +36,16 @@ class MedCatResource(object):
     """The ``cdb-medmen-v1.dat`` file.
 
     """
-
     mc_status_resource: Resource = field()
     """The the ``mc_status`` directory.
 
     """
-
     umls_tuis: Resource = field()
     """The UMLS TUIs (types) mapping resource that maps from TUIs to descriptions.
 
     :see: `Semantic Types <https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/documentation/SemanticTypesAndGroups.html>`_
 
     """
-
     umls_groups: Resource = field()
     """Like :obj:`umls_tuis` but groups TUIs in gropus."""
 
@@ -56,14 +53,12 @@ class MedCatResource(object):
     """Types used to filter linked CUIs (i.e. ``{'T047', 'T048'}``).
 
     """
-
     filter_groups: Set[str] = field(default=None)
     """Just like :obj:`filter_tuis` but each element is treated as a group used to
     generate a list of CUIs from those mapped from ``name`` to ``tui` in
     :obj:`groups`.
 
     """
-
     spacy_enable_components: Set[str] = field(
         default_factory=lambda: set('sentencizer parser'.split()))
     """By default, MedCAT disables several pipeline components.  Some of these are
@@ -72,14 +67,12 @@ class MedCatResource(object):
     :see: `MedCAT Config <https://github.com/CogStack/MedCAT/blob/master/medcat/config.py>`_
 
     """
-
     cat_config: Dict[str, Dict[str, Any]] = field(default=None)
     """If provieded, set the CDB configuration.  Keys are ``general``,
     ``preprocessing`` and all other attributes documented in the `MedCAT Config
     <https://github.com/CogStack/MedCAT/blob/master/medcat/config.py>`_
 
     """
-
     cache_global: InitVar[bool] = field(default=True)
     """Whether or not to globally cache resources, which saves load time.
 
@@ -102,8 +95,8 @@ class MedCatResource(object):
             if isinstance(targ_any, dict):
                 targ_conf: Dict[str, Any] = targ_any
                 if logger.isEnabledFor(logging.DEBUG):
-                    logger.debug(
-                        f"updating '{src_top}': <{targ_conf}> with <{src_conf}>")
+                    logger.debug(f"updating '{src_top}': " +
+                                 f"<{targ_conf}> with <{src_conf}>")
                 targ_conf.update(src_conf)
             else:
                 setattr(targ, src_top, src_conf)
