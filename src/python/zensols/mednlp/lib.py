@@ -4,7 +4,7 @@ from __future__ import annotations
 """
 __author__ = 'Paul Landes'
 
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Tuple
 from dataclasses import dataclass, field
 from scispacy.linking_utils import Entity as SciSpacyEntity
 from zensols.config import ConfigFactory
@@ -31,7 +31,7 @@ class MedicalLibrary(object):
     """Queries UMLS data."""
 
     def get_entities(self, text: str) -> Dict[str, Any]:
-        """Return the all concept entity data
+        """Return the all concept entity data.
 
         :return: concepts as a multi-tiered dict
 
