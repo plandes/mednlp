@@ -68,7 +68,7 @@ class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
         return f'name-{self.name}'
 
     def _create_model(self) -> Language:
-        return self.medcat_resource.cat.get_spacy_nlp()
+        return self.medcat_resource.cat.pipe.spacy_nlp
 
     def _normalize_tokens(self, doc: Doc) -> Iterable[FeatureToken]:
         if logger.isEnabledFor(logging.INFO):

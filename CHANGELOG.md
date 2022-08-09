@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+### Changed
+- Upgrade to spaCy 2.2, medcat 3.0.
+
 ### Removed
 - Support for Python 3.7, 3.8 from dropped support in `zensols.util`.
 

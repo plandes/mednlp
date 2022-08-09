@@ -37,7 +37,7 @@ class Application(Dictable):
     """
     CLI_META = {'mnemonic_excludes': {'write'},
                 'mnemonic_overrides': {'show_config': 'conf'},
-                'option_excludes': {'doc_parser', 'config_factory'},
+                'option_excludes': {'doc_parser', 'config_factory', 'library'},
                 'option_overrides': {'input_dir': {'long_name': 'input',
                                                    'short_name': 'i',
                                                    'metavar': 'DIR'}}}
