@@ -28,6 +28,7 @@ class MedCatResource(object):
 
     """
     installer: Installer = field()
+    """Installs and provides paths to the model files."""
 
     vocab_resource: Resource = field()
     """The path to the ``vocab.dat`` file."""
