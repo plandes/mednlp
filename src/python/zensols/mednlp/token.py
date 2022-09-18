@@ -33,6 +33,7 @@ class MedicalFeatureToken(SpacyFeatureToken):
         reduce(lambda res, x: res | x, FEATURE_IDS_BY_TYPE.values()))
     WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) +
                                  'cui_'.split())
+    CONCEPT_ENTITY_LABEL = 'concept'
     _NONE_SET = frozenset()
 
     def __init__(self, spacy_token: Union[Token, Span], norm: str,
