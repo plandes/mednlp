@@ -1,0 +1,78 @@
+# description: UMLS CUI embeddings
+
+## Installer
+#
+# The below URL might need to be updated from a new URL given by navigating to
+# the embeddings link below
+#
+# paper: https://arxiv.org/pdf/1804.01486.pdf
+# embeddings: https://figshare.com/s/00d69861786cd0156d81
+cui2vec_resource:
+  class_name: zensols.install.Resource
+  url: 'https://figshare.com/ndownloader/files/10959626?private_link=00d69861786cd0156d81'
+  name: 'cui2vec.zip'
+  is_compressed: true
+  check_path: 'cui2vec_pretrained.csv'
+  # keep the file since it the paper mentions having to "navigate" to get it
+  clean_up: false
+  clean_up_paths:
+    - '__MACOSX'
+
+cui2vec_installer:
+  class_name: zensols.install.Installer
+  package_resource: zensols.mednlp
+  resources: 'instance: list: cui2vec_resource'
+
+
+## Embedding
+#
+cui2vec_500_embedding:
+  class_name: 'zensols.mednlp.cui2vec.Cui2VecEmbedModel'
+  installer: 'instance: cui2vec_installer'
+  resource: 'instance: cui2vec_resource'
+  lowercase: false
+
+# a vectorizer that turns tokens (TokensContainer) in to indexes given to the
+# embedding layer
+cui2vec_50_feature_vectorizer:
+  class_name: zensols.deepnlp.vectorize.WordVectorEmbeddingFeatureVectorizer
+  # the feature id is used to connect instance data with the vectorizer used to
+  # generate the feature at run time
+  feature_id: 'wvcui2vec500'
+  # encode at the (feature) document level
+  fold_method: 'concat_tokens'
+  # the word embedding model
+  embed_model: 'instance: cui2vec_500_embedding'
+  # do not serialize (pickle) the decoded output to do the work up front
+  encode_transformed: '${mednlp_default:cui2vec_encode_transformed}'
+  # the FeatureToken attribute used to index the embedding vectors
+  token_feature_id: 'cui_'
+
+# a torch.nn.Module implementation that uses the an embedding model
+cui2vec_500_embedding_layer:
+  class_name: zensols.deepnlp.layer.WordVectorEmbeddingLayer
+  embed_model: 'instance: cui2vec_500_embedding'
+  feature_vectorizer_manager: 'instance: cui2vec_feature_vectorizer_manager'
+  # freeze the embedding to train faster
+  trainable: '${mednlp_default:cui2vec_trainable}'
+
+
+## Vectorizer
+#
+cui2vec_feature_vectorizer_manager:
+  class_name: zensols.deepnlp.vectorize.FeatureDocumentVectorizerManager
+  torch_config: 'instance: torch_config'
+  doc_parser: 'instance: ${mednlp_default:doc_parser}'
+  # do not truncate tokens
+  token_length: -1
+  configured_vectorizers: 'list: cui2vec_50_feature_vectorizer'
+
+# cui embeddings
+cui2vec_feature_batch_mappings:
+  manager_mappings:
+    - vectorizer_manager_name: cui2vec_feature_vectorizer_manager
+      fields:
+        - attr: cuis
+          feature_id: wvcui2vec500
+          is_agg: true
+          attr_access: doc
