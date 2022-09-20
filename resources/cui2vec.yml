@@ -34,7 +34,7 @@ cui2vec_500_embedding:
 
 # a vectorizer that turns tokens (TokensContainer) in to indexes given to the
 # embedding layer
-cui2vec_50_feature_vectorizer:
+cui2vec_500_feature_vectorizer:
   class_name: zensols.deepnlp.vectorize.WordVectorEmbeddingFeatureVectorizer
   # the feature id is used to connect instance data with the vectorizer used to
   # generate the feature at run time
@@ -65,14 +65,14 @@ cui2vec_feature_vectorizer_manager:
   doc_parser: 'instance: ${mednlp_default:doc_parser}'
   # do not truncate tokens
   token_length: -1
-  configured_vectorizers: 'list: cui2vec_50_feature_vectorizer'
+  configured_vectorizers: 'list: cui2vec_500_feature_vectorizer'
 
 # cui embeddings
 cui2vec_feature_batch_mappings:
   manager_mappings:
     - vectorizer_manager_name: cui2vec_feature_vectorizer_manager
       fields:
-        - attr: cuis
-          feature_id: wvcui2vec500
+        - attr: cui2vec_500_embedding
+          feature_id: ${cui2vec_500_feature_vectorizer:feature_id}
           is_agg: true
           attr_access: doc
