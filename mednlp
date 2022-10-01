@@ -11,7 +11,9 @@ if (__name__ == '__main__'):
           5: '72 year old man with 3 weeks of Altered Mental Status with PMH of bipolar disorder.',
           6: 'Mr Smith was admitted to the hospital yesterday with severe Parkison\'s disease and a history of CVAs.',
           7: 'Patient with severe Parkison\'s disease and a history of CVAs.',
-          }[0]
+          # heorrhage misspelling and CKD acronym detected
+          8: 'Intracerebral heorrhage and CKD',
+          }[8]
     harn = ConfigurationImporterCliHarness(
         src_dir_name='src/python',
         app_factory_class='zensols.mednlp.ApplicationFactory',
