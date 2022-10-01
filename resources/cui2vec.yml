@@ -2,6 +2,12 @@
 
 ## Installer
 #
+cui2vec_rm_update:
+  class_name: zensols.install.RemoveUpdate
+  dry_run: false
+  paths:
+    - '{target}/../__MACOSX'
+
 # The below URL might need to be updated from a new URL given by navigating to
 # the embeddings link below
 #
@@ -15,8 +21,7 @@ cui2vec_resource:
   check_path: 'cui2vec_pretrained.csv'
   # keep the file since it the paper mentions having to "navigate" to get it
   clean_up: false
-  clean_up_paths:
-    - '__MACOSX'
+  updates: 'instance: list: cui2vec_rm_update'
 
 cui2vec_installer:
   class_name: zensols.install.Installer
