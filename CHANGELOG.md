@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Changed
-- Upgrade to spaCy 2.2, medcat 3.0.
+- Upgrade to spaCy 2.2, MedCAT 3.0, `zensols.nlp` 1.4.0.
+- Make `cui2vec` a standard word embedding with vectorizer and layer.
+- Replace entity splitter by not embedding named entities as default
+  configuration.
 
 ### Removed
 - Support for Python 3.7, 3.8 from dropped support in `zensols.util`.
