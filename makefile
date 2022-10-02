@@ -21,7 +21,7 @@ ENTRY_BIN =		./mednlp
 # add app configuration to command line arguments
 PY_CLI_ARGS +=		-c test-resources/mednlp.conf
 
-PY_SRC_TEST_PAT ?=	'test_parse.py'
+#PY_SRC_TEST_PAT ?=	'test_mul*.py'
 
 
 include ./zenbuild/main.mk
@@ -34,6 +34,14 @@ appinfo:
 .PHONY:			modeldeps
 modeldeps:
 			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-model.txt
+
+.PHONY:			scispacydeps
+scispacydeps:
+			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-scispacy.txt --no-deps
+
+.PHONY:			testentlink
+testentlink:
+			make PY_SRC_TEST=test/entlink test
 
 .PHONY:			testrun
 testrun:
@@ -65,7 +73,7 @@ cleanexample:
 			rm -fr example/cache
 
 .PHONY:			testall
-testall:		test testrun testfeatures clinicaltuis
+testall:		test testentlink testrun testfeatures clinicaltuis
 			example/uts/uts.py
 			example/features/features.py show
 			example/cui2vec/cui2vec.py similarity -t heart

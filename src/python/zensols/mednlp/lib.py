@@ -6,10 +6,8 @@ __author__ = 'Paul Landes'
 
 from typing import Any, List, Dict, Tuple
 from dataclasses import dataclass, field
-from scispacy.linking_utils import Entity as SciSpacyEntity
 from zensols.config import ConfigFactory
-from .domain import Entity, EntitySimilarity
-from . import MedCatResource, EntityLinkerResource, UTSClient
+from . import MedCatResource, UTSClient
 
 
 @dataclass
@@ -24,7 +22,7 @@ class MedicalLibrary(object):
     medcat_resource: MedCatResource = field(default=None)
     """The MedCAT factory resource."""
 
-    entity_linker_resource: EntityLinkerResource = field(default=None)
+    entity_linker_resource: 'EntityLinkerResource' = field(default=None)
     """The entity linker resource."""
 
     uts_client: UTSClient = field(default=None)
@@ -38,15 +36,16 @@ class MedicalLibrary(object):
         """
         return self.medcat_resource.cat.get_entities(text)
 
-    def get_linked_entity(self, cui: str) -> SciSpacyEntity:
+    def get_linked_entity(self, cui: str) -> 'Entity':
         """Get a scispaCy linked entity.
 
         :param cui: the unique concept ID
 
         """
-        se: SciSpacyEntity = self.entity_linker_resource.get_linked_entity(cui)
-        if se is not None:
-            return Entity(se)
+        from scispacy.linking_utils import Entity as SciSpacyEntity
+        from .entlink import Entity
+        ent: Entity = self.entity_linker_resource.get_linked_entity(cui)
+        return ent
 
     def get_atom(self, cui: str) -> Dict[str, str]:
         """Get the UMLS atoms of a CUI from UTS.
@@ -84,7 +83,8 @@ class MedicalLibrary(object):
         """
         return self.config_factory('cui2vec_500_embedding')
 
-    def similarity_by_term(self, term: str, topn: int = 5) -> List[EntitySimilarity]:
+    def similarity_by_term(self, term: str, topn: int = 5) -> \
+            List['EntitySimilarity']:
         """Return similaries of a medical term.
 
         :param term: the medical term (i.e. ``heart disease``)
@@ -92,6 +92,7 @@ class MedicalLibrary(object):
         :param topn: the top N count similarities to return
 
         """
+        from .entlink import Entity, EntitySimilarity
         embedding: Cui2VecEmbedModel = self.cui2vec_embedding
         kv: KeyedVectors = embedding.keyed_vectors
         res: List[Dict[str, str]] = self.uts_client.search_term(term)

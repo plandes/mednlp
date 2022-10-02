@@ -1,14 +1,14 @@
+# base
 numpy>=1.23.1
 lxml~=4.9.1
 
 # specific to medcat
 pandas~=1.4.2
-spacy~=3.2.0
 zensols.medcat==1.3.0
 
 # aux
-scispacy~=0.5.0
 ctakes-parser==0.1.0
 
+# zensols
 zensols.install~=0.1.0
-zensols.nlp~=1.4.0
+zensols.nlp~=1.4.1

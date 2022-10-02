@@ -11,7 +11,6 @@ import collections
 from spacy.tokens.token import Token
 from spacy.tokens.doc import Doc
 from spacy.language import Language
-from scispacy.linking_utils import Entity as SciSpacyEntity
 from zensols.nlp import (
     FeatureToken, SpacyFeatureDocumentParser, FeatureDocumentParser,
     SpacyFeatureTokenDecorator,
@@ -20,21 +19,6 @@ from . import MedNLPError, MedCatResource, MedicalFeatureToken, MedicalLibrary
 from .domain import _MedicalEntity
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class LinkFeatureTokenDecorator(SpacyFeatureTokenDecorator):
-    """Adds linked SciSpacy definitions to tokens using the
-    :class:`.MedicalLibrary`.
-
-    """
-    lib: MedicalLibrary = field(default=None)
-    """The medical library used for linking entities."""
-
-    def decorate(self, spacy_tok: Token, feature_token: FeatureToken):
-        e: SciSpacyEntity = self.lib.get_linked_entity(feature_token.cui_)
-        if e is not None:
-            feature_token._definition = e.definition
 
 
 @dataclass

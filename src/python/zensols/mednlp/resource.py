@@ -9,8 +9,6 @@ import logging
 from pathlib import Path
 import pandas as pd
 from frozendict import frozendict
-from scispacy.linking import EntityLinker
-from scispacy.linking_utils import Entity
 from medcat.config import Config
 from medcat.vocab import Vocab
 from medcat.cdb import CDB
@@ -189,53 +187,3 @@ class MedCatResource(object):
 
 
 MedCatResource._filter_medcat_logger()
-
-
-@dataclass
-class EntityLinkerResource(object):
-    """Provides a way resolve :class:`scispacy.linking_utils.Entity` instances from
-    CUIs.
-
-    :see: :meth:`.get_linked_entity`
-
-    """
-    params: Dict[str, Any] = field(
-        default_factory=lambda: {'resolve_abbreviations': True,
-                                 'linker_name': 'umls'})
-    """Parameters given to the scispaCy entity linker."""
-
-    cache_global: InitVar[bool] = field(default=True)
-    """Whether or not to globally cache resources, which saves load time.
-
-    """
-    def __post_init__(self, cache_global: bool):
-        self._linker = PersistedWork(
-            '_linker', self, cache_global=cache_global)
-
-    @property
-    @persisted('_linker')
-    def linker(self) -> EntityLinker:
-        """The ScispaCy entity linker."""
-        self._silence_scispacy_warn()
-        return EntityLinker(**self.params)
-
-    @staticmethod
-    def _silence_scispacy_warn():
-        """This warning has should have no bearing on this application as we're simply
-        doing a CUI looking.
-
-        """
-        import warnings
-        s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
-        warnings.filterwarnings('ignore', message=s)
-        s = 'Please use `csr_matrix` from the `scipy.sparse` namespace.*'
-        warnings.filterwarnings('ignore', message=s)
-
-    def get_linked_entity(self, cui: str) -> Entity:
-        """Get a scispaCy linked entity.
-
-        :param cui: the unique concept ID
-
-        """
-        linker: EntityLinker = self.linker
-        return linker.kb.cui_to_entity.get(cui)
