@@ -1,27 +1,12 @@
-import unittest
-import sys
 import json
 from pathlib import Path
-from zensols.cli import CliHarness
-from zensols.persist import persisted
 from zensols.nlp import (
     FeatureToken, FeatureSentence, FeatureDocument, FeatureDocumentParser
 )
-from zensols.mednlp import Application, ApplicationFactory
+from util import TestBase
 
 
-class TestApp(unittest.TestCase):
-    @persisted('_app', cache_global=True)
-    def _get_doc_parser(self):
-        harness: CliHarness = ApplicationFactory.create_harness()
-        app: Application = harness.get_instance(
-            'show _ --config test-resources/mednlp.conf --level=err')
-        return app.doc_parser
-
-    def setUp(self):
-        self.text = 'He was diagnosed with kidney failure and heart disease.'
-        self.maxDiff = sys.maxsize
-
+class TestParse(TestBase):
     def test_feature_parse(self):
         keeps = set('cui_ pref_name_'.split())
         #app: Application = self.app

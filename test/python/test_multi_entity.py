@@ -1,25 +1,10 @@
-import unittest
-import sys
 import json
 from pathlib import Path
-from zensols.cli import CliHarness
-from zensols.persist import persisted
 from zensols.nlp import FeatureDocument, FeatureDocumentParser
-from zensols.mednlp import Application, ApplicationFactory
+from util import TestBase
 
 
-class TestMultiEntity(unittest.TestCase):
-    @persisted('_app', cache_global=True)
-    def _get_doc_parser(self):
-        harness: CliHarness = ApplicationFactory.create_harness()
-        app: Application = harness.get_instance(
-            'show _ --config test-resources/mednlp-add-linker.conf --level=err')
-        return app.doc_parser
-
-    def setUp(self):
-        self.text = 'He was diagnosed with kidney failure and heart disease.'
-        self.maxDiff = sys.maxsize
-
+class TestMultiEntity(TestBase):
     def test_multi_entity(self):
         sent = 'I love Chicago but Mike Ditka gives me lung cancer.'
         parser: FeatureDocumentParser = self._get_doc_parser()
