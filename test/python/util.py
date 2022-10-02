@@ -7,6 +7,8 @@ from zensols.mednlp import Application, ApplicationFactory
 
 class TestBase(unittest.TestCase):
     def setUp(self):
+        import warnings
+        warnings.simplefilter("ignore", ResourceWarning)
         self.text = 'He was diagnosed with kidney failure and heart disease.'
         self.maxDiff = sys.maxsize
 

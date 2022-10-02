@@ -83,6 +83,15 @@ class MedCatResource(object):
         self._cat = PersistedWork('_cat', self, cache_global=cache_global)
         self._installed = False
 
+    @staticmethod
+    def _filter_medcat_logger():
+        class NoCdbExportFilter(logging.Filter):
+            def filter(self, record):
+                s = 'The CDB was exported by an unknown version of MedCAT.'
+                return not record.getMessage() == s
+
+        logging.getLogger('medcat.cdb').addFilter(NoCdbExportFilter())
+
     def _assert_installed(self):
         if not self._installed:
             self.installer()
@@ -177,6 +186,9 @@ class MedCatResource(object):
     def clear(self):
         self._tuis.clear()
         self._cat.clear()
+
+
+MedCatResource._filter_medcat_logger()
 
 
 @dataclass

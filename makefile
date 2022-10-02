@@ -21,6 +21,9 @@ ENTRY_BIN =		./mednlp
 # add app configuration to command line arguments
 PY_CLI_ARGS +=		-c test-resources/mednlp.conf
 
+PY_SRC_TEST_PAT ?=	'test_parse.py'
+
+
 include ./zenbuild/main.mk
 
 .PHONY:			appinfo
