@@ -33,4 +33,4 @@ jobs:
         run: 'make info deps'
 
       - name: Run tests
-        run: 'make PY_SRC_TEST_PAT=test_parse.py test'
+        run: 'make test'
