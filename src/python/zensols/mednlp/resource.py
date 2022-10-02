@@ -216,6 +216,8 @@ class EntityLinkerResource(object):
         import warnings
         s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
         warnings.filterwarnings('ignore', message=s)
+        s = 'Please use `csr_matrix` from the `scipy.sparse` namespace.*'
+        warnings.filterwarnings('ignore', message=s)
 
     def get_linked_entity(self, cui: str) -> Entity:
         """Get a scispaCy linked entity.
