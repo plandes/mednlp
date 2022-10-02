@@ -7,6 +7,7 @@
 PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
 PIP_ARGS +=		--use-deprecated=legacy-resolver
+PY_DEP_POST_DEPS +=	modeldeps
 INFO_TARGETS +=		appinfo
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
@@ -29,6 +30,10 @@ include ./zenbuild/main.mk
 appinfo:
 			@echo "app-resources-dir: $(RESOURCES_DIR)"
 			@echo "proj-lib-url-version: $(PROJ_LIB_URL_VERSION)"
+
+.PHONY:			modeldeps
+modeldeps:
+			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-model.txt
 
 .PHONY:			testrun
 testrun:
