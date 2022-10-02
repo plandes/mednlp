@@ -7,7 +7,7 @@ from util import TestBase
 class TestMultiEntity(TestBase):
     def test_multi_entity(self):
         sent = 'I love Chicago but Mike Ditka gives me lung cancer.'
-        parser: FeatureDocumentParser = self._get_doc_parser()
+        parser: FeatureDocumentParser = self._get_doc_parser('mednlp-add-linker')
         doc: FeatureDocument = parser.parse(sent)
         path = Path('test-resources/doc-features.json')
         json_str = doc.asjson(indent=4)

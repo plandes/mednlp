@@ -13,8 +13,8 @@ class TestBase(unittest.TestCase):
         self.maxDiff = sys.maxsize
 
     @persisted('_app', cache_global=True)
-    def _get_doc_parser(self):
+    def _get_doc_parser(self, config: str = 'mednlp'):
         harness: CliHarness = ApplicationFactory.create_harness()
         app: Application = harness.get_instance(
-            'show _ --config test-resources/mednlp-add-linker.conf --level=err')
+            f'show _ --config test-resources/{config}.conf --level=err')
         return app.doc_parser
