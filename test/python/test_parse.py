@@ -53,7 +53,7 @@ class TestApp(unittest.TestCase):
         self.assertTrue('C0035078', sent[4].cui_)
         self.assertTrue('Kidney Failure', sent[4].pref_name_)
 
-    def test_multi_entity(self):
+    def _test_multi_entity(self):
         sent = 'I love Chicago but Mike Ditka gives me lung cancer.'
         parser: FeatureDocumentParser = self._get_doc_parser()
         doc: FeatureDocument = parser.parse(sent)
