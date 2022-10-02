@@ -33,7 +33,7 @@ appinfo:
 
 .PHONY:			modeldeps
 modeldeps:
-			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-model.txt
+			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-model.txt --no-deps
 
 .PHONY:			scispacydeps
 scispacydeps:
