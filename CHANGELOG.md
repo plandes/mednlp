@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.1.0] - 2022-10-01
+### Added
+- Unit test in GitHub CI.
+
 ### Changed
 - Upgrade to spaCy 2.2, MedCAT 3.0, `zensols.nlp` 1.4.0.
 - Make `cui2vec` a standard word embedding with vectorizer and layer.
