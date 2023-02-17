@@ -33,11 +33,11 @@ appinfo:
 
 .PHONY:			modeldeps
 modeldeps:
-			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-model.txt --no-deps
+			$(PIP_BIN) install $(PIP_ARGS) -r resources/requirements/model.txt --no-deps
 
 .PHONY:			scispacydeps
 scispacydeps:
-			$(PIP_BIN) install $(PIP_ARGS) -r $(PY_SRC)/requirements-scispacy.txt --no-deps
+			$(PIP_BIN) install $(PIP_ARGS) -r resources/requirements/scispacy.txt --no-deps
 
 .PHONY:			testentlink
 testentlink:
