@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0] - 2023-04-05
 ### Changed
+- Install missing models and packages on start up.
 - Updated [zensols.install] to 0.2.1
 - Updated [zensols.nlp] to 1.6.0.
 
