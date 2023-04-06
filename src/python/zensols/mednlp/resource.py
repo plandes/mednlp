@@ -14,6 +14,7 @@ from medcat.vocab import Vocab
 from medcat.cdb import CDB
 from medcat.cat import CAT
 from medcat.meta_cat import MetaCAT
+from zensols.util import APIError
 from zensols.install import Resource, Installer
 from zensols.persist import persisted, PersistedWork
 
@@ -76,6 +77,9 @@ class MedCatResource(object):
     """Whether or not to globally cache resources, which saves load time.
 
     """
+    requirements_dir: Path = field(default=None)
+    """The directory with the pip requirements files."""
+
     def __post_init__(self, cache_global: bool):
         self._tuis = PersistedWork('_tuis', self, cache_global=cache_global)
         self._cat = PersistedWork('_cat', self, cache_global=cache_global)
@@ -177,9 +181,29 @@ class MedCatResource(object):
         # create cat - each cdb comes with a config that was used to train it;
         # you can change that config in any way you want, before or after
         # creating cat
-        cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
-                  meta_cats=[mc_status])
+        try:
+            cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
+                      meta_cats=[mc_status])
+        except OSError as e:
+            msg: str = str(e)
+            if msg.find("Can't find model") == -1:
+                raise e
+            else:
+                self._install_model()
+                cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
+                          meta_cats=[mc_status])
         return cat
+
+    def _install_model(self):
+        if self.requirements_dir is None:
+            raise APIError('model not installed and no requirements found')
+        else:
+            import pip
+            logger.info('no scispacy model found--attempting to install')
+            req_file: Path
+            for req_file in self.requirements_dir.iterdir():
+                pip.main(['install', '--use-deprecated=legacy-resolver',
+                          '-r', str(req_file), '--no-deps'])
 
     def clear(self):
         self._tuis.clear()
