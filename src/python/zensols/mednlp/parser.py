@@ -8,14 +8,12 @@ from typing import Type, Iterable, Dict, Set
 from dataclasses import dataclass, field
 import logging
 import collections
-from spacy.tokens.token import Token
 from spacy.tokens.doc import Doc
 from spacy.language import Language
 from zensols.nlp import (
     FeatureToken, SpacyFeatureDocumentParser, FeatureDocumentParser,
-    SpacyFeatureTokenDecorator,
 )
-from . import MedNLPError, MedCatResource, MedicalFeatureToken, MedicalLibrary
+from . import MedNLPError, MedCatResource, MedicalFeatureToken
 from .domain import _MedicalEntity
 
 logger = logging.getLogger(__name__)
