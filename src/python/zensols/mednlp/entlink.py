@@ -13,7 +13,7 @@ from scispacy.linking_utils import Entity as SciSpacyEntity
 from zensols.util import APIError
 from zensols.persist import persisted, PersistedWork
 from zensols.config import Dictable
-from zensols.nlp import SpacyFeatureTokenDecorator
+from zensols.nlp import FeatureTokenDecorator
 
 logger = logging.getLogger(__name__)
 
@@ -112,7 +112,7 @@ class EntityLinkerResource(object):
 
 
 @dataclass
-class LinkFeatureTokenDecorator(SpacyFeatureTokenDecorator):
+class LinkFeatureTokenDecorator(FeatureTokenDecorator):
     """Adds linked SciSpacy definitions to tokens using the
     :class:`.MedicalLibrary`.
 
@@ -120,7 +120,7 @@ class LinkFeatureTokenDecorator(SpacyFeatureTokenDecorator):
     lib: MedicalLibrary = field(default=None)
     """The medical library used for linking entities."""
 
-    def decorate(self, spacy_tok: Token, feature_token: FeatureToken):
-        e: SciSpacyEntity = self.lib.get_linked_entity(feature_token.cui_)
+    def decorate(self, token: FeatureToken):
+        e: SciSpacyEntity = self.lib.get_linked_entity(token.cui_)
         if e is not None:
-            feature_token._definition = e.definition
+            token._definition = e.definition
