@@ -1,4 +1,3 @@
-from __future__ import annotations
 """Contains the classes for the medical token type.
 
 """
