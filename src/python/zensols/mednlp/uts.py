@@ -14,6 +14,7 @@ import json
 from json.decoder import JSONDecodeError
 import requests
 from lxml.html import fromstring
+from lxml.etree import _Element as Element
 from zensols.persist import Stash
 from . import MedNLPError
 
@@ -21,12 +22,16 @@ logger = logging.getLogger(__name__)
 
 
 class UTSError(MedNLPError):
-    """An error thrown by wrapper of the UTS system."""
+    """An error thrown by wrapper of the UTS system.
+
+    """
     pass
 
 
 class NoResultsError(UTSError):
-    """Thrown when no results, usually for a CUI not found."""
+    """Thrown when no results, usually for a CUI not found.
+
+    """
     pass
 
 
@@ -39,6 +44,9 @@ class AuthenticationError(UTSError):
 
 @dataclass
 class Authentication(object):
+    """A utility class to manage the authentication with the UTS system.
+
+    """
     SERVICE = 'http://umlsks.nlm.nih.gov'
     """The service endpoint URL."""
 
@@ -66,7 +74,24 @@ class Authentication(object):
             except JSONDecodeError as e:
                 logger.warning('looks like JSON, but not decodable: ' +
                                f'<{r.text}>: {e}')
-        response = fromstring(r.text)
+        response: Element = fromstring(r.text)
+        if isinstance(response, Element):
+            err: str = None
+            if response.tag == 'p':
+                try:
+                    content: str = json.loads(response.text)
+                    if 'name' in content and 'message' in content:
+                        name: str = content['name']
+                        err = f"{name}: {content['message']}"
+                        if name == 'UnauthorizedError':
+                            raise AuthenticationError(err)
+                    else:
+                        raise UTSError(f'Unknown response: {content}')
+                except json.decoder.JSONDecodeError as e:
+                    err = f'Appears to be an error, but can not parse: {e}'
+                    raise UTSError(err) from e
+            if err is not None:
+                raise UTSError(err)
         # extract the entire URL needed from the HTML form (action attribute)
         # returned - looks similar to
         # https://utslogin.nlm.nih.gov/cas/v1/tickets/TGT-36471-aYqNLN2rFIJPXKzxwdTNC5ZT7z3B3cTAKfSc5ndHQcUxeaDOLN-cas
