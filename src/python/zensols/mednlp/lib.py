@@ -1,9 +1,8 @@
-from __future__ import annotations
 """Medical resource library that contains UMLS access, cui2vec etc..
 
 """
+from __future__ import annotations
 __author__ = 'Paul Landes'
-
 from typing import Any, List, Dict, Tuple
 from dataclasses import dataclass, field
 from zensols.config import ConfigFactory

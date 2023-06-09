@@ -1,9 +1,7 @@
-from __future__ import annotations
 """Contains the classes for the medical token type and others.
 
 """
 __author__ = 'Paul Landes'
-
 from typing import Optional
 from dataclasses import dataclass, field
 import logging
