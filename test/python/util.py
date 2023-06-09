@@ -1,6 +1,6 @@
 import unittest
 import sys
-from zensols.cli import CliHarness
+from zensols.cli import CliHarness, ApplicationFailure
 from zensols.persist import persisted
 from zensols.mednlp import Application, ApplicationFactory
 
@@ -17,4 +17,6 @@ class TestBase(unittest.TestCase):
         harness: CliHarness = ApplicationFactory.create_harness()
         app: Application = harness.get_instance(
             f'show _ --config test-resources/{config}.conf --level=err')
+        if isinstance(app, ApplicationFailure):
+            raise app.exception
         return app.doc_parser
