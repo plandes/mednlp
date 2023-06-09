@@ -1,19 +1,17 @@
-from __future__ import annotations
 """Contains the classes for the medical token type and others.
 
 """
 __author__ = 'Paul Landes'
 
-from typing import Optional
+from typing import List, Dict, Any, ClassVar
 from dataclasses import dataclass, field, InitVar
 import logging
-from spacy.tokens.span import Span
 from scispacy.linking import EntityLinker
 from scispacy.linking_utils import Entity as SciSpacyEntity
-from zensols.util import APIError
 from zensols.persist import persisted, PersistedWork
 from zensols.config import Dictable
-from zensols.nlp import FeatureTokenDecorator
+from zensols.nlp import FeatureToken, FeatureTokenDecorator
+from . import MedicalLibrary
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +21,7 @@ class Entity(Dictable):
     """A convenience container class that Wraps a SciSpacy entity.
 
     """
-    _DICTABLE_ATTRIBUTES = 'cui name definition'.split()
+    _DICTABLE_ATTRIBUTES: ClassVar[List[str]] = 'cui name definition'.split()
 
     sci_spacy_entity: SciSpacyEntity = field(repr=False)
     """The entity identified by :mod:`scispacy.linking_utils`."""
