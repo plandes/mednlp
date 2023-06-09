@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 import pandas as pd
 from frozendict import frozendict
-from medcat.config import Config
+from medcat.config import Config, MixingConfig
 from medcat.vocab import Vocab
 from medcat.cdb import CDB
 from medcat.cat import CAT
@@ -104,12 +104,13 @@ class MedCatResource(object):
         src_conf = Dict[str, Any]
         for src_top, src_conf in src.items():
             targ_any: Any = getattr(targ, src_top)
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug(f"updating dict '{src_top}' ({type(targ_any)}): " +
+                             f"<{targ_any}> with <{src_conf}>")
             if isinstance(targ_any, dict):
-                targ_conf: Dict[str, Any] = targ_any
-                if logger.isEnabledFor(logging.DEBUG):
-                    logger.debug(f"updating '{src_top}': " +
-                                 f"<{targ_conf}> with <{src_conf}>")
-                targ_conf.update(src_conf)
+                targ_any.update(src_conf)
+            elif isinstance(targ_any, MixingConfig):
+                targ_any.merge_config(src_conf)
             else:
                 setattr(targ, src_top, src_conf)
 

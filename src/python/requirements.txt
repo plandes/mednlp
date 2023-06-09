@@ -4,13 +4,14 @@ lxml~=4.9.1
 scikit-learn~=1.1.2
 sklearn
 
-# specific to medcat
+# medcat
 pandas~=1.4.2
-zensols.medcat==1.3.0
+blis~=0.7.8
+medcat~=1.7.0
 
 # aux
 ctakes-parser==0.1.0
 
 # zensols
 zensols.install~=0.2.1
-zensols.nlp~=1.6.0
+zensols.nlp~=1.7.0

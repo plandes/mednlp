@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.2.0] - 2023-06-09
+### Changed
+- Upgrade to [medcat] 1.7.0.
+- Better UTS error handling with raised exceptions and messages.
+
+
 ## [1.1.0] - 2023-04-05
 ### Changed
 - Install missing models and packages on start up.
@@ -60,7 +66,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Paul Landes/mednlp/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Paul Landes/mednlp/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Paul Landes/mednlp/compare/v0.1.1...v1.0.0
 [0.1.1]: https://github.com/Paul Landes/mednlp/compare/v0.1.0...v0.1.1
@@ -71,3 +78,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [zensols.util]: https://github.com/plandes/util
 [zensols.nlp]: https://github.com/plandes/nlparse
 [zensols.install]: https://github.com/plandes/install
+[medcat]: https://github.com/CogStack/MedCAT
