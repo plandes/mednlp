@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.3.0] - 2023-06-20
 ### Changed
 - Fix contraction tokenization.  This was done by swapping the target and
   source parser in the `lang.conf:mednlp_combine_doc_parser` resource library
@@ -72,7 +73,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/Paul Landes/mednlp/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Paul Landes/mednlp/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Paul Landes/mednlp/compare/v0.1.1...v1.0.0
