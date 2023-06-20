@@ -13,7 +13,8 @@ if (__name__ == '__main__'):
           7: 'Patient with severe Parkison\'s disease and a history of CVAs.',
           # heorrhage misspelling and CKD acronym detected
           8: 'Intracerebral heorrhage and CKD',
-          }[8]
+          9: 'I\'d say he has severe Parkison\'s disease.'
+          }[9]
     harn = ConfigurationImporterCliHarness(
         src_dir_name='src/python',
         app_factory_class='zensols.mednlp.ApplicationFactory',

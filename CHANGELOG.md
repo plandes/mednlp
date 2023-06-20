@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changed
+- Fix contraction tokenization.  This was done by swapping the target and
+  source parser in the `lang.conf:mednlp_combine_doc_parser` resource library
+  configuration.
+
+
 ## [1.2.0] - 2023-06-09
 ### Changed
 - Upgrade to [medcat] 1.7.0.
