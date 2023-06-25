@@ -9,7 +9,6 @@ from util import TestBase
 class TestParse(TestBase):
     def test_feature_parse(self):
         keeps = set('cui_ pref_name_'.split())
-        #app: Application = self.app
         parser: FeatureDocumentParser = self._get_doc_parser()
         self.assertTrue(isinstance(parser, FeatureDocumentParser))
         med_toks = []
