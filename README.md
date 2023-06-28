@@ -43,8 +43,29 @@ Binaries are also available on [pypi].
 If the [cui2vec] functionality is used, the [Zensols Deep NLP library]
 is also needed, which is installed with:
 ```bash
-pip install zensols.deepnlp
+pip install --use-deprecated=legacy-resolver zensols.deepnlp
 ```
+
+## Usage
+
+To parse text, create features, and extract clinical concept identifiers:
+```python
+>>> from zensols.mednlp import ApplicationFactory
+>>> doc_parser = ApplicationFactory.get_doc_parser()
+>>> for tok in doc.tokens: print(tok.norm, tok.pos_, tok.tag_, tok.cui_, tok.detected_name_)
+>>> doc = doc_parser('John was diagnosed with kidney failure')
+>>> for tok in doc.tokens: print(tok.norm, tok.pos_, tok.tag_, tok.cui_, tok.detected_name_)
+John PROPN NNP -<N>- -<N>-
+was AUX VBD -<N>- -<N>-
+diagnosed VERB VBN -<N>- -<N>-
+with ADP IN -<N>- -<N>-
+kidney NOUN NN C0035078 kidney~failure
+failure NOUN NN C0035078 kidney~failure
+>>> print(doc.entities)
+(<John>, <kidney failure>)
+```
+See the [full example](example/example/features/simple.py), and for other
+functionality, see the [examples](example).
 
 
 ## Attribution
@@ -92,7 +113,7 @@ An extensive changelog is available [here](CHANGELOG.md).
 
 [MIT License](LICENSE.md)
 
-Copyright (c) 2021 - 2022 Paul Landes
+Copyright (c) 2021 - 2023 Paul Landes
 
 
 <!-- links -->

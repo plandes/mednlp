@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Added
+- Feature document parser shortcut from application factory.
+
+
 ## [1.3.1] - 2023-06-27
 ### Changed
 - Updated to [zensols.nlp] to 1.7.2 and use its new feature to auto load any

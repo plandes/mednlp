@@ -5,7 +5,7 @@
 
 # type of project
 PROJ_TYPE =		python
-PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy
+PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy markdown
 PIP_ARGS +=		--use-deprecated=legacy-resolver
 PY_DEP_POST_DEPS +=	modeldeps
 INFO_TARGETS +=		appinfo
