@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.3.1] - 2023-06-27
+### Changed
+- Updated to [zensols.nlp] to 1.7.2 and use its new feature to auto load any
+  missing spaCy base model(s).
+- Remove configuration file requirement from the CLI.
+- Fix spaCy dependency requirement to align with `scipy` and  [zensols.nlp].
+
+
 ## [1.3.0] - 2023-06-20
 ### Changed
 - Fix contraction tokenization.  This was done by swapping the target and
@@ -73,7 +81,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/Paul Landes/mednlp/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/Paul Landes/mednlp/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Paul Landes/mednlp/compare/v1.0.0...v1.1.0

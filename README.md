@@ -33,7 +33,7 @@ available.
 
 ## Obtaining
 
-The easiest way to install the command line program is via the `pip` installer:
+The easiest way to install the command line program is via the `pip` installer.
 ```bash
 pip3 install --use-deprecated=legacy-resolver zensols.mednlp
 ```
@@ -41,7 +41,10 @@ pip3 install --use-deprecated=legacy-resolver zensols.mednlp
 Binaries are also available on [pypi].
 
 If the [cui2vec] functionality is used, the [Zensols Deep NLP library]
-is also needed, which is stalled with `pip install zensols.deepnlp`.
+is also needed, which is installed with:
+```bash
+pip install zensols.deepnlp
+```
 
 
 ## Attribution

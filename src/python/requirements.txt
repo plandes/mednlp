@@ -6,11 +6,15 @@ scikit-learn~=1.1.2
 # medcat
 pandas~=1.4.2
 blis~=0.7.8
+scipy~=1.9.2
 medcat~=1.7.0
+
+# force zensols.nlp version over medcat
+spacy~=3.2.0
 
 # aux
 ctakes-parser==0.1.0
 
 # zensols
 zensols.install~=0.2.1
-zensols.nlp~=1.7.0
+zensols.nlp~=1.7.2
