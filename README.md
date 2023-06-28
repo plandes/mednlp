@@ -64,7 +64,7 @@ failure NOUN NN C0035078 kidney~failure
 >>> print(doc.entities)
 (<John>, <kidney failure>)
 ```
-See the [full example](example/example/features/simple.py), and for other
+See the [full example](example/features/simple.py), and for other
 functionality, see the [examples](example).
 
 
