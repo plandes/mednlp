@@ -52,7 +52,6 @@ To parse text, create features, and extract clinical concept identifiers:
 ```python
 >>> from zensols.mednlp import ApplicationFactory
 >>> doc_parser = ApplicationFactory.get_doc_parser()
->>> for tok in doc.tokens: print(tok.norm, tok.pos_, tok.tag_, tok.cui_, tok.detected_name_)
 >>> doc = doc_parser('John was diagnosed with kidney failure')
 >>> for tok in doc.tokens: print(tok.norm, tok.pos_, tok.tag_, tok.cui_, tok.detected_name_)
 John PROPN NNP -<N>- -<N>-
