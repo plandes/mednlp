@@ -19,8 +19,6 @@ cui2vec_resource:
   name: 'cui2vec.zip'
   is_compressed: true
   check_path: 'cui2vec_pretrained.csv'
-  # keep the file since it the paper mentions having to "navigate" to get it
-  clean_up: false
   updates: 'instance: list: cui2vec_rm_update'
 
 cui2vec_installer:
