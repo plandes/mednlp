@@ -85,7 +85,7 @@ This API utilizes the following frameworks:
 ## Citation
 
 If you use this project in your research please use the following BibTeX entry:
-```
+```bibtex
 @article{Landes_DiEugenio_Caragea_2021,
   title={DeepZensols: Deep Natural Language Processing Framework},
   url={http://arxiv.org/abs/2109.03383},
