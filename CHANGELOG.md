@@ -11,8 +11,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.2] - 2023-06-29
 ### Added
 - Feature document parser shortcut from application factory.
-- A shortcut static method to get the medical document parser directly from the
-  application factory.
 
 ### Changed
 - Resource library configuration to clean up model resources after download.
@@ -92,7 +90,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- links -->
 [Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.3.3...HEAD
-[1.3.3]: https://github.com/Paul Landes/mednlp/compare/v1.3.2...v1.3.3
 [1.3.2]: https://github.com/Paul Landes/mednlp/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/Paul Landes/mednlp/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...v1.3.0
