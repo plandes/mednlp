@@ -8,18 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
-## [1.3.3] - 2023-06-29
-### Added
-- A shortcut static method to get the medical document parser directly from the
-  application factory.
-  
-### Changed
-- Resource library configuration to clean up model resources after download.
-
-
 ## [1.3.2] - 2023-06-29
 ### Added
 - Feature document parser shortcut from application factory.
+- A shortcut static method to get the medical document parser directly from the
+  application factory.
+
+### Changed
+- Resource library configuration to clean up model resources after download.
 
 
 ## [1.3.1] - 2023-06-27
