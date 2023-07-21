@@ -8,6 +8,7 @@ pandas~=1.4.2
 blis~=0.7.8
 scipy~=1.9.2
 medcat~=1.7.0
+pydantic~=1.8.2
 
 # force zensols.nlp version over medcat
 spacy~=3.2.0
