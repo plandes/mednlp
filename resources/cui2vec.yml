@@ -20,6 +20,8 @@ cui2vec_resource:
   is_compressed: true
   check_path: 'cui2vec_pretrained.csv'
   updates: 'instance: list: cui2vec_rm_update'
+  # if deleted, it will re-download on each access of the weights
+  clean_up: false
 
 cui2vec_installer:
   class_name: zensols.install.Installer
