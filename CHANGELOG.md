@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.4.0] - 2023-08-16
+Downstream moderate risk update release.
+
+### Changed
+- Switch order of medical specific and general spaCy language parsing and
+  chunking.  Now the medical parser is the source parser and the default spaCy
+  parser is the target in `MappingCombinerFeatureDocumentParser`.  This was
+  done to get better sentence chunking as MedCAT (used in the medical parser)
+  does not sentence chunk well as it was not designed for it.
+- Upgrade to [zensols.util] 1.13.0
+- Fix `cui2vec` weight archive re-download on each access.
+- Mapping combiner default is to use token's character absolute index.
+
+
 ## [1.3.2] - 2023-06-29
 ### Added
 - Feature document parser shortcut from application factory.

@@ -17,5 +17,5 @@ spacy~=3.2.0
 ctakes-parser==0.1.0
 
 # zensols
-zensols.install~=0.2.1
-zensols.nlp~=1.7.2
+zensols.install~=1.0.0
+zensols.nlp~=1.8.0
