@@ -1,3 +1,4 @@
+from typing import Dict
 import json
 from pathlib import Path
 from zensols.nlp import (
@@ -8,20 +9,31 @@ from util import TestBase
 
 class TestParse(TestBase):
     def test_feature_parse(self):
+        DEBUG: bool = False
         keeps = set('cui_ pref_name_'.split())
         parser: FeatureDocumentParser = self._get_doc_parser()
         self.assertTrue(isinstance(parser, FeatureDocumentParser))
-        med_toks = []
-        for tok in parser(self.text).token_iter():
+        med_toks: Dict[str, str] = []
+        doc: FeatureDocument = parser(self.text)
+        for tok in doc.token_iter():
             fd = tok.asdict()
             med_toks.append({k: fd[k] for k in fd.keys() & keeps})
+        if DEBUG:
+            print()
+            for tok in doc.token_iter():
+                print(tok, tok.cui_, tok.pref_name_)
+            print()
+            for tok in med_toks:
+                print(tok)
         none = FeatureToken.NONE
-        self.assertEqual({'cui_': none, 'pref_name_': none},
-                         med_toks[0])
-        self.assertEqual({'cui_': 'C0011900', 'pref_name_': 'Diagnosis'},
-                         med_toks[2])
-        self.assertEqual({'cui_': 'C0035078', 'pref_name_': 'Kidney Failure'},
-                         med_toks[4])
+        for i, mtok in enumerate(med_toks):
+            if DEBUG:
+                print(i, mtok)
+            if i >= 4 and i <= 5:
+                self.assertEqual(
+                    {'cui_': 'C0035078', 'pref_name_': 'Kidney Failure'}, mtok)
+            else:
+                self.assertEqual({'cui_': none, 'pref_name_': none}, mtok)
 
     def test_doc_parse(self):
         parser: FeatureDocumentParser = self._get_doc_parser()
