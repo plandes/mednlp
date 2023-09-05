@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- Fix unit tests using the model provided for the MedCAT tutorials.
+
 
 ## [1.4.0] - 2023-08-16
 Downstream moderate risk update release.
