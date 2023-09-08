@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+## [1.4.1] - 2023-09-08
 ### Changed
 - Fix unit tests using the model provided for the MedCAT tutorials.
+- Re-enable GitHub workflow unit tests CI.
 
 
 ## [1.4.0] - 2023-08-16
@@ -106,7 +109,9 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.3.3...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/Paul Landes/mednlp/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/Paul Landes/mednlp/compare/v1.3.2...v1.4.0
 [1.3.2]: https://github.com/Paul Landes/mednlp/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/Paul Landes/mednlp/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/Paul Landes/mednlp/compare/v1.2.0...v1.3.0
