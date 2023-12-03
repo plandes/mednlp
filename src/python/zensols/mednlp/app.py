@@ -52,8 +52,8 @@ class Application(Dictable):
     """Medical resource library that contains UMLS access, cui2vec etc.."""
 
     def _get_text(self, text_or_file: str) -> str:
-        """Return the text from a file or the text passed based on if ``text_or_file``
-        is a file on the file system.
+        """Return the text from a file or the text passed based on if
+        ``text_or_file`` is a file on the file system.
 
         """
         path = Path(text_or_file)
@@ -139,7 +139,7 @@ class Application(Dictable):
         doc: FeatureDocument = self.doc_parser.parse(text)
         df: pd.DataFrame = df_fac(doc)
         if only_medical:
-            df = df[df['is_concept'] == True]
+            df = df[df['is_concept'] is True]
         self._output_dataframe(df, out)
 
     def search(self, term: str):
@@ -198,6 +198,7 @@ class Application(Dictable):
         :param only_medical: only provide medical linked tokens
 
         """
+        from .ctakes import CTakesParserStash
         text: str = self._get_text(text_or_file)
         stash: CTakesParserStash = self.library.get_new_ctakes_parser_stash()
         stash.set_documents([text])

@@ -41,7 +41,6 @@ class MedicalLibrary(object):
         :param cui: the unique concept ID
 
         """
-        from scispacy.linking_utils import Entity as SciSpacyEntity
         from .entlink import Entity
         ent: Entity = self.entity_linker_resource.get_linked_entity(cui)
         return ent
@@ -69,14 +68,14 @@ class MedicalLibrary(object):
         """
         return self.uts_client.get_relations(cui)
 
-    def get_new_ctakes_parser_stash(self) -> CTakesParserStash:
+    def get_new_ctakes_parser_stash(self) -> 'CTakesParserStash':
         """Return a new instance of a ctakes parser stash.
 
         """
         return self.config_factory.new_instance('ctakes_parser_stash')
 
     @property
-    def cui2vec_embedding(self) -> Cui2VecEmbedModel:
+    def cui2vec_embedding(self) -> 'Cui2VecEmbedModel':
         """The cui2vec embedding model.
 
         """
@@ -92,6 +91,8 @@ class MedicalLibrary(object):
 
         """
         from .entlink import Entity, EntitySimilarity
+        from .cui2vec import Cui2VecEmbedModel
+        from gensim.models.keyedvectors import KeyedVectors
         embedding: Cui2VecEmbedModel = self.cui2vec_embedding
         kv: KeyedVectors = embedding.keyed_vectors
         res: List[Dict[str, str]] = self.uts_client.search_term(term)

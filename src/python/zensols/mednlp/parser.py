@@ -57,7 +57,8 @@ class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
 
         # load/create model resources
         res: MedCatResource = self.medcat_resource
-        ix2ent: Dict[int, _MedicalEntity] = collections.defaultdict(_MedicalEntity)
+        ix2ent: Dict[int, _MedicalEntity] = \
+            collections.defaultdict(_MedicalEntity)
 
         # add entities
         for ent in doc.ents:

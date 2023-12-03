@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 import logging
 from spacy.tokens.span import Span
 from zensols.util import APIError
-from zensols.config import Dictable
 
 logger = logging.getLogger(__name__)
 
@@ -19,9 +18,9 @@ class MedNLPError(APIError):
 
 @dataclass
 class _MedicalEntity(object):
-    """Container class for general and medical specific named entities.  Instances
-    of this class have the NER from a vanilla spaCy model output and the NER+L
-    linked UMLS concepts.
+    """Container class for general and medical specific named entities.
+    Instances of this class have the NER from a vanilla spaCy model output and
+    the NER+L linked UMLS concepts.
 
     """
     concept_span: Optional[Span] = field(default=None)

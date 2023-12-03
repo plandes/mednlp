@@ -49,11 +49,13 @@ class MedicalFeatureToken(SpacyFeatureToken):
 
     @property
     def ent(self) -> str:
-        return self.med_ent.concept_span.label if self.is_concept else super().ent
+        return self.med_ent.concept_span.label \
+            if self.is_concept else super().ent
 
     @property
     def ent_(self) -> str:
-        return self.med_ent.concept_span.label_ if self.is_concept else super().ent_
+        return self.med_ent.concept_span.label_ \
+            if self.is_concept else super().ent_
 
     @property
     def is_concept(self) -> bool:

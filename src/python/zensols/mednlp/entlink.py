@@ -59,8 +59,8 @@ class EntitySimilarity(Entity):
 
 @dataclass
 class EntityLinkerResource(object):
-    """Provides a way resolve :class:`scispacy.linking_utils.Entity` instances from
-    CUIs.
+    """Provides a way resolve :class:`scispacy.linking_utils.Entity` instances
+    from CUIs.
 
     :see: :meth:`.get_linked_entity`
 
@@ -87,8 +87,8 @@ class EntityLinkerResource(object):
 
     @staticmethod
     def _silence_scispacy_warn():
-        """This warning has should have no bearing on this application as we're simply
-        doing a CUI looking.
+        """This warning has should have no bearing on this application as we're
+        simply doing a CUI looking.
 
         """
         import warnings

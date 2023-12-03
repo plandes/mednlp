@@ -41,7 +41,8 @@ class MedCatResource(object):
 
     """
     umls_tuis: Resource = field()
-    """The UMLS TUIs (types) mapping resource that maps from TUIs to descriptions.
+    """The UMLS TUIs (types) mapping resource that maps from TUIs to
+    descriptions.
 
     :see: `Semantic Types <https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/documentation/SemanticTypesAndGroups.html>`_
 
@@ -54,15 +55,15 @@ class MedCatResource(object):
 
     """
     filter_groups: Set[str] = field(default=None)
-    """Just like :obj:`filter_tuis` but each element is treated as a group used to
-    generate a list of CUIs from those mapped from ``name`` to ``tui` in
+    """Just like :obj:`filter_tuis` but each element is treated as a group used
+    to generate a list of CUIs from those mapped from ``name`` to ``tui` in
     :obj:`groups`.
 
     """
     spacy_enable_components: Set[str] = field(
         default_factory=lambda: set('sentencizer parser'.split()))
-    """By default, MedCAT disables several pipeline components.  Some of these are
-    needed for sentence chunking and other downstream tasks.
+    """By default, MedCAT disables several pipeline components.  Some of these
+    are needed for sentence chunking and other downstream tasks.
 
     :see: `MedCAT Config <https://github.com/CogStack/MedCAT/blob/master/medcat/config.py>`_
 
@@ -145,8 +146,8 @@ class MedCatResource(object):
     @property
     @persisted('_groups')
     def groups(self) -> pd.DataFrame:
-        """A dataframe of TUIs, their abbreviations, descriptions and a group name
-        associated with each.
+        """A dataframe of TUIs, their abbreviations, descriptions and a group
+        name associated with each.
 
         """
         self._assert_installed()

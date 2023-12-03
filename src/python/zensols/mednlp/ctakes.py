@@ -34,9 +34,9 @@ class _TextDirectoryStash(DirectoryStash):
 
 @dataclass
 class CTakesParserStash(ReadOnlyStash, Primeable, Dictable):
-    """Runs the cTAKES CUI entity linker on a directory of medical notes.  For each
-    medical text file, it generates an ``xmi`` file, which is then parsed by
-    the the :mod:`ctakes_parser` library.
+    """Runs the cTAKES CUI entity linker on a directory of medical notes.  For
+    each medical text file, it generates an ``xmi`` file, which is then parsed
+    by the the :mod:`ctakes_parser` library.
 
     This straightforward wrapper around the ``ctparser`` library automates the
     file system orchestration that needs to happen.  Configure an instance of
@@ -77,7 +77,8 @@ class CTakesParserStash(ReadOnlyStash, Primeable, Dictable):
 
     @property
     def source_stash(self) -> Stash:
-        """The stash that tracks the text documents that are to be parsed by cTAKES.
+        """The stash that tracks the text documents that are to be parsed by
+        cTAKES.
 
         """
         return self._source_stash
