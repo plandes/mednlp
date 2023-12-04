@@ -94,8 +94,6 @@ class EntityLinkerResource(object):
         import warnings
         s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
         warnings.filterwarnings('ignore', message=s)
-        s = 'Please use `csr_matrix` from the `scipy.sparse` namespace.*'
-        warnings.filterwarnings('ignore', message=s)
 
     def get_linked_entity(self, cui: str) -> Entity:
         """Get a scispaCy linked entity.
@@ -120,5 +118,7 @@ class LinkFeatureTokenDecorator(FeatureTokenDecorator):
 
     def decorate(self, token: FeatureToken):
         e: SciSpacyEntity = self.lib.get_linked_entity(token.cui_)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'entity: {token.cui_} -> {e} ({id(token)})')
         if e is not None:
             token._definition = e.definition
