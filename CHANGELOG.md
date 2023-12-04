@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Upgrade libraries: `numpy`, `lxml`, `scikitlearn`, `scipy`, `medcat`.
+- Added `scispacy` dependency.
 
 
 ## [1.4.1] - 2023-09-08
