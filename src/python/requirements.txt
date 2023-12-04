@@ -7,7 +7,7 @@ scikit-learn~=1.3.2
 pandas~=2.1.3
 blis~=0.7.11
 scipy~=1.9.3
-medcat~=1.7.0
+medcat~=1.9.3
 
 # aux
 ctakes-parser~=0.1.0
