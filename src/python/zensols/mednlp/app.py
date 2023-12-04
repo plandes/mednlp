@@ -139,7 +139,7 @@ class Application(Dictable):
         doc: FeatureDocument = self.doc_parser.parse(text)
         df: pd.DataFrame = df_fac(doc)
         if only_medical:
-            df = df[df['is_concept'] is True]
+            df = df[df['is_concept']]
         self._output_dataframe(df, out)
 
     def search(self, term: str):
