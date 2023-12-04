@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changed
+- Upgrade libraries: `numpy`, `lxml`, `scikitlearn`, `scipy`.
+
+
 ## [1.4.1] - 2023-09-08
 ### Changed
 - Fix unit tests using the model provided for the MedCAT tutorials.
