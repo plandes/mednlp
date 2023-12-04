@@ -1,31 +1,30 @@
 ## makefile automates the build and deployment for python projects
 
 
-## build config
-
-# type of project
+## Build system
+#
 PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy markdown
-PIP_ARGS +=		--use-deprecated=legacy-resolver
 PY_DEP_POST_DEPS +=	modeldeps
 INFO_TARGETS +=		appinfo
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
-
-# project
-ENTRY_BIN =		./mednlp
-
-
-## project specific
-
 # add app configuration to command line arguments
 PY_CLI_ARGS +=		-c test-resources/mednlp.conf
 
-#PY_SRC_TEST_PAT ?=	'test_mul*.py'
+
+## Project
+#
+ENTRY_BIN =		./mednlp
 
 
+## Includes
+#
 include ./zenbuild/main.mk
 
+
+## Targets
+#
 .PHONY:			appinfo
 appinfo:
 			@echo "app-resources-dir: $(RESOURCES_DIR)"
@@ -34,10 +33,6 @@ appinfo:
 .PHONY:			modeldeps
 modeldeps:
 			$(PIP_BIN) install $(PIP_ARGS) -r resources/requirements/model.txt --no-deps
-
-.PHONY:			scispacydeps
-scispacydeps:
-			$(PIP_BIN) install $(PIP_ARGS) -r resources/requirements/scispacy.txt --no-deps
 
 .PHONY:			testentlink
 testentlink:
