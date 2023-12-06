@@ -40,11 +40,6 @@ pip3 install zensols.mednlp
 
 Binaries are also available on [pypi].
 
-If the [cui2vec] functionality is used, the [Zensols Deep NLP library]
-is also needed, which is installed with:
-```bash
-pip install --use-deprecated=legacy-resolver zensols.deepnlp
-```
 
 ## Usage
 
