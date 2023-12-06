@@ -1,11 +1,11 @@
 # base
-numpy>=1.25.2
 lxml~=4.9.3
+numpy~=1.25.2
 scikit-learn~=1.3.2
 
 # medcat
-pandas~=2.1.3
 blis~=0.7.11
+pandas~=2.1.3
 scipy~=1.9.3
 scispacy~=0.5.3
 medcat~=1.9.3
@@ -14,5 +14,5 @@ medcat~=1.9.3
 ctakes-parser~=0.1.0
 
 # zensols
-zensols.install~=1.0.0
-zensols.nlp~=1.8.0
+zensols.install~=1.1.0
+zensols.nlp~=1.9.0
