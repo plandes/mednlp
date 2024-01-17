@@ -65,12 +65,11 @@ functionality, see the [examples](example).
 ## MedCAT Models
 
 By default, this library the small MedCAT model used for
-[tutorials][https://github.com/CogStack/MedCATtutorials/pull/12], and is not
+[tutorials](https://github.com/CogStack/MedCATtutorials/pull/12), and is not
 sufficient for any serious project.  To get the UMLS trained model,the [MedCAT
-UMLS request form] from be filled out (see the [MedCAT] repo if this link
-changes).
+UMLS request form] from be filled out (see the [MedCAT] repository).
 
-After you obtain access and download the new models, add the following to
+After you obtain access and download the new model, add the following to
 `~/.mednlprc` with the following:
 
 ```ini
