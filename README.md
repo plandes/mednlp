@@ -62,6 +62,23 @@ See the [full example](example/features/simple.py), and for other
 functionality, see the [examples](example).
 
 
+## MedCAT Models
+
+By default, this library the small MedCAT model used for
+[tutorials][https://github.com/CogStack/MedCATtutorials/pull/12], and is not
+sufficient for any serious project.  To get the UMLS trained model,the [MedCAT
+UMLS request form] from be filled out (see the [MedCAT] repo if this link
+changes).
+
+After you obtain access and download the new models, add the following to
+`~/.mednlprc` with the following:
+
+```ini
+[medcat_status_resource]
+url = file:///location/to/the/downloaded/file/umls_sm_wstatus_2021_oct.zip'
+```
+
+
 ## Attribution
 
 This API utilizes the following frameworks:
@@ -133,6 +150,8 @@ Copyright (c) 2021 - 2023 Paul Landes
 [build-link]: https://github.com/plandes/mednlp/actions
 
 [MedCAT]: https://github.com/CogStack/MedCAT
+[MedCAT UMLS request form]: https://uts.nlm.nih.gov/uts/login?service=https:%2F%2Fmedcat.rosalind.kcl.ac.uk%2Fauth-callback
+
 [Pandas]: https://pandas.pydata.org
 [ctakes-parser]: https://pypi.org/project/ctakes-parser
 
