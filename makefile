@@ -52,7 +52,8 @@ testparse:
 # not CUIs/results are after defaulting to notebook only MedCAT model
 .PHONY:			testfeatures
 testfeatures:
-			$(ENTRY_BIN) features
+			$(ENTRY_BIN) features \
+				--config test-resources/mednlp.conf \
 				--ids pref_name_,loc --medonly $(TEST_SENT)
 
 # test CTS (UMLS terminology service)
