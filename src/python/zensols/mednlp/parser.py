@@ -6,6 +6,7 @@ __author__ = 'Paul Landes'
 from typing import Type, Iterable, Dict, Set
 from dataclasses import dataclass, field
 import logging
+import warnings
 import collections
 from spacy.tokens.doc import Doc
 from spacy.language import Language
@@ -44,6 +45,11 @@ class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
         if self.medcat_resource is None:
             raise MedNLPError('No medcat resource set')
         super().__post_init__()
+        # filter spacy language warning when using scispacy
+        warnings.filterwarnings(
+            'ignore',
+            message=r'^Possible set union at position',
+            category=FutureWarning)
 
     def _create_model_key(self) -> str:
         return f'name-{self.name}'

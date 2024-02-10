@@ -24,6 +24,18 @@ mednlp_map_filter_token_normalizer:
 doc_parser:
   auto_install_model: true
 
+# a biomedical (scispay) parser
+mednlp_biomed_parser:
+  class_name: zensols.nlp.SpacyFeatureDocumentParser
+  lang: en
+  model_name: ${lang}_core_sci_md
+  token_normalizer: 'instance: map_filter_token_normalizer'
+  #token_normalizer: 'instance: mednlp_map_filter_token_normalizer'
+  token_feature_ids: >-
+    eval({'import': ['zensols.nlp as n']}):
+      n.FeatureToken.FEATURE_IDS
+  auto_install_model: true
+
 
 ## MedCat resources
 #
@@ -58,6 +70,7 @@ mednlp_doc_parser:
 
 ## Parsers
 #
+# takes first the features of a default (doc_parser), then MedCAT features
 mednlp_combine_doc_parser:
   class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
   target_parser: 'instance: doc_parser'
@@ -65,16 +78,42 @@ mednlp_combine_doc_parser:
   # add the FeatureToken attribute regardless
   overwrite_nones: true
   # copy the med entity if not already there
-  yield_features: 'set: ent_'
+  yield_features: 'set: ent_, ent'
   # only entities are missing from the medical parser output
   overwrite_features: >-
     eval({'import': ['zensols.mednlp as m']}):
-      list(m.MedicalFeatureToken.FEATURE_IDS - {'tuis', 'tui_descs_', 'ent_'})
+      (m.MedicalFeatureToken.FEATURE_IDS - {'tuis', 'tui_descs_'})
   # only map token level instead of sentence
   merge_sentences: false
   # include MedCAT parsed features (i.e. 'cui_')
   token_feature_ids: ${mednlp_doc_parser:token_feature_ids}
 
+# like `mednlp_combine_doc_parser` but add biomedical spacy parser features;
+# this also produces different features such NER and POS tags
+mednlp_combine_biomed_doc_parser:
+  class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
+  target_parser: 'instance: doc_parser'
+  source_parsers: 'instance: list: mednlp_doc_parser, mednlp_biomed_parser'
+  # add the FeatureToken attribute regardless
+  overwrite_nones: true
+  # add entities from MedCAT output in addition to the scispacy biomedical
+  yield_features: >-
+    eval({'import': ['zensols.nlp as n', 'zensols.mednlp as m']}):
+      m.MedicalFeatureToken.FEATURE_IDS
+  # add feature nones for medical missing medical features, meaning `cui_` will
+  # be `-<N>-` instead of missing from feature tokens
+  yield_feature_defaults: >-
+    eval({'import': ['zensols.nlp as n']}): n.FeatureToken.NONE
+  # keep the scispacy biomedical features, but don't overwrite default parser's entity
+  overwrite_features: >-
+    eval({'import': ['zensols.nlp as n']}):
+      n.FeatureToken.FEATURE_IDS - {'ent_', 'ent'}
+  # only map token level instead of sentence
+  merge_sentences: false
+  # include MedCAT parsed features (i.e. 'cui_')
+  token_feature_ids: ${mednlp_doc_parser:token_feature_ids}
+
+# another combiner that makes prioritizes MedCAT features
 mednlp_combine_medfirst_doc_parser:
   class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
   target_parser: 'instance: mednlp_doc_parser'
