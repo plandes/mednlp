@@ -45,7 +45,7 @@ testrun:
 .PHONY:			testfeatures
 testfeatures:
 			$(ENTRY_BIN) features $(PY_CLI_ARGS) \
-				--ids pref_name_,loc --onlymedical \
+				--ids pref_name_,loc --medonly \
 				"Spinal and bulbar muscular atrophy (SBMA)"
 
 .PHONY:			clinicaltuis
