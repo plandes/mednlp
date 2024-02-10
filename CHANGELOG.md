@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Added
+- Added a ScispaCy biomedical document parser, which is enabled by setting
+  `mednlp_default:doc_parser = mednlp_combine_biomed_doc_parser`.  This uses
+  better linguistic features and detects more entity span(s).
+
+### Changed
+- Bug fix: numeric entity feature from the combined medical parser is non-zero
+  for medical entities.
+- Combined medical parser defines linguistic and medical features in the
+  document parser object instance.
+
+
 ## [1.5.0] - 2023-12-05
 ### Changed
 - Upgrade libraries: `numpy`, `lxml`, `scikitlearn`, `scipy`, `medcat`.
