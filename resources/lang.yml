@@ -22,6 +22,7 @@ mednlp_map_filter_token_normalizer:
 #
 # install any missing spaCy at runtime (uses pip/effects pip install)
 doc_parser:
+  model_name: ${lang}_core_web_md
   auto_install_model: true
 
 # a biomedical (scispay) parser
