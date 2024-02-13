@@ -10,9 +10,8 @@ import warnings
 import collections
 from spacy.tokens.doc import Doc
 from spacy.language import Language
-from zensols.nlp import (
-    FeatureToken, SpacyFeatureDocumentParser, FeatureDocumentParser,
-)
+from zensols.nlp import FeatureToken, FeatureDocumentParser
+from zensols.nlp.sparser import SpacyFeatureDocumentParser
 from . import MedNLPError, MedCatResource, MedicalFeatureToken
 from .domain import _MedicalEntity
 

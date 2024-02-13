@@ -27,7 +27,7 @@ doc_parser:
 
 # a biomedical (scispay) parser
 mednlp_biomed_parser:
-  class_name: zensols.nlp.SpacyFeatureDocumentParser
+  class_name: zensols.nlp.sparser.SpacyFeatureDocumentParser
   lang: en
   model_name: ${lang}_core_sci_md
   token_normalizer: 'instance: map_filter_token_normalizer'
@@ -73,7 +73,7 @@ mednlp_doc_parser:
 #
 # takes first the features of a default (doc_parser), then MedCAT features
 mednlp_combine_doc_parser:
-  class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
+  class_name: zensols.nlp.combine.MappingCombinerFeatureDocumentParser
   target_parser: 'instance: doc_parser'
   source_parsers: 'instance: list: mednlp_doc_parser'
   # add the FeatureToken attribute regardless
@@ -92,7 +92,7 @@ mednlp_combine_doc_parser:
 # like `mednlp_combine_doc_parser` but add biomedical spacy parser features;
 # this also produces different features such NER and POS tags
 mednlp_combine_biomed_doc_parser:
-  class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
+  class_name: zensols.nlp.combine.MappingCombinerFeatureDocumentParser
   target_parser: 'instance: doc_parser'
   source_parsers: 'instance: list: mednlp_doc_parser, mednlp_biomed_parser'
   # add the FeatureToken attribute regardless
@@ -116,7 +116,7 @@ mednlp_combine_biomed_doc_parser:
 
 # another combiner that makes prioritizes MedCAT features
 mednlp_combine_medfirst_doc_parser:
-  class_name: zensols.nlp.MappingCombinerFeatureDocumentParser
+  class_name: zensols.nlp.combine.MappingCombinerFeatureDocumentParser
   target_parser: 'instance: mednlp_doc_parser'
   source_parsers: 'instance: list: doc_parser'
   # only entities are missing from the medical parser output
