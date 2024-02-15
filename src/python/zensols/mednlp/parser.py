@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 import logging
 import warnings
 import collections
+import textwrap as tw
 from spacy.tokens.doc import Doc
 from spacy.language import Language
 from zensols.nlp import FeatureToken, FeatureDocumentParser
@@ -58,7 +59,7 @@ class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
 
     def _normalize_tokens(self, doc: Doc) -> Iterable[FeatureToken]:
         if logger.isEnabledFor(logging.INFO):
-            logger.info(f'parsing: {doc}')
+            logger.info(f'parsing: {tw.shorten(str(doc), 60)}')
 
         # load/create model resources
         res: MedCatResource = self.medcat_resource
