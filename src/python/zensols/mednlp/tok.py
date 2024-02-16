@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Union, Dict, Optional, Tuple
+from typing import Dict, Tuple, Optional, Union
 import logging
 from functools import reduce
 from frozendict import frozendict
@@ -32,7 +32,6 @@ class MedicalFeatureToken(SpacyFeatureToken):
         reduce(lambda res, x: res | x, FEATURE_IDS_BY_TYPE.values()))
     WRITABLE_FEATURE_IDS = tuple(list(FeatureToken.WRITABLE_FEATURE_IDS) +
                                  'cui_'.split())
-    CONCEPT_ENTITY_LABEL = 'concept'
     _NONE_SET = frozenset()
 
     def __init__(self, spacy_token: Union[Token, Span], norm: str,
@@ -48,14 +47,16 @@ class MedicalFeatureToken(SpacyFeatureToken):
         self.is_ent = med_ent.is_ent
 
     @property
-    def ent(self) -> str:
-        return self.med_ent.concept_span.label \
-            if self.is_concept else super().ent
+    def ent_(self) -> str:
+        # self.med_ent.concept_span.label_ just gives 'concept', which then
+        # clobbers other useful entities in the combiner parsers
+        return self.NONE
 
     @property
-    def ent_(self) -> str:
-        return self.med_ent.concept_span.label_ \
-            if self.is_concept else super().ent_
+    def ent(self) -> int:
+        # self.med_ent.concept_span.label just gives 'concept', which then
+        # clobbers other useful entities in the combiner parsers
+        return 0
 
     @property
     def is_concept(self) -> bool:
