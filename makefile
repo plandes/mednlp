@@ -6,7 +6,6 @@
 PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy markdown
 PY_DEP_POST_DEPS +=	modeldeps
-INFO_TARGETS +=		appinfo
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
 # add app configuration to command line arguments
