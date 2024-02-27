@@ -8,13 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.6.0] - 2024-02-27
 ### Added
 - Added a ScispaCy biomedical document parser, which is enabled by setting
   `mednlp_default:doc_parser = mednlp_combine_biomed_doc_parser`.  This uses
   better linguistic features and detects more entity span(s).
 
 ### Changed
-- Bug fix: numeric entity feature from the combined medical parser is non-zero
+- Fixed normalize token and sentence/token indexes from being clobbered by
+  combined medical parsers.
+- Fixed numeric entity feature from the combined medical parser is non-zero
   for medical entities.
 - Combined medical parser defines linguistic and medical features in the
   document parser object instance.
@@ -133,7 +136,8 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/Paul Landes/mednlp/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/Paul Landes/mednlp/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/Paul Landes/mednlp/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/Paul Landes/mednlp/compare/v1.3.2...v1.4.0
