@@ -1,0 +1,9 @@
+<map id="inheritance3d281c5408" name="inheritance3d281c5408">
+<area shape="rect" id="node1" title="Base exception from which almost all library raised errors extend." alt="" coords="75,5,165,36"/>
+<area shape="rect" id="node5" href="#zensols.mednlp.domain.MedNLPError" target="_top" title="Raised by any medical NLP speicic reason in this library." alt="" coords="53,84,187,115"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.uts.Authentication" target="_top" title="A utility class to manage the authentication with the UTS system." alt="" coords="400,5,536,36"/>
+<area shape="rect" id="node3" href="#zensols.mednlp.uts.AuthenticationError" target="_top" title="Thrown when authentication fails." alt="" coords="5,241,181,272"/>
+<area shape="rect" id="node4" href="#zensols.mednlp.uts.UTSError" target="_top" title="An error thrown by wrapper of the UTS system." alt="" coords="71,163,169,193"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.uts.NoResultsError" target="_top" title="Thrown when no results, usually for a CUI not found." alt="" coords="206,241,351,272"/>
+<area shape="rect" id="node7" href="#zensols.mednlp.uts.UTSClient" target="_top" title="UTSClient(api_key: str, version: str = &#39;2020AA&#39;, request_stash: zensols.persist.domain.Stash = None)" alt="" coords="665,5,769,36"/>
+</map>

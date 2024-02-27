@@ -1,0 +1,4 @@
+<map id="inheritance35b9269af5" name="inheritance35b9269af5">
+<area shape="rect" id="node1" title="Base exception from which almost all library raised errors extend." alt="" coords="27,5,117,36"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.domain.MedNLPError" target="_top" title="Raised by any medical NLP speicic reason in this library." alt="" coords="5,84,139,115"/>
+</map>

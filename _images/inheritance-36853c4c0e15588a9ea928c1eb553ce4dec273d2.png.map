@@ -1,0 +1,10 @@
+<map id="inheritance63088b8809" name="inheritance63088b8809">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="108,5,180,36"/>
+<area shape="rect" id="node3" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="36,84,124,115"/>
+<area shape="rect" id="node7" title="Implementations can add, remove or modify features on a token." alt="" coords="156,84,367,115"/>
+<area shape="rect" id="node2" title="A class that that generates a dictionary recursively from data classes" alt="" coords="33,163,119,193"/>
+<area shape="rect" id="node4" href="#zensols.mednlp.entlink.Entity" target="_top" title="A convenience container class that Wraps a SciSpacy entity." alt="" coords="40,241,112,272"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.entlink.EntitySimilarity" target="_top" title="A similarity measure of a medical concept in cui2vec." alt="" coords="5,320,147,351"/>
+<area shape="rect" id="node5" href="#zensols.mednlp.entlink.EntityLinkerResource" target="_top" title="Provides a way resolve :class:`scispacy.linking_utils.Entity` instances" alt="" coords="463,5,657,36"/>
+<area shape="rect" id="node8" href="#zensols.mednlp.entlink.LinkFeatureTokenDecorator" target="_top" title="Adds linked SciSpacy definitions to tokens using the" alt="" coords="143,163,387,193"/>
+</map>

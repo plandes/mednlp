@@ -1,0 +1,10 @@
+<map id="inheritance8ea4307af0" name="inheritance8ea4307af0">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="144,5,216,36"/>
+<area shape="rect" id="node2" title="All subclasses have the ability to deallocate any resources. &#160;This is" alt="" coords="41,84,172,115"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="211,84,299,115"/>
+<area shape="rect" id="node6" title="Classes can extend this that want to persist :class:`.PersistedWork`" alt="" coords="5,163,195,193"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes" alt="" coords="219,163,306,193"/>
+<area shape="rect" id="node5" title="This class parses text in to instances of :class:`.FeatureDocument`" alt="" coords="83,241,303,272"/>
+<area shape="rect" id="node8" title="This langauge resource parses text in to Spacy documents. &#160;Loaded spaCy" alt="" coords="58,320,329,351"/>
+<area shape="rect" id="node7" href="#zensols.mednlp.parser.MedicalFeatureDocumentParser" target="_top" title="A medical based language resources that parses concepts." alt="" coords="52,399,335,429"/>
+</map>
