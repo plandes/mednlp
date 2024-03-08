@@ -64,7 +64,7 @@ functionality, see the [examples](example).
 
 ## MedCAT Models
 
-By default, this library the small MedCAT model used for
+By default, this library uses the small MedCAT model used for
 [tutorials](https://github.com/CogStack/MedCATtutorials/pull/12), and is not
 sufficient for any serious project.  To get the UMLS trained model,the [MedCAT
 UMLS request form] from be filled out (see the [MedCAT] repository).
