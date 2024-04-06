@@ -3,13 +3,15 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Dict, Any, Set
+from typing import Tuple, Iterable, Dict, Any, Set
 from dataclasses import dataclass, field, InitVar
 import logging
 import warnings
 from pathlib import Path
+import re
 from frozendict import frozendict
 import pandas as pd
+import spacy.util
 from medcat.config import Config, MixingConfig
 from medcat.vocab import Vocab
 from medcat.cdb import CDB
@@ -27,6 +29,9 @@ class MedCatResource(object):
     """A factory class that creates MedCAT resources.
 
     """
+    _MODEL_REGEX = re.compile(r'^([^@]+) @ .+$')
+    """A regular expression for a spaCy model dependency (http syntax)."""
+
     installer: Installer = field()
     """Installs and provides paths to the model files."""
 
@@ -81,6 +86,9 @@ class MedCatResource(object):
     """
     requirements_dir: Path = field(default=None)
     """The directory with the pip requirements files."""
+
+    auto_install_models: Tuple[str, ...] = field(default=())
+    """A list of spaCy models that will be installed if not already."""
 
     def __post_init__(self, cache_global: bool):
         self._tuis = PersistedWork('_tuis', self, cache_global=cache_global)
@@ -179,8 +187,10 @@ class MedCatResource(object):
         # override configuration
         if self.cat_config is not None:
             self._override_config(cdb.config, self.cat_config)
-        #
+        # add TUI filters (i.e. filter out non-medical terms)
         self._add_filters(cdb.config, cdb)
+        # ensure models are installed
+        self._assert_spacy_models()
         # create cat - each cdb comes with a config that was used to train it;
         # you can change that config in any way you want, before or after
         # creating cat
@@ -199,6 +209,7 @@ class MedCatResource(object):
             if msg.find("Can't find model") == -1:
                 raise e
             else:
+                logger.info('no scispacy model found--attempting to install')
                 self._install_model()
                 cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
                           meta_cats=[mc_status])
@@ -208,12 +219,43 @@ class MedCatResource(object):
         if self.requirements_dir is None:
             raise APIError('model not installed and no requirements found')
         else:
-            import pip
-            logger.info('no scispacy model found--attempting to install')
+            from pip._internal import main as pipmain
             req_file: Path
             for req_file in self.requirements_dir.iterdir():
-                pip.main(['install', '--use-deprecated=legacy-resolver',
-                          '-r', str(req_file), '--no-deps'])
+                pipmain(['install', '--use-deprecated=legacy-resolver',
+                         '-r', str(req_file), '--no-deps'])
+
+    def _get_model_requirements(self) -> Iterable[Tuple[str, str]]:
+        path: Path
+        for path in self.requirements_dir.iterdir():
+            with open(path) as f:
+                line: str
+                for line in map(str.strip, f.readlines()):
+                    m: re.Match = self._MODEL_REGEX.match(line)
+                    if m is not None:
+                        yield (m.group(1), line)
+
+    def _install_dependency(self, dep: str):
+        from pip._internal import main as pipmain
+        pipmain(['install', '--use-deprecated=legacy-resolver',
+                 dep, '--no-deps'])
+
+    def _assert_spacy_models(self):
+        missing: Set[str] = set()
+        model_name: str
+        for model_name in self.auto_install_models:
+            if not spacy.util.is_package(model_name):
+                missing.add(model_name)
+        if len(missing) > 0:
+            if logger.isEnabledFor(logging.INFO):
+                logger.info(f'installing missing models: {missing}')
+            reqs: Dict[str, str] = dict(self._get_model_requirements())
+            for model_name in missing:
+                dep: str = reqs.get(model_name)
+                if dep is None:
+                    raise APIError(
+                        f'Resource needs unmapped model: {model_name}')
+                self._install_dependency(dep)
 
     def clear(self):
         self._tuis.clear()
