@@ -69,7 +69,8 @@ class MedCatResource(object):
     spacy_enable_components: Set[str] = field(
         default_factory=lambda: set('sentencizer parser'.split()))
     """By default, MedCAT disables several pipeline components.  Some of these
-    are needed for sentence chunking and other downstream tasks.
+    are needed for sentence chunking and other downstream tasks.  Otherwise
+    sentence indexing won't work because sentence boundaries are missing.
 
     :see: `MedCAT Config <https://github.com/CogStack/MedCAT/blob/master/medcat/config.py>`_
 
