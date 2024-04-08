@@ -90,7 +90,7 @@ class MedicalFeatureToken(SpacyFeatureToken):
             return self.NONE
 
     @property
-    def sub_names(self) -> Tuple[str]:
+    def sub_names(self) -> Tuple[str, ...]:
         """Return other names for the concept."""
         if self.is_concept:
             return tuple(sorted(self._cdb.cui2names[self.cui_]))
@@ -111,7 +111,7 @@ class MedicalFeatureToken(SpacyFeatureToken):
         return self._definition or FeatureToken.NONE
 
     @property
-    def tuis(self) -> Tuple[str]:
+    def tuis(self) -> Tuple[str, ...]:
         """The the CUI type of the concept."""
         if self.is_concept:
             cui: str = self.cui_
