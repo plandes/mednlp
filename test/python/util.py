@@ -9,12 +9,13 @@ class TestBase(unittest.TestCase):
     def setUp(self):
         import warnings
         warnings.simplefilter("ignore", ResourceWarning)
-        self.text = 'He was diagnosed with kidney failure and heart disease.'
+        self.text_1 = 'He was diagnosed with kidney failure and heart disease.'
+        self.text_2 = 'He loved to smoke but Marlboro cigarettes gave John Smith lung cancer while he was in Chicago.'
         self.maxDiff = sys.maxsize
 
-    def _get_doc_parser(self, config: str = 'mednlp', section: str = None):
+    def _get_doc_parser(self, config: str = 'default', section: str = None):
         harness: CliHarness = ApplicationFactory.create_harness()
-        args: str = f'--config test-resources/{config}.conf --level=err'
+        args: str = f'--config test-resources/config/{config}.conf --level=err'
         if section is None:
             app: Application = harness.get_instance(f'show _ {args}')
             if isinstance(app, ApplicationFailure):

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 @dataclass
-class MedicalFeatureDocumentParser(SpacyFeatureDocumentParser):
+class MedCatFeatureDocumentParser(SpacyFeatureDocumentParser):
     """A medical based language resources that parses concepts.
 
     """

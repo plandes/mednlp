@@ -14,7 +14,7 @@ class TestParse(TestBase):
         parser: FeatureDocumentParser = self._get_doc_parser()
         self.assertTrue(isinstance(parser, FeatureDocumentParser))
         med_toks: Dict[str, str] = []
-        doc: FeatureDocument = parser(self.text)
+        doc: FeatureDocument = parser(self.text_1)
         for tok in doc.token_iter():
             fd = tok.asdict()
             med_toks.append({k: fd[k] for k in fd.keys() & keeps})
@@ -38,7 +38,7 @@ class TestParse(TestBase):
     def test_doc_parse(self):
         parser: FeatureDocumentParser = self._get_doc_parser()
         self.assertTrue(isinstance(parser, FeatureDocumentParser))
-        doc: FeatureDocument = parser.parse(self.text)
+        doc: FeatureDocument = parser.parse(self.text_1)
         self.assertTrue(isinstance(doc, FeatureDocument))
         sent: FeatureSentence = doc[0]
         self.assertTrue(isinstance(sent, FeatureSentence))
@@ -49,10 +49,10 @@ class TestParse(TestBase):
         self.assertTrue('C0035078', sent[4].cui_)
         self.assertTrue('Kidney Failure', sent[4].pref_name_)
 
-    def _test_multi_entity(self):
-        sent = 'I love Chicago but Mike Ditka gives me lung cancer.'
+    def test_multi_entity(self):
+        WRITE: bool = False
         parser: FeatureDocumentParser = self._get_doc_parser()
-        doc: FeatureDocument = parser.parse(sent)
+        doc: FeatureDocument = parser.parse(self.text_2)
         path = Path('test-resources/doc-features.json')
         json_str = doc.asjson(indent=4)
         obj = json.loads(json_str)
@@ -61,9 +61,9 @@ class TestParse(TestBase):
                 del t['context_similarity']
         # enable to re-write `should` test data for API changes; but have to
         # remove all `context_simirity` entries
-        if 0:
+        if WRITE:
             with open(path, 'w') as f:
-                f.write(json_str)
+                json.dump(obj, f, indent=4)
         with open(path) as f:
             should = json.load(f)
         self.assertEqual(should, obj)

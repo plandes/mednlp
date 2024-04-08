@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+- Deprecated feature document parser `mednlp_combine_medfirst_doc_parser` from
+  resource library.
+
+### Changed
+- Renamed `MeddicalFeatureDocumentParser` to `MedCatFeatureDocumentParser`
+  since the parser only adds MedCAT CUIs.
+- Fixed the configured parser that adds both ScispaCy biomed entities and
+  MedCAT CUIs in `mednlp_combine_biomed_doc_parser`.
+- Separated combiner with non-combiner models in configuration space.  The
+  non-combiners (biomed ScispaCy and MedCAT) are parses that are used in their
+  respective combiners.  These are then used by a new composite parser that
+  uses both (`mednlp_combine_biomed_doc_parser`).  Unit test case added for
+  all configured parsers.
+
 
 ## [1.6.0] - 2024-02-27
 ### Added

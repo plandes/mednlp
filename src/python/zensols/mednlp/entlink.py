@@ -52,7 +52,7 @@ class Entity(Dictable):
 class EntitySimilarity(Entity):
     """A similarity measure of a medical concept in cui2vec.
 
-    :see: :meth:`.MedicalFeatureDocumentParser.similarity_by_term`
+    :see: :meth:`.MedCatFeatureDocumentParser.similarity_by_term`
     """
     similiarty: float = field()
 
