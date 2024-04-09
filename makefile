@@ -44,14 +44,16 @@ testentlink:
 # test parsing
 .PHONY:			testparse
 testparse:
-			$(ENTRY_BIN) show $(PY_CLI_ARGS) $(TEST_SENT)
+			@$(ENTRY_BIN) show $(PY_CLI_ARGS) $(TEST_SENT) | \
+				diff - test-resources/integration/parse.txt || \
+				exit 1
 
 # not CUIs/results are after defaulting to notebook only MedCAT model
 .PHONY:			testfeatures
 testfeatures:
 			@$(ENTRY_BIN) features $(PY_CLI_ARGS) \
 				--ids pref_name_,loc --medonly $(TEST_SENT) | \
-				diff -q - test-resources/integration/features.csv || \
+				diff - test-resources/integration/features.csv || \
 				exit 1
 
 # test CTS (UMLS terminology service)
