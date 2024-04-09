@@ -3,16 +3,11 @@ from collections import OrderedDict
 import json
 from zensols.nlp import FeatureToken, FeatureDocument, FeatureDocumentParser
 from util import TestBase
-from zensols.mednlp import surpress_warnings
 
 
 class TestCombinedParsers(TestBase):
     _DEFAULT_ATTRS = 'i i_sent idx norm ent_ ent_iob ent_iob_'.split()
     _TRACE = False
-
-    def setUp(self):
-        super().setUp()
-        surpress_warnings()
 
     def _compare_sents(self, parser_name: str, idx: int, write: bool,
                        sent: str, attrs: List[str], missing: Set[str]):

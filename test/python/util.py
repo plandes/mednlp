@@ -2,13 +2,14 @@ import unittest
 import sys
 from zensols.cli import CliHarness, ApplicationFailure
 from zensols.config import ConfigFactory
-from zensols.mednlp import Application, ApplicationFactory
+from zensols.mednlp import Application, ApplicationFactory, surpress_warnings
 
 
 class TestBase(unittest.TestCase):
     def setUp(self):
         import warnings
         warnings.simplefilter("ignore", ResourceWarning)
+        surpress_warnings()
         self.text_1 = 'He was diagnosed with kidney failure and heart disease.'
         self.text_2 = 'He loved to smoke but Marlboro cigarettes gave John Smith lung cancer while he was in Chicago.'
         self.maxDiff = sys.maxsize
