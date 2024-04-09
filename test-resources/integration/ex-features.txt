@@ -1,0 +1,139 @@
+-----sentence: <He was diagnosed with kidney failure in the United States.>-----
+first three tokens:
+He
+    children=[]
+    context_similarity=-1
+    cui=-1
+    cui_=-<N>-
+    definition_=-<N>-
+    dep=430
+    dep_=nsubjpass
+    detected_name_=-<N>-
+    ent=0
+    ent_=-<N>-
+    ent_iob=0
+    ent_iob_=O
+    i=0
+    i_sent=0
+    idx=0
+    is_concept=False
+    is_contraction=False
+    is_ent=False
+    is_pronoun=True
+    is_punctuation=False
+    is_space=False
+    is_stop=True
+    is_superlative=False
+    is_wh=False
+    lemma_=he
+    lexspan=(0, 2)
+    norm=He
+    norm_len=2
+    pos_=PRON
+    pref_name_=-<N>-
+    sent_i=0
+    shape=12204527652707022206
+    shape_=Xx
+    sub_names=[]
+    tag=13656873538139661788
+    tag_=PRP
+    tui_descs_=
+    tuis=frozenset()
+    tuis_=
+was
+    children=[]
+    context_similarity=-1
+    cui=-1
+    cui_=-<N>-
+    definition_=-<N>-
+    dep=406
+    dep_=auxpass
+    detected_name_=-<N>-
+    ent=0
+    ent_=-<N>-
+    ent_iob=0
+    ent_iob_=O
+    i=1
+    i_sent=1
+    idx=3
+    is_concept=False
+    is_contraction=False
+    is_ent=False
+    is_pronoun=False
+    is_punctuation=False
+    is_space=False
+    is_stop=True
+    is_superlative=False
+    is_wh=False
+    lemma_=be
+    lexspan=(3, 6)
+    norm=was
+    norm_len=3
+    pos_=AUX
+    pref_name_=-<N>-
+    sent_i=0
+    shape=4088098365541558500
+    shape_=xxx
+    sub_names=[]
+    tag=17109001835818727656
+    tag_=VBD
+    tui_descs_=
+    tuis=frozenset()
+    tuis_=
+diagnosed
+    children=[0, 1, 3, 10]
+    context_similarity=-1
+    cui=-1
+    cui_=-<N>-
+    definition_=-<N>-
+    dep=8206900633647566924
+    dep_=ROOT
+    detected_name_=-<N>-
+    ent=0
+    ent_=-<N>-
+    ent_iob=0
+    ent_iob_=O
+    i=2
+    i_sent=2
+    idx=7
+    is_concept=False
+    is_contraction=False
+    is_ent=False
+    is_pronoun=False
+    is_punctuation=False
+    is_space=False
+    is_stop=False
+    is_superlative=False
+    is_wh=False
+    lemma_=diagnose
+    lexspan=(7, 16)
+    norm=diagnosed
+    norm_len=9
+    pos_=VERB
+    pref_name_=-<N>-
+    sent_i=0
+    shape=13110060611322374290
+    shape_=xxxx
+    sub_names=[]
+    tag=3822385049556375858
+    tag_=VBN
+    tui_descs_=
+    tuis=frozenset()
+    tuis_=
+-----named entities:-----
+<kidney>: cui=C0035078
+<kidney failure>: cui=C0035078
+<the United States>: cui=-<N>-
+-----features as a Pandas data frame-----
+    idx   i       norm  is_concept      cui_      pref_name_   ent_
+0     0   0         He       False     -<N>-           -<N>-  -<N>-
+1     3   1        was       False     -<N>-           -<N>-  -<N>-
+2     7   2  diagnosed       False     -<N>-           -<N>-  -<N>-
+3    17   3       with       False     -<N>-           -<N>-  -<N>-
+4    22   4     kidney        True  C0035078  Kidney Failure  ORGAN
+5    29   5    failure        True  C0035078  Kidney Failure  -<N>-
+6    37   6         in       False     -<N>-           -<N>-  -<N>-
+7    40   7        the       False     -<N>-           -<N>-    GPE
+8    44   8     United       False     -<N>-           -<N>-    GPE
+9    51   9     States       False     -<N>-           -<N>-    GPE
+10   57  10          .       False     -<N>-           -<N>-  -<N>-

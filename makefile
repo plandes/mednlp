@@ -6,15 +6,14 @@
 PROJ_TYPE =		python
 PROJ_MODULES =		git python-resources python-cli python-doc python-doc-deploy markdown
 PY_DEP_POST_DEPS +=	modeldeps
+PY_CLI_ARGS +=		--config test-resources/config/default.conf
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
-# add app configuration to command line arguments
-PY_CLI_ARGS +=		--config test-resources/config/default.conf
 
 ## Project
 #
 ENTRY_BIN =		./mednlp
-TEST_SENT =		"Spinal and bulbar muscular atrophy (SBMA)"
+TEST_SENT =		"John Smith was diagnosed with liver disease while in Chicago."
 
 
 ## Includes
@@ -50,21 +49,33 @@ testparse:
 # not CUIs/results are after defaulting to notebook only MedCAT model
 .PHONY:			testfeatures
 testfeatures:
-			$(ENTRY_BIN) features $(PY_CLI_ARGS) \
-				--ids pref_name_,loc --medonly $(TEST_SENT)
+			@$(ENTRY_BIN) features $(PY_CLI_ARGS) \
+				--ids pref_name_,loc --medonly $(TEST_SENT) | \
+				diff -q - test-resources/integration/features.csv || \
+				exit 1
 
 # test CTS (UMLS terminology service)
 .PHONY:			testclinicaltuis
 testclinicaltuis:
-			$(ENTRY_BIN) group byname $(PY_CLI_ARGS) -q \
-				Anatomy,Devices,Disorders,Drugs,Genes,Living,Objects,Occupations,Phenomena,Physiology,Procedures
+			@$(ENTRY_BIN) group byname $(PY_CLI_ARGS) -q \
+				Anatomy,Devices,Disorders,Drugs,Genes,Living,Objects,Occupations,Phenomena,Physiology,Procedures | \
+				diff - test-resources/integration/tuis.txt || \
+				exit 1
 
 # run unit tests and examples as integration tests
 .PHONY:			testall
 testall:		test testentlink testparse testfeatures testclinicaltuis
-			example/uts/uts.py
-			example/features/features.py show
-			example/cui2vec/cui2vec.py similarity -t heart
+			@example/features/features.py show | \
+				diff - test-resources/integration/ex-features.txt || \
+				exit 1
+			@example/cui2vec/cui2vec.py similarity -t heart 2>&1 | \
+				grep -v RuntimeWarning | \
+				grep -v 'dists = dot' | \
+				diff - test-resources/integration/cui2vec.txt || \
+				exit 1
+			@example/uts/uts.py | \
+				diff - test-resources/integration/uts.txt || \
+				exit 1
 
 # remove cached files created by the examples
 .PHONY:			cleanexample

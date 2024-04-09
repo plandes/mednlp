@@ -9,7 +9,7 @@ __author__ = 'Paul Landes'
 from dataclasses import dataclass, field
 import itertools as it
 import pandas as pd
-from zensols.cli import CliHarness
+from zensols.cli import CliHarness ; CliHarness.add_sys_path('src/python')
 from zensols.cli import ProgramNameConfigurator
 from zensols.nlp import FeatureDocumentParser, FeatureDocument
 from zensols.nlp.dataframe import FeatureDataFrameFactory

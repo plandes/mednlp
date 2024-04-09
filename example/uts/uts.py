@@ -8,7 +8,8 @@ __author__ = 'Paul Landes'
 from typing import Dict, List
 from dataclasses import dataclass, field
 from pprint import pprint
-from zensols.cli import CliHarness, ProgramNameConfigurator
+from zensols.cli import CliHarness ; CliHarness.add_sys_path('src/python')
+from zensols.cli import ProgramNameConfigurator
 from zensols.mednlp import UTSClient
 
 

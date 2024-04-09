@@ -1,0 +1,6 @@
+cui2vec: found cui: 'heart' -> C0018787
+cui2vec: Both cardiac ventricles (C0524423): 91.09%
+cui2vec: Left ventricular structure (C0225897): 89.46%
+cui2vec: Right Ventricular Hypertrophy (C0162770): 89.41%
+cui2vec: Both cardiac atria (C0524422): 89.24%
+cui2vec: Right ventricular structure (C0225883): 88.93%

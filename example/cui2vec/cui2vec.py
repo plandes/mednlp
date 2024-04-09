@@ -7,6 +7,8 @@ This example needs the ``zensols.deepnlp`` library, install with::
 
     pip install zensols.deepnlp
 
+
+
 """
 __author__ = 'Paul Landes'
 
@@ -14,7 +16,8 @@ from typing import Dict, List, Tuple
 from dataclasses import dataclass, field
 import logging
 from gensim.models.keyedvectors import KeyedVectors
-from zensols.cli import CliHarness, ProgramNameConfigurator, ApplicationError
+from zensols.cli import CliHarness ; CliHarness.add_sys_path('src/python')
+from zensols.cli import ProgramNameConfigurator, ApplicationError
 from zensols.mednlp import UTSClient
 from zensols.mednlp.cui2vec import Cui2VecEmbedModel
 
