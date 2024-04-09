@@ -196,15 +196,8 @@ class MedCatResource(object):
         # you can change that config in any way you want, before or after
         # creating cat
         try:
-            with warnings.catch_warnings():
-                # spaCy 3.6 and medcat 1.7 - 1.9 warns with what appears to be
-                # an unserialized regular expression from the language model
-                warnings.filterwarnings(
-                    'ignore',
-                    category=FutureWarning,
-                    message='^Possible set union at position')
-                cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
-                          meta_cats=[mc_status])
+            cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
+                      meta_cats=[mc_status])
         except OSError as e:
             msg: str = str(e)
             if msg.find("Can't find model") == -1:

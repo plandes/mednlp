@@ -9,8 +9,7 @@ PY_DEP_POST_DEPS +=	modeldeps
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		pycleancache cleanexample
 # add app configuration to command line arguments
-PY_CLI_ARGS +=		-c test-resources/mednlp.conf
-
+PY_CLI_ARGS +=		--config test-resources/config/default.conf
 
 ## Project
 #
@@ -51,8 +50,7 @@ testparse:
 # not CUIs/results are after defaulting to notebook only MedCAT model
 .PHONY:			testfeatures
 testfeatures:
-			$(ENTRY_BIN) features \
-				--config test-resources/mednlp.conf \
+			$(ENTRY_BIN) features $(PY_CLI_ARGS) \
 				--ids pref_name_,loc --medonly $(TEST_SENT)
 
 # test CTS (UMLS terminology service)
