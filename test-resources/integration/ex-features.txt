@@ -122,7 +122,6 @@ diagnosed
     tuis_=
 -----named entities:-----
 <kidney>: cui=C0035078
-<kidney failure>: cui=C0035078
 <the United States>: cui=-<N>-
 -----features as a Pandas data frame-----
     idx   i       norm  is_concept      cui_      pref_name_   ent_
