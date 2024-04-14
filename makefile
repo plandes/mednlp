@@ -64,9 +64,9 @@ testclinicaltuis:
 				diff - test-resources/integration/tuis.txt || \
 				exit 1
 
-# run unit tests and examples as integration tests
-.PHONY:			testall
-testall:		test testentlink testparse testfeatures testclinicaltuis
+# integration tests
+.PHONY:			testint
+testint:
 			@example/features/features.py show | \
 				diff - test-resources/integration/ex-features.txt || \
 				exit 1
@@ -78,6 +78,10 @@ testall:		test testentlink testparse testfeatures testclinicaltuis
 			@example/uts/uts.py | \
 				diff - test-resources/integration/uts.txt || \
 				exit 1
+
+# unit and integration tests
+.PHONY:			testall
+testall:		test testentlink testparse testfeatures testclinicaltuis testint
 
 # remove cached files created by the examples
 .PHONY:			cleanexample

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+## [1.7.0] - 2024-04-14
 ### Removed
 - Deprecated feature document parser `mednlp_combine_medfirst_doc_parser` from
   resource library.
@@ -151,7 +153,8 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/Paul Landes/mednlp/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/Paul Landes/mednlp/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/Paul Landes/mednlp/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/Paul Landes/mednlp/compare/v1.4.0...v1.4.1

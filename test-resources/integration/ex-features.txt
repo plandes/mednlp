@@ -121,6 +121,7 @@ diagnosed
     tuis=frozenset()
     tuis_=
 -----named entities:-----
+<kidney failure>: cui=C0035078
 <kidney>: cui=C0035078
 <the United States>: cui=-<N>-
 -----features as a Pandas data frame-----
