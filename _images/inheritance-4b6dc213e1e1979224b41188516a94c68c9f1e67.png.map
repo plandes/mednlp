@@ -1,0 +1,9 @@
+<map id="inheritance9f8b6aecec" name="inheritance9f8b6aecec">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="149,5,221,36"/>
+<area shape="rect" id="node4" title="All subclasses have the ability to deallocate any resources. &#160;This is" alt="" coords="52,84,183,115"/>
+<area shape="rect" id="node6" title="Any subclass that has the ability (and need) to do preprocessing. &#160;For" alt="" coords="219,163,323,193"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.cui2vec.Cui2VecEmbedModel" target="_top" title="This class uses the pretrained cui2vec embeddings." alt="" coords="77,399,275,429"/>
+<area shape="rect" id="node3" title="Extensions of this class read a text vectors file and compile, then write" alt="" coords="73,320,279,351"/>
+<area shape="rect" id="node5" title="Classes can extend this that want to persist :class:`.PersistedWork`" alt="" coords="5,163,195,193"/>
+<area shape="rect" id="node7" title="This is an abstract base class that represents a set of word vectors" alt="" coords="25,241,199,272"/>
+</map>

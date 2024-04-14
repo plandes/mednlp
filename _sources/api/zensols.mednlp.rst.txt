@@ -1,0 +1,123 @@
+zensols.mednlp package
+======================
+
+Submodules
+----------
+
+zensols.mednlp.app
+------------------
+.. inheritance-diagram:: zensols.mednlp.app
+   :parts: 1
+
+.. automodule:: zensols.mednlp.app
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.cli
+------------------
+.. inheritance-diagram:: zensols.mednlp.cli
+   :parts: 1
+
+.. automodule:: zensols.mednlp.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.ctakes
+---------------------
+.. inheritance-diagram:: zensols.mednlp.ctakes
+   :parts: 1
+
+.. automodule:: zensols.mednlp.ctakes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.cui2vec
+----------------------
+.. inheritance-diagram:: zensols.mednlp.cui2vec
+   :parts: 1
+
+.. automodule:: zensols.mednlp.cui2vec
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.domain
+---------------------
+.. inheritance-diagram:: zensols.mednlp.domain
+   :parts: 1
+
+.. automodule:: zensols.mednlp.domain
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.entlink
+----------------------
+.. inheritance-diagram:: zensols.mednlp.entlink
+   :parts: 1
+
+.. automodule:: zensols.mednlp.entlink
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.lib
+------------------
+.. inheritance-diagram:: zensols.mednlp.lib
+   :parts: 1
+
+.. automodule:: zensols.mednlp.lib
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.parser
+---------------------
+.. inheritance-diagram:: zensols.mednlp.parser
+   :parts: 1
+
+.. automodule:: zensols.mednlp.parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.resource
+-----------------------
+.. inheritance-diagram:: zensols.mednlp.resource
+   :parts: 1
+
+.. automodule:: zensols.mednlp.resource
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.tok
+------------------
+.. inheritance-diagram:: zensols.mednlp.tok
+   :parts: 1
+
+.. automodule:: zensols.mednlp.tok
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zensols.mednlp.uts
+------------------
+.. inheritance-diagram:: zensols.mednlp.uts
+   :parts: 1
+
+.. automodule:: zensols.mednlp.uts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: zensols.mednlp
+   :members:
+   :undoc-members:
+   :show-inheritance:

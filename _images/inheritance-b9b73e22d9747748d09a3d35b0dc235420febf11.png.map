@@ -1,0 +1,8 @@
+<map id="inheritance3f45fd46e2" name="inheritance3f45fd46e2">
+<area shape="rect" id="node1" title="Helper class that provides a standard way to create an ABC using" alt="" coords="25,5,97,36"/>
+<area shape="rect" id="node4" title="An interface for classes that have multi&#45;line debuging capability." alt="" coords="17,84,105,115"/>
+<area shape="rect" id="node2" href="#zensols.mednlp.app.Application" target="_top" title="A natural language medical domain parsing library." alt="" coords="5,241,116,272"/>
+<area shape="rect" id="node3" title="A class that that generates a dictionary recursively from data classes" alt="" coords="17,163,104,193"/>
+<area shape="rect" id="node5" title="Create a collection of name/value pairs." alt="" coords="451,5,523,36"/>
+<area shape="rect" id="node6" href="#zensols.mednlp.app.GroupInfo" target="_top" title="Used to group TUI information in :meth:`.Application.group`" alt="" coords="436,84,539,115"/>
+</map>
