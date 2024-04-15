@@ -134,7 +134,7 @@ An extensive changelog is available [here](CHANGELOG.md).
 
 [MIT License](LICENSE.md)
 
-Copyright (c) 2021 - 2023 Paul Landes
+Copyright (c) 2021 - 2024 Paul Landes
 
 
 <!-- links -->
