@@ -6,7 +6,6 @@ __author__ = 'Paul Landes'
 from typing import Tuple, Iterable, Dict, Any, Set
 from dataclasses import dataclass, field, InitVar
 import logging
-import warnings
 from pathlib import Path
 import re
 from frozendict import frozendict
