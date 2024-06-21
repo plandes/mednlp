@@ -112,7 +112,7 @@ If you use this project in your research please use the following BibTeX entry:
     month = dec,
     year = "2023",
     address = "Singapore, Singapore",
-    publisher = "Empirical Methods in Natural Language Processing",
+    publisher = "Association for Computational Linguistics",
     url = "https://aclanthology.org/2023.nlposs-1.16",
     pages = "141--146"
 }
