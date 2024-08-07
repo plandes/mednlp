@@ -31,7 +31,7 @@ jobs:
 
       # https://github.com/nmslib/nmslib/issues/538
       - name: Install an available library from the abandoned nmslib project
-        run: 'pip install "nmslib-metabrainz~=2.1.2"'
+        run: 'pip install "nmslib-metabrainz==2.1.2"'
 
       - name: Prepare tests
         run: 'make info deps'
