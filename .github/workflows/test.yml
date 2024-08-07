@@ -29,8 +29,11 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
-      - name: Prepare tests
+      # https://github.com/nmslib/nmslib/issues/538
+      - name: Install an available library from the abandoned nmslib project
         run: python -m pip "pip install 'nmslib-metabrainz~=2.1.2'"
+
+      - name: Prepare tests
         run: 'make info deps'
 
       - name: Run tests
