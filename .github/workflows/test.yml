@@ -30,6 +30,7 @@ jobs:
         run: python -c "import sys; print(sys.version)"
 
       - name: Prepare tests
+        run: python -m pip "pip install 'nmslib-metabrainz~=2.1.2'"
         run: 'make info deps'
 
       - name: Run tests
