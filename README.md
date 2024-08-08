@@ -31,14 +31,25 @@ The [API reference](https://plandes.github.io/mednlp/api.html) is also
 available.
 
 
-## Obtaining
+## Installing
 
-The easiest way to install the command line program is via the `pip` installer.
+Install the library using a Python package manager such as `pip`:
 ```bash
 pip3 install zensols.mednlp
 ```
 
-Binaries are also available on [pypi].
+### CUI Embeddings
+
+To use the `cui2vec` to functionality, the embeddings must be *manually*
+downloaded.  Start with this commands:
+```bash
+mkdir -p ~/.cache/zensols/mednlp
+wget -O ~/.cache/zensols/mednlp/cui2vec.zip https://figshare.com/ndownloader/files/10959626?private_link=00d69861786cd0156d81
+```
+If the download fails or the file is not a zip file (rather an HTML error
+message text), then you will need to download the file manually by
+[browsing](https://figshare.com/ndownloader/files/10959626) to the file, and
+then moving it to `~/.cache/zensols/mednlp/cui2vec.zip`.
 
 
 ## Usage
