@@ -2,4 +2,5 @@
 *_flymake.py
 /target
 /lib
+/data
 /medcat.log

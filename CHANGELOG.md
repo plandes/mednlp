@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Added
+- Clinical [PubMedBert SBERT embeddings] configuration.
+- [PyRuSH] Clincal clinical sententence chunker
+
+
 ## [1.7.0] - 2024-04-14
 ### Removed
 - Deprecated feature document parser `mednlp_combine_medfirst_doc_parser` from
@@ -174,3 +179,5 @@ Downstream moderate risk update release.
 [zensols.nlp]: https://github.com/plandes/nlparse
 [zensols.install]: https://github.com/plandes/install
 [medcat]: https://github.com/CogStack/MedCAT
+[PyRuSH]: https://github.com/jianlins/PyRuSH
+[PubMedBert SBERT embeddings]: https://huggingface.co/pritamdeka/S-PubMedBert-MS-MARCO
