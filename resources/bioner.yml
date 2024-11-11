@@ -1,0 +1,9 @@
+#@meta {desc: 'configure the SciSpacy BioNLP parser', date: '2024-04-06'}
+
+# use the biomedical NER
+mednlp_biomed_doc_parser:
+  model_name: en_ner_bionlp13cg_md
+
+medcat_resource:
+  auto_install_models:
+    - ${mednlp_biomed_doc_parser:model_name}
