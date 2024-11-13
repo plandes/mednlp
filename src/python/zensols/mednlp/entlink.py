@@ -121,4 +121,6 @@ class LinkFeatureTokenDecorator(FeatureTokenDecorator):
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'entity: {token.cui_} -> {e} ({id(token)})')
         if e is not None:
-            token._definition = e.definition
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug(f'entity def: {e.definition}')
+            token.set_feature('definition_', e.definition)

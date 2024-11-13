@@ -1,9 +1,25 @@
 #@meta {desc: 'configure the SciSpacy BioNLP parser', date: '2024-04-06'}
+#@meta {doc: 'A spaCy NER model trained on the BIONLP13CG corpus.'}
+#@meta {url: 'https://allenai.github.io/scispacy/'}
 
+
+## Natural language
+#
 # use the biomedical NER
 mednlp_biomed_doc_parser:
   model_name: en_ner_bionlp13cg_md
 
+# configure the model for download
 medcat_resource:
   auto_install_models:
     - ${mednlp_biomed_doc_parser:model_name}
+
+
+## Vectorization
+#
+# creates one hot vectors for each enumeration of the spaCy feature parsed in
+# `doc_parser`.
+# mednlp_enum_feature_vectorizer:
+#   class_name: zensols.deepnlp.vectorize.EnumContainerFeatureVectorizer
+#   feature_id: 'medent'
+#   encode_transformed: false

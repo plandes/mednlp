@@ -110,6 +110,10 @@ class MedicalFeatureToken(SpacyFeatureToken):
         """The definition if the concept."""
         return self._definition or FeatureToken.NONE
 
+    @definition_.setter
+    def definition_(self, definition_: str):
+        self._definition = definition_
+
     @property
     def tuis(self) -> Tuple[str, ...]:
         """The the CUI type of the concept."""

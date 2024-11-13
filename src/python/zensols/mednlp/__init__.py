@@ -16,6 +16,7 @@ from .resource import *
 from .tok import *
 from .lib import *
 from .parser import *
+from .vectorizers import *
 from .app import *
 from .cli import *
 
