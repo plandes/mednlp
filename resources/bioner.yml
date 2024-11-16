@@ -17,9 +17,20 @@ medcat_resource:
 
 ## Vectorization
 #
-# creates one hot vectors for each enumeration of the spaCy feature parsed in
-# `doc_parser`.
-# mednlp_enum_feature_vectorizer:
-#   class_name: zensols.deepnlp.vectorize.EnumContainerFeatureVectorizer
-#   feature_id: 'medent'
-#   encode_transformed: false
+medent_spacy_feature_vectorizer:
+  class_name: zensols.deepnlp.vectorize.spacy.SpacyFeatureVectorizer
+  feature_id: medent
+  description: medical named entity recognition
+  torch_config: 'instance: gpu_torch_config'
+  model: >-
+    call({'param': {'attribute': 'model'}}): ${deepnlp_default:vectorizer_doc_parser}
+  symbols: ner
+
+# uncomment to add the vectorizer to the default configuration in `vectorizer.conf`
+# language_vectorizer_manager:
+#   configured_spacy_vectorizers: >-
+#     instance: tuple:
+#       ner_spacy_feature_vectorizer,
+#       dep_spacy_feature_vectorizer,
+#       pos_spacy_feature_vectorizer,
+#       medent_spacy_feature_vectorizer
