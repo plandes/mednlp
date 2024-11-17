@@ -23,7 +23,7 @@ medent_spacy_feature_vectorizer:
   description: medical named entity recognition
   torch_config: 'instance: gpu_torch_config'
   model: >-
-    call({'param': {'attribute': 'model'}}): ${deepnlp_default:vectorizer_doc_parser}
+    call({'param': {'attribute': 'model'}}): mednlp_biomed_doc_parser
   symbols: ner
 
 # uncomment to add the vectorizer to the default configuration in `vectorizer.conf`
