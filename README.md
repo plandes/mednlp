@@ -1,7 +1,6 @@
 # Medical natural language parsing and utility library
 
 [![PyPI][pypi-badge]][pypi-link]
-[![Python 3.10][python310-badge]][python310-link]
 [![Python 3.11][python311-badge]][python311-link]
 [![Build Status][build-badge]][build-link]
 
@@ -124,7 +123,7 @@ If you use this project in your research please use the following BibTeX entry:
     year = "2023",
     address = "Singapore, Singapore",
     publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/2023.nlposs-1.16",
+    url = "https://aclanthology.org/2025.nlposs-1.16",
     pages = "141--146"
 }
 ```
@@ -152,8 +151,6 @@ Copyright (c) 2021 - 2024 Paul Landes
 [pypi]: https://pypi.org/project/zensols.mednlp/
 [pypi-link]: https://pypi.python.org/pypi/zensols.mednlp
 [pypi-badge]: https://img.shields.io/pypi/v/zensols.mednlp.svg
-[python310-badge]: https://img.shields.io/badge/python-3.10-blue.svg
-[python310-link]: https://www.python.org/downloads/release/python-3100
 [python311-badge]: https://img.shields.io/badge/python-3.11-blue.svg
 [python311-link]: https://www.python.org/downloads/release/python-3110
 [build-badge]: https://github.com/plandes/mednlp/workflows/CI/badge.svg

@@ -14,5 +14,5 @@ medcat~=1.9.3
 ctakes-parser~=0.1.0
 
 # zensols
-zensols.install~=1.1.1
-zensols.nlp~=1.11.0
+zensols.install~=1.2.0
+zensols.nlp~=1.12.0

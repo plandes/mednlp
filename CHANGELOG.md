@@ -8,9 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.8.0] - 2025-01-11
+### Removed
+- Support for Python 3.10.
+
 ### Added
 - Clinical [PubMedBert SBERT embeddings] configuration.
 - [PyRuSH] Clincal clinical sententence chunker
+
+### Changed
+- Upgraded to [zensols.util] version 1.15.
 
 
 ## [1.7.0] - 2024-04-14
@@ -158,7 +165,8 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.7.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/Paul Landes/mednlp/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/Paul Landes/mednlp/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/Paul Landes/mednlp/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/Paul Landes/mednlp/compare/v1.4.1...v1.5.0
