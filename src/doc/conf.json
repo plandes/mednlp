@@ -1,2 +1,0 @@
-{"includes": {"named": ["numpy", "pandas", "torch", "zensols.nlp", "zensols.util"],
-	      "mapped": [["zensols.deepnlp", "{url}/deepnlp/"]]}}

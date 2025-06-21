@@ -16,7 +16,7 @@ if (__name__ == '__main__'):
           9: 'I\'d say he has severe Parkison\'s disease.'
           }[9]
     harn = ConfigurationImporterCliHarness(
-        src_dir_name='src/python',
+        src_dir_name='src',
         app_factory_class='zensols.mednlp.ApplicationFactory',
         proto_args={
             -1: ['proto', st],
@@ -30,8 +30,8 @@ if (__name__ == '__main__'):
             7: ['ctakes', st],
             8: ['group', 'byname', '-q', 'Disorders,Drugs'],
             9: ['similarity', 'heart'],
-        }[1],
+        }[-1],
         proto_factory_kwargs={
-            'reload_pattern': r'^zensols.mednlp'},
+            'reload_pattern': r'^(?:zensols.mednlp|zensols.cli.lib)'},
     )
     harn.run()

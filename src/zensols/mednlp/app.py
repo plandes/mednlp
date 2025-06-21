@@ -204,3 +204,6 @@ class Application(Dictable):
         for sim in self.library.similarity_by_term(term):
             print(sim.cui)
             sim.write(1)
+
+    def proto(self, sent):
+        self.show(sent)

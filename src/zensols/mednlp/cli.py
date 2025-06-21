@@ -19,6 +19,10 @@ class ApplicationFactory(ApplicationFactory):
         """Get the default application's document parser."""
         return cls.create_harness().get_application().doc_parser
 
+    def _handle_error(self, ex: Exception):
+        # TODO
+        raise ex
+
 
 def main(args: List[str] = sys.argv, **kwargs: Dict[str, Any]) -> ActionResult:
     harness: CliHarness = ApplicationFactory.create_harness(relocate=False)

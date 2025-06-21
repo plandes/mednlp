@@ -91,9 +91,10 @@ class EntityLinkerResource(object):
         simply doing a CUI looking.
 
         """
-        import warnings
-        s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
-        warnings.filterwarnings('ignore', message=s)
+        # import warnings
+        # s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
+        # warnings.filterwarnings('ignore', message=s)
+        pass
 
     def get_linked_entity(self, cui: str) -> Entity:
         """Get a scispaCy linked entity.

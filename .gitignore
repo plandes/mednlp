@@ -4,3 +4,6 @@
 /lib
 /data
 /medcat.log
+# pixi environments
+.pixi
+/pyproject.toml

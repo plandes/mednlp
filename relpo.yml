@@ -1,0 +1,94 @@
+#@meta {author: "Paul Landes"}
+#@meta {desc: "Python build configuration", date: "2025-06-19"}
+
+# primary author
+author:
+  name: Paul Landes
+  email: landes@mailc.net
+# GitHub account
+github:
+  user: plandes
+# other 'project' section metadata
+project:
+  domain: zensols
+  name: mednlp
+  short_description: Medical natural language parsing and utility library.
+  long_description: A natural language medical domain parsing library.
+  keywords:
+    - tooling
+  python:
+    # Python interpreter versions
+    version:
+      # constraint on install eligibility
+      required: '>=3.11,<3.13'
+      # last supported version of Python supported for the project
+      previous: '3.11.12'
+      # Python version supported for current development
+      current: '3.11.12'
+      # version of Python used to build/link specific to the host
+      package_host: '3.11.6'
+    # pypi dependencies added to 'project'
+    dependencies:
+      # util
+      - 'lxml~=4.9.3'
+      # scientific
+      - 'numpy~=1.26.4'
+      - 'scikit-learn~=1.3.2'
+      # MedCAT (entlink)
+      - 'pandas~=2.3.0'
+      - 'scipy~=1.13.1'
+      - 'scispacy~=0.5.4'
+      - 'medcat~=1.16.0'
+      # clinical (entlink)
+      - 'ctakes-parser~=0.1.0'
+      # nlp
+      - 'zensols.install~=1.2.0'
+      - 'zensols.nlp~=1.12.3'
+      - 'zensols.util~=1.15.9'
+pixi:
+  project:
+    platforms: ["osx-arm64", "linux-64"]
+doc:
+  api_config:
+    intersphinx_mapping:
+      util:
+        modules: [zensols.util, zensols.persist, zensols.config, zensols.cli, zensols.multi]
+        url: '{RP_DOC_IM_URL}/{package}/'
+      deepnlp:
+        modules: ['zensols.deepnlp']
+        url: '{RP_DOC_IM_URL}/{package}/'
+      numpy:
+        modules: ['numpy']
+        url: 'https://numpy.org/doc/stable'
+      pandas:
+        modules: ['pandas']
+        url: 'https://pandas.pydata.org/pandas-docs/stable'
+      torch:
+        modules: ['torch']
+        url: 'https://lightning.ai/docs/torchmetrics/stable'
+      nlp:
+        modules: ['zensols.nlp']
+        url: '{RP_DOC_IM_URL}/{package}/'
+      util:
+        modules: ['zensols.util']
+        url: '{RP_DOC_IM_URL}/{package}/'
+build:
+  table_appends:
+    tool.pixi.target.osx-arm64.pypi-dependencies:
+      nmslib:
+        path: "lib/nmslib-2.1.2-cp311-cp311-macosx_10_9_universal2.whl"
+    tool.pixi.target.linux-64.pypi-dependencies:
+      nmslib:
+        path: "lib/nmslib-2.1.2-cp311-cp311-linux_x86_64.whl"
+    tool.pixi.pypi-dependencies:
+      # models
+      en_core_web_sm:
+        url: "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl"
+      en_core_sci_sm:
+        url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz"
+      en_core_sci_md:
+        url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_md-0.5.4.tar.gz"
+      en_core_sci_scibert:
+        url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_scibert-0.5.4.tar.gz"
+      en_ner_bionlp13cg_md:
+        url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_bionlp13cg_md-0.5.4.tar.gz"
