@@ -21,7 +21,7 @@ jobs:
       - name: Install Python environment needed for the relpo command
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: Install the relpo command
         run: 'pip install zensols_relpo'
