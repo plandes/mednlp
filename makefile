@@ -10,10 +10,6 @@ ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		cleanexample
 
 
-
-PY_TEST_GLOB ?=		test_combined.py
-
-
 ## Project
 #
 ENTRY_BIN =		./mednlp
