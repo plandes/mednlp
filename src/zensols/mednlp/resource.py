@@ -3,20 +3,19 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import Tuple, Iterable, Dict, Any, Set
+from typing import Tuple, Dict, Any, Set
 from dataclasses import dataclass, field, InitVar
 import logging
 from pathlib import Path
 import re
 from frozendict import frozendict
 import pandas as pd
-import spacy.util
 from medcat.config import Config, MixingConfig
 from medcat.vocab import Vocab
 from medcat.cdb import CDB
 from medcat.cat import CAT
 from medcat.meta_cat import MetaCAT
-from zensols.util import APIError
+from zensols.util.package import PackageRequirement, PackageManager
 from zensols.install import Resource, Installer
 from zensols.persist import persisted, PersistedWork
 
@@ -84,11 +83,13 @@ class MedCatResource(object):
     """Whether or not to globally cache resources, which saves load time.
 
     """
-    requirements_dir: Path = field(default=None)
-    """The directory with the pip requirements files."""
+    requirements: Tuple[str, ...] = field(default=())
+    """A list of spaCy pip dependencies (can include model direct-references)
+    that will be installed if not already.
 
-    auto_install_models: Tuple[str, ...] = field(default=())
-    """A list of spaCy models that will be installed if not already."""
+    """
+    package_manager: PackageManager = field(default_factory=PackageManager)
+    """The package manager used to install :obj:`requirements`."""
 
     def __post_init__(self, cache_global: bool):
         self._tuis = PersistedWork('_tuis', self, cache_global=cache_global)
@@ -174,7 +175,10 @@ class MedCatResource(object):
         loaded, if not already.
 
         """
+        # install medcat models if not already
         self._assert_installed()
+        # ensure models are installed
+        self._assert_requirements()
         # Load the vocab model you downloaded
         vocab = Vocab.load(self.installer[self.vocab_resource])
         # Load the cdb model you downloaded
@@ -189,66 +193,17 @@ class MedCatResource(object):
             self._override_config(cdb.config, self.cat_config)
         # add TUI filters (i.e. filter out non-medical terms)
         self._add_filters(cdb.config, cdb)
-        # ensure models are installed
-        self._assert_spacy_models()
         # create cat - each cdb comes with a config that was used to train it;
         # you can change that config in any way you want, before or after
         # creating cat
-        try:
-            cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
-                      meta_cats=[mc_status])
-        except OSError as e:
-            msg: str = str(e)
-            if msg.find("Can't find model") == -1:
-                raise e
-            else:
-                logger.info('no scispacy model found--attempting to install')
-                self._install_model()
-                cat = CAT(cdb=cdb, config=cdb.config, vocab=vocab,
-                          meta_cats=[mc_status])
-        return cat
+        return CAT(cdb=cdb, config=cdb.config, vocab=vocab,
+                   meta_cats=[mc_status])
 
-    def _install_model(self):
-        if self.requirements_dir is None:
-            raise APIError('model not installed and no requirements found')
-        else:
-            from pip._internal import main as pipmain
-            req_file: Path
-            for req_file in self.requirements_dir.iterdir():
-                pipmain(['install', '--use-deprecated=legacy-resolver',
-                         '-r', str(req_file), '--no-deps'])
-
-    def _get_model_requirements(self) -> Iterable[Tuple[str, str]]:
-        path: Path
-        for path in self.requirements_dir.iterdir():
-            with open(path) as f:
-                line: str
-                for line in map(str.strip, f.readlines()):
-                    m: re.Match = self._MODEL_REGEX.match(line)
-                    if m is not None:
-                        yield (m.group(1), line)
-
-    def _install_dependency(self, dep: str):
-        from pip._internal import main as pipmain
-        pipmain(['install', '--use-deprecated=legacy-resolver',
-                 dep, '--no-deps'])
-
-    def _assert_spacy_models(self):
-        missing: Set[str] = set()
-        model_name: str
-        for model_name in self.auto_install_models:
-            if not spacy.util.is_package(model_name):
-                missing.add(model_name)
-        if len(missing) > 0:
-            if logger.isEnabledFor(logging.INFO):
-                logger.info(f'installing missing models: {missing}')
-            reqs: Dict[str, str] = dict(self._get_model_requirements())
-            for model_name in missing:
-                dep: str = reqs.get(model_name)
-                if dep is None:
-                    raise APIError(
-                        f'Resource needs unmapped model: {model_name}')
-                self._install_dependency(dep)
+    def _assert_requirements(self):
+        spec: str
+        for spec in self.requirements:
+            req = PackageRequirement.from_spec(spec)
+            self.package_manager.install(req)
 
     def clear(self):
         self._tuis.clear()

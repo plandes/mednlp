@@ -10,14 +10,15 @@ class TestCombinedParsers(TestBase):
     _TRACE = False
 
     def _compare_sents(self, parser_name: str, idx: int, write: bool,
-                       sent: str, attrs: List[str], missing: Set[str]):
+                       sent: str, attrs: List[str], missing: Set[str],
+                       config: str = 'combined'):
         def map_tok_features(t: FeatureToken) -> Dict[str, Any]:
             # sort keys to make diffing easier
             dct = t.asdict()
             return OrderedDict(sorted(dct.items(), key=lambda t: t[0]))
 
         actual_file: str = f'test-resources/should/{parser_name}-{idx}.json'
-        p: FeatureDocumentParser = self._get_doc_parser('combined', parser_name)
+        p: FeatureDocumentParser = self._get_doc_parser(config, parser_name)
         doc: FeatureDocument = p(sent)
 
         actuals = tuple(map(map_tok_features, doc.token_iter()))

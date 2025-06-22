@@ -8,11 +8,7 @@
 # use the biomedical NER
 mednlp_biomed_doc_parser:
   model_name: en_ner_bionlp13cg_md
-
-# configure the model for download
-medcat_resource:
-  auto_install_models:
-    - ${mednlp_biomed_doc_parser:model_name}
+  auto_install_model: ${mednlp_requirements:biomed_parser}
 
 
 ## Vectorization

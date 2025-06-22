@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+### Changed
+- Upgrade to [medcat] 1.16.0.
+- Switch to [zensols.util] and [zensols.nlp] model dependency runtime
+  installation.
+- Upgrade build to [pixi].
+
+
 ## [1.8.0] - 2025-01-11
 ### Removed
 - Support for Python 3.10.
@@ -189,3 +196,4 @@ Downstream moderate risk update release.
 [medcat]: https://github.com/CogStack/MedCAT
 [PyRuSH]: https://github.com/jianlins/PyRuSH
 [PubMedBert SBERT embeddings]: https://huggingface.co/pritamdeka/S-PubMedBert-MS-MARCO
+[pixi]: https://pixi.sh

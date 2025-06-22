@@ -5,14 +5,15 @@
 #
 PROJ_TYPE =		python
 PROJ_MODULES =		python/doc python/deploy
-PY_CLI_ARGS +=		--config test-resources/config/default.conf
+PY_TEST_TARGETS =	testcur
+PY_TEST_ALL_TARGETS +=	testentlink testparse testfeatures testclinicaltuis testint
 ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		cleanexample
 
 
 ## Project
 #
-ENTRY_BIN =		./mednlp
+PY_CLI_ARGS +=		--config test-resources/config/default.conf
 TEST_SENT =		'John Smith was diagnosed with liver disease while in Chicago.'
 
 
@@ -26,7 +27,7 @@ include ./zenbuild/main.mk
 # test scispacy entity link db
 .PHONY:			testentlink
 testentlink:
-			make PY_SRC_TEST=test/entlink test
+			make PY_TEST_GLOB=noghci_test_*.py testcur
 
 # test parsing
 .PHONY:			testparse
@@ -61,12 +62,12 @@ testclinicaltuis:
 # integration tests
 .PHONY:			testintfeat
 testintfeat:
-			@echo "integration test: features"
+			@echo "integration test: features (harness)"
 			@make $(PY_MAKE_ARGS) ARG="show" \
 				PY_HARNESS_BIN=example/features/features.py run | \
 				diff - test-resources/integration/ex-features.txt || \
 				exit 1
-			@echo "integration test: features...ok"
+			@echo "integration test: features (harness)...ok"
 
 .PHONY:			testintcui2vec
 testintcui2vec:
@@ -91,11 +92,6 @@ testintuts:
 .PHONY:			testint
 testint:		testintfeat testintcui2vec testintuts
 
-
-
-# unit and integration tests
-.PHONY:			testall
-testall:		test testentlink testparse testfeatures testclinicaltuis testint
 
 # remove cached files created by the examples
 .PHONY:			cleanexample
