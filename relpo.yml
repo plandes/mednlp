@@ -79,15 +79,3 @@ build:
     tool.pixi.target.linux-64.pypi-dependencies:
       nmslib:
         path: "lib/nmslib-2.1.2-cp311-cp311-linux_x86_64.whl"
-    # tool.pixi.pypi-dependencies:
-    #   # models
-    #   en_core_web_sm:
-    #     url: "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl"
-    #   en_core_sci_sm:
-    #     url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz"
-    #   en_core_sci_md:
-    #     url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_md-0.5.4.tar.gz"
-    #   en_core_sci_scibert:
-    #     url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_scibert-0.5.4.tar.gz"
-    #   en_ner_bionlp13cg_md:
-    #     url: "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_ner_bionlp13cg_md-0.5.4.tar.gz"
