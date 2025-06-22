@@ -36,7 +36,8 @@ jobs:
       # pyproject.toml sha1 changes due to different whitespace in the build
       # environment
       - name: Create the enviornment, which updates the lock file
-        run: 'make pyinit'
+        #run: 'make pyinit'
+        run: 'make pyinvokerelpo ARG="pyproject -o pyproject.toml -l debug"'
 
       - name: Build information
         run: 'make info'
