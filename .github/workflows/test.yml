@@ -21,13 +21,13 @@ jobs:
       - name: Install Python environment needed for the relpo command
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
 
       - name: Install the relpo command
         run: 'pip install zensols_relpo'
 
       - name: Relpo version
-        run: 'pip freeze | grep relpo'
+        run: 'relpo --version'
 
       - name: Install pixi
         run: 'curl -fsSL https://pixi.sh/install.sh | sh'
@@ -39,8 +39,7 @@ jobs:
       # pyproject.toml sha1 changes due to different whitespace in the build
       # environment
       - name: Create the enviornment, which updates the lock file
-        #run: 'make pyinit'
-        run: 'make pyinvokerelpo ARG="pyproject -o pyproject.toml -l debug"'
+        run: 'make pyinit'
 
       - name: Build information
         run: 'make info'
