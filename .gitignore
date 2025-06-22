@@ -1,7 +1,6 @@
 *.pyc
 *_flymake.py
 /target
-/lib
 /data
 /medcat.log
 # pixi environments
