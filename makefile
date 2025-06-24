@@ -28,7 +28,8 @@ include ./zenbuild/main.mk
 # test scispacy entity link db
 .PHONY:			testentlink
 testentlink:
-			make PY_TEST_GLOB=noghci_test_*.py testcur
+			@echo "testing entity linking..."
+			@make PY_TEST_GLOB=noghci_test_*.py testcur
 
 # test parsing
 .PHONY:			testparse

@@ -15,7 +15,9 @@ project:
   short_description: Medical natural language parsing and utility library.
   long_description: A natural language medical domain parsing library.
   keywords:
-    - tooling
+    - clinical
+    - entity linking
+    - natural language processing
   python:
     # Python interpreter versions
     version:
@@ -41,7 +43,7 @@ project:
       - 'medcat~=1.16.0'
       # clinical (entlink)
       - 'ctakes-parser~=0.1.0'
-      - 'pyrush==1.0.9'
+#      - 'pyrush==1.0.9'
       # nlp
       - 'zensols.install~=1.2.0'
       - 'zensols.nlp~=1.12.5'

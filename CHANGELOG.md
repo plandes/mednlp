@@ -9,9 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.9.0] - 2025-06-23
-### Added
-- Add support for Python 3.12.
-
 ### Changed
 - Upgraded:
   - [medcat] 1.16.0
