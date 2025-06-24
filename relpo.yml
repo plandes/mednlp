@@ -43,7 +43,7 @@ project:
       - 'medcat~=1.16.0'
       # clinical (entlink)
       - 'ctakes-parser~=0.1.0'
-#      - 'pyrush==1.0.9'
+      - 'pyrush==1.0.9'
       # nlp
       - 'zensols.install~=1.2.0'
       - 'zensols.nlp~=1.12.5'
@@ -78,12 +78,12 @@ doc:
         url: '{RP_DOC_IM_URL}/{package}/'
 build:
   table_appends:
-    tool.pixi.target.osx-arm64.pypi-dependencies:
-      nmslib:
-        path: "lib/nmslib-2.1.2-cp311-cp311-macosx_10_9_universal2.whl"
-    tool.pixi.target.linux-64.pypi-dependencies:
-      nmslib:
-        path: "lib/nmslib-2.1.2-cp311-cp311-linux_x86_64.whl"
+    # tool.pixi.target.osx-arm64.pypi-dependencies:
+    #   nmslib:
+    #     path: "lib/nmslib-2.1.2-cp311-cp311-macosx_10_9_universal2.whl"
+    # tool.pixi.target.linux-64.pypi-dependencies:
+    #   nmslib:
+    #     path: "lib/nmslib-2.1.2-cp311-cp311-linux_x86_64.whl"
     tool.pixi.environments.testint:
       features: ['pyvercur', 'testint']
       solve-group: 'default'
