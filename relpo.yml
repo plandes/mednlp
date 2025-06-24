@@ -41,9 +41,12 @@ project:
       - 'medcat~=1.16.0'
       # clinical (entlink)
       - 'ctakes-parser~=0.1.0'
+      - 'pyrush==1.0.9'
       # nlp
       - 'zensols.install~=1.2.0'
-      - 'zensols.nlp~=1.12.4'
+      - 'zensols.nlp~=1.12.5'
+  # the program is called on the command line
+  has_entry_points: true
 pixi:
   project:
     platforms: ["osx-arm64", "linux-64"]
@@ -79,3 +82,8 @@ build:
     tool.pixi.target.linux-64.pypi-dependencies:
       nmslib:
         path: "lib/nmslib-2.1.2-cp311-cp311-linux_x86_64.whl"
+    tool.pixi.environments.testint:
+      features: ['pyvercur', 'testint']
+      solve-group: 'default'
+    tool.pixi.feature.testint.pypi-dependencies:
+      zensols-deepnlp: '~=1.18.0'

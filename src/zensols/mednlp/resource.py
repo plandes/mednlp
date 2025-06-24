@@ -16,14 +16,15 @@ from medcat.cdb import CDB
 from medcat.cat import CAT
 from medcat.meta_cat import MetaCAT
 from zensols.util.package import PackageRequirement, PackageManager
-from zensols.install import Resource, Installer
+from zensols.config import Dictable
 from zensols.persist import persisted, PersistedWork
+from zensols.install import Resource, Installer
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class MedCatResource(object):
+class MedCatResource(Dictable):
     """A factory class that creates MedCAT resources.
 
     """

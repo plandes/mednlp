@@ -8,11 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.9.0] - 2025-06-23
+### Added
+- Add support for Python 3.12.
+
 ### Changed
-- Upgrade to [medcat] 1.16.0.
+- Upgraded:
+  - [medcat] 1.16.0
+  - [zensols.nlp] 1.12.5
+  - [Pandas] 2.3.0
 - Switch to [zensols.util] and [zensols.nlp] model dependency runtime
   installation.
 - Upgrade build to [pixi].
+- Added PyRush dependencies.
 
 
 ## [1.8.0] - 2025-01-11
@@ -172,7 +180,8 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/Paul Landes/mednlp/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/Paul Landes/mednlp/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/Paul Landes/mednlp/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/Paul Landes/mednlp/compare/v1.5.0...v1.6.0
@@ -197,3 +206,4 @@ Downstream moderate risk update release.
 [PyRuSH]: https://github.com/jianlins/PyRuSH
 [PubMedBert SBERT embeddings]: https://huggingface.co/pritamdeka/S-PubMedBert-MS-MARCO
 [pixi]: https://pixi.sh
+[Pandas]: https://pandas.pydata.org

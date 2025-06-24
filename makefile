@@ -4,17 +4,18 @@
 ## Build system
 #
 PROJ_TYPE =		python
-PROJ_MODULES =		python/doc python/deploy
+PROJ_MODULES =		python/doc python/test python/package python/deploy
 PY_TEST_TARGETS =	testcur
 PY_TEST_ALL_TARGETS +=	testentlink testparse testfeatures testclinicaltuis testint
-ADD_CLEAN +=		medcat.log
 CLEAN_DEPS +=		cleanexample
 
 
 ## Project
 #
+MODEL_DIR ?=		$(HOME)/.cache/zensols/mednlp
+MODEL_RESAVE_BIN ?=	src/bin/resave.py
 PY_CLI_ARGS +=		--config test-resources/config/default.conf
-TEST_SENT =		'John Smith was diagnosed with liver disease while in Chicago.'
+TEST_SENT ?=		'John Smith was diagnosed with liver disease while in Chicago.'
 
 
 ## Includes
@@ -72,7 +73,8 @@ testintfeat:
 .PHONY:			testintcui2vec
 testintcui2vec:
 			@echo "integration test: cui2vec"
-			@make $(PY_MAKE_ARGS) ARG="show similarity -t heart" \
+			@make $(PY_MAKE_ARGS) ARG="similarity -t heart" \
+				PY_INVOKE_ARG="-e testint" \
 				PY_HARNESS_BIN=example/cui2vec/cui2vec.py run 2>&1 | \
 				grep -v RuntimeWarning | \
 				grep -v 'dists = dot' | \
@@ -91,6 +93,16 @@ testintuts:
 
 .PHONY:			testint
 testint:		testintfeat testintcui2vec testintuts
+
+# fix warning: "This is an old format. Please re-save the mode..."
+.PHONY:			resavemodels
+resavemodels:
+			@echo "installing deps..."
+			@$(PY_PX_BIN) run python -m pip install plac
+			@for i in $(MODEL_DIR)/medcat-* ; do \
+				echo "resaving models in $$i" ; \
+				$(PY_PX_BIN) run python $(MODEL_RESAVE_BIN) $$i ; \
+			done
 
 
 # remove cached files created by the examples

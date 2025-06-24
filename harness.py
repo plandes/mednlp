@@ -30,7 +30,7 @@ if (__name__ == '__main__'):
             7: ['ctakes', st],
             8: ['group', 'byname', '-q', 'Disorders,Drugs'],
             9: ['similarity', 'heart'],
-        }[1],
+        }[-1],
         proto_factory_kwargs={
             'reload_pattern': r'^zensols.mednlp'},
     )

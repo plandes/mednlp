@@ -5,16 +5,16 @@ from __future__ import annotations
 __author__ = 'Paul Landes'
 from typing import Any, List, Dict, Tuple
 from dataclasses import dataclass, field
-from zensols.config import ConfigFactory
+from zensols.config import ConfigFactory, Dictable
 from . import MedCatResource, UTSClient
 
 
 @dataclass
-class MedicalLibrary(object):
+class MedicalLibrary(Dictable):
     """A utility class that provides access to medical APIs.
 
     """
-    config_factory: ConfigFactory = field(default=None)
+    config_factory: ConfigFactory = field(default=None, repr=False)
     """The configuration factory used to create cTAKES and cui2vec instances.
 
     """

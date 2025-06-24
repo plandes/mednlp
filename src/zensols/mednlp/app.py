@@ -204,3 +204,12 @@ class Application(Dictable):
         for sim in self.library.similarity_by_term(term):
             print(sim.cui)
             sim.write(1)
+
+    def proto(self, sent):
+        lib = self.library
+        res = lib.medcat_resource
+        #print(type(self.doc_parser))
+        parser = self.config_factory('mednlp_medcat_doc_parser')
+        print(type(parser))
+        doc = parser(sent)
+        doc[0].write()
