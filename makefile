@@ -4,7 +4,7 @@
 ## Build system
 #
 PROJ_TYPE =		python
-PROJ_MODULES =		python/doc python/test python/package python/deploy
+PROJ_MODULES =		python/doc python/package python/deploy
 PY_TEST_TARGETS =	testcur
 PY_TEST_ALL_TARGETS +=	testentlink testparse testfeatures testclinicaltuis testint
 CLEAN_DEPS +=		cleanexample
