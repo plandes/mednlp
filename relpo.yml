@@ -26,7 +26,7 @@ project:
       # last supported version of Python supported for the project
       previous: '3.11.12'
       # Python version supported for current development
-      current: '3.11.12'
+      current: '3.12.10'
       # version of Python used to build/link specific to the host
       package_host: '3.11.6'
     # pypi dependencies added to 'project'
@@ -43,10 +43,9 @@ project:
       - 'medcat~=1.16.0'
       # clinical (entlink)
       - 'ctakes-parser~=0.1.0'
-      - 'pyrush==1.0.9'
       # nlp
       - 'zensols.install~=1.2.0'
-      - 'zensols.nlp~=1.12.5'
+      - 'zensols.nlp~=1.12.7'
   # the program is called on the command line
   has_entry_points: true
 pixi:
@@ -72,7 +71,7 @@ doc:
         url: 'https://lightning.ai/docs/torchmetrics/stable'
       nlp:
         modules: ['zensols.nlp']
-        url: '{RP_DOC_IM_URL}/{package}/'
+        url: '{RP_DOC_IM_URL}/nlparse/'
       util:
         modules: ['zensols.util']
         url: '{RP_DOC_IM_URL}/{package}/'

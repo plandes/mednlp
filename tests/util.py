@@ -23,11 +23,9 @@ class TestBase(unittest.TestCase):
             app: Application = harness.get_instance(f'show _ {args}')
             if isinstance(app, ApplicationFailure):
                 raise app.exception
-            #app.library.medcat_resource.assert_spacy_models()
             return app.doc_parser
         else:
             harness: CliHarness = ApplicationFactory.create_harness()
             fac: ConfigFactory = harness.get_config_factory(args)
             parser = fac(section)
-            #fac('medcat_resource').assert_spacy_models()
             return parser
