@@ -45,14 +45,14 @@ class MedCatResource(Dictable):
     """The the ``mc_status`` directory.
 
     """
-    umls_tuis: Resource = field()
+    umls_tuis: Path = field()
     """The UMLS TUIs (types) mapping resource that maps from TUIs to
     descriptions.
 
     :see: `Semantic Types <https://lhncbc.nlm.nih.gov/ii/tools/MetaMap/documentation/SemanticTypesAndGroups.html>`_
 
     """
-    umls_groups: Resource = field()
+    umls_groups: Path = field()
     """Like :obj:`umls_tuis` but groups TUIs in gropus."""
 
     filter_tuis: Set[str] = field(default=None)
@@ -147,9 +147,7 @@ class MedCatResource(Dictable):
     @persisted('_tuis')
     def tuis(self) -> Dict[str, str]:
         """A mapping of type identifiers (TUIs) to their descriptions."""
-        self._assert_installed()
-        path: Path = self.installer[self.umls_tuis]
-        df = pd.read_csv(path, delimiter='|', header=None)
+        df = pd.read_csv(self.umls_tuis, delimiter='|', header=None)
         df.columns = 'abbrev tui desc'.split()
         df_tups = df[['tui', 'desc']].itertuples(name=None, index=False)
         return frozendict(df_tups)
@@ -161,9 +159,7 @@ class MedCatResource(Dictable):
         name associated with each.
 
         """
-        self._assert_installed()
-        path: Path = self.installer[self.umls_groups]
-        df = pd.read_csv(path, delimiter='|', header=None)
+        df = pd.read_csv(self.umls_groups, delimiter='|', header=None)
         df.columns = 'abbrev name tui desc'.split()
         return df
 
