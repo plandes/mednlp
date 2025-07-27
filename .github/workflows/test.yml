@@ -44,5 +44,5 @@ jobs:
       - name: Build information
         run: 'make info'
 
-      - name: Run tests (only current stale Python 3.11 until nmslib is updated)
-        run: 'make testcur'
+      - name: Run tests
+        run: 'make test'
