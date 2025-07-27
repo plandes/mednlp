@@ -72,9 +72,6 @@ doc:
       nlp:
         modules: ['zensols.nlp']
         url: '{RP_DOC_IM_URL}/nlparse/'
-      util:
-        modules: ['zensols.util']
-        url: '{RP_DOC_IM_URL}/{package}/'
 build:
   table_appends:
     tool.pixi.environments.testint:
