@@ -42,7 +42,9 @@ class MedicalLibrary(Dictable):
 
         """
         from .entlink import Entity
-        ent: Entity = self.entity_linker_resource.get_linked_entity(cui)
+        ent: Entity = None
+        if self.entity_linker_resource is not None:
+            self.entity_linker_resource.get_linked_entity(cui)
         return ent
 
     def get_atom(self, cui: str) -> Dict[str, str]:
