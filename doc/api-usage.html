@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html class="no-js" data-content_root="../" lang="en">
+<head><meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/><meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="../genindex.html" rel="index" title="Index"/><link href="../search.html" rel="search" title="Search"/><link href="../api.html" rel="next" title="API Reference"/><link href="../index.html" rel="prev" title="Medical natural language parsing and utility library"/>
+<!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 -->
+<title>Medical NLP and Utility API - Medical natural language parsing and utility library. 1.9.3 documentation</title>
+<link href="../_static/pygments.css?v=03e43079" rel="stylesheet" type="text/css">
+<link href="../_static/styles/furo.css?v=580074bf" rel="stylesheet" type="text/css">
+<link href="../_static/copybutton.css?v=76b2166b" rel="stylesheet" type="text/css">
+<link href="../_static/sphinx-codeautolink.css?v=b2176991" rel="stylesheet" type="text/css">
+<link href="../_static/graphviz.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/furo-extensions.css?v=8dab3a3b" rel="stylesheet" type="text/css"/>
+<link href="../_static/codeautolink.css?v=57550ae3" rel="stylesheet" type="text/css"/>
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></link></link></link></link></meta></head>
+<body>
+<script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+<symbol id="svg-toc" viewbox="0 0 24 24">
+<title>Contents</title>
+<svg fill="currentColor" stroke="currentColor" stroke-width="0" viewbox="0 0 1024 1024">
+<path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"></path>
+</svg>
+</symbol>
+<symbol id="svg-menu" viewbox="0 0 24 24">
+<title>Menu</title>
+<svg class="feather-menu" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</symbol>
+<symbol id="svg-arrow-right" viewbox="0 0 24 24">
+<title>Expand</title>
+<svg class="feather-chevron-right" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</symbol>
+<symbol id="svg-sun" viewbox="0 0 24 24">
+<title>Light mode</title>
+<svg class="feather-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="5"></circle>
+<line x1="12" x2="12" y1="1" y2="3"></line>
+<line x1="12" x2="12" y1="21" y2="23"></line>
+<line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+<line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+<line x1="1" x2="3" y1="12" y2="12"></line>
+<line x1="21" x2="23" y1="12" y2="12"></line>
+<line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+<line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+</svg>
+</symbol>
+<symbol id="svg-moon" viewbox="0 0 24 24">
+<title>Dark mode</title>
+<svg class="icon-tabler-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+</svg>
+</symbol>
+<symbol id="svg-sun-with-moon" viewbox="0 0 24 24">
+<title>Auto light/dark, in light mode</title>
+<svg class="icon-custom-derived-from-feather-sun-and-tabler-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z" style="opacity: 50%"></path>
+<line x1="14.5" x2="14.5" y1="3.25" y2="1.25"></line>
+<line x1="14.5" x2="14.5" y1="15.85" y2="17.85"></line>
+<line x1="10.044" x2="8.63" y1="5.094" y2="3.68"></line>
+<line x1="19" x2="20.414" y1="14.05" y2="15.464"></line>
+<line x1="8.2" x2="6.2" y1="9.55" y2="9.55"></line>
+<line x1="20.8" x2="22.8" y1="9.55" y2="9.55"></line>
+<line x1="10.044" x2="8.63" y1="14.006" y2="15.42"></line>
+<line x1="19" x2="20.414" y1="5.05" y2="3.636"></line>
+<circle cx="14.5" cy="9.55" r="3.6"></circle>
+</svg>
+</symbol>
+<symbol id="svg-moon-with-sun" viewbox="0 0 24 24">
+<title>Auto light/dark, in dark mode</title>
+<svg class="icon-custom-derived-from-feather-sun-and-tabler-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"></path>
+<line style="opacity: 50%" x1="18" x2="18" y1="3.705" y2="2.5"></line>
+<line style="opacity: 50%" x1="18" x2="18" y1="11.295" y2="12.5"></line>
+<line style="opacity: 50%" x1="15.316" x2="14.464" y1="4.816" y2="3.964"></line>
+<line style="opacity: 50%" x1="20.711" x2="21.563" y1="10.212" y2="11.063"></line>
+<line style="opacity: 50%" x1="14.205" x2="13.001" y1="7.5" y2="7.5"></line>
+<line style="opacity: 50%" x1="21.795" x2="23" y1="7.5" y2="7.5"></line>
+<line style="opacity: 50%" x1="15.316" x2="14.464" y1="10.184" y2="11.036"></line>
+<line style="opacity: 50%" x1="20.711" x2="21.563" y1="4.789" y2="3.937"></line>
+<circle cx="18" cy="7.5" r="2.169" style="opacity: 50%"></circle>
+</svg>
+</symbol>
+<symbol id="svg-pencil" viewbox="0 0 24 24">
+<svg class="icon-tabler-pencil-code" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+<path d="M13.5 6.5l4 4"></path>
+<path d="M20 21l2 -2l-2 -2"></path>
+<path d="M17 17l-2 2l2 2"></path>
+</svg>
+</symbol>
+<symbol id="svg-eye" viewbox="0 0 24 24">
+<svg class="icon-tabler-eye-code" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+<path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+<path d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008"></path>
+<path d="M20 21l2 -2l-2 -2"></path>
+<path d="M17 17l-2 2l2 2"></path>
+</svg>
+</symbol>
+</svg>
+<input aria-label="Toggle site navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<input aria-label="Toggle table of contents sidebar" class="sidebar-toggle" id="__toc" name="__toc" type="checkbox"/>
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+<div class="page">
+<header class="mobile-header">
+<div class="header-left">
+<label class="nav-overlay-icon" for="__navigation">
+<span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+</label>
+</div>
+<div class="header-center">
+<a href="../top.html"><div class="brand">Medical natural language parsing and utility library. 1.9.3 documentation</div></a>
+</div>
+<div class="header-right">
+<div class="theme-toggle-container theme-toggle-header">
+<button aria-label="Toggle Light / Dark / Auto color theme" class="theme-toggle">
+<svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+<svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+<svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+<svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+</button>
+</div>
+<label class="toc-overlay-icon toc-header-icon" for="__toc">
+<span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+</label>
+</div>
+</header>
+<aside class="sidebar-drawer">
+<div class="sidebar-container">
+<div class="sidebar-sticky"><a class="sidebar-brand" href="../top.html">
+<span class="sidebar-brand-text">Medical natural language parsing and utility library. 1.9.3 documentation</span>
+</a><form action="../search.html" class="sidebar-search-container" method="get" role="search">
+<input aria-label="Search" class="sidebar-search" name="q" placeholder="Search"/>
+<input name="check_keywords" type="hidden" value="yes"/>
+<input name="area" type="hidden" value="default"/>
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Medical NLP and Utility API</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/zensols.mednlp.html">zensols.mednlp package</a></li>
+</ul>
+</input></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<div class="main">
+<div class="content">
+<div class="article-container">
+<a class="back-to-top muted-link" href="#">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+</svg>
+<span>Back to top</span>
+</a>
+<div class="content-icon-container">
+<div class="view-this-page">
+<a class="muted-link" href="../_sources/doc/api-usage.md.txt" title="View this page">
+<svg><use href="#svg-eye"></use></svg>
+<span class="visually-hidden">View this page</span>
+</a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+<button aria-label="Toggle Light / Dark / Auto color theme" class="theme-toggle">
+<svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+<svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+<svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+<svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+</button>
+</div>
+<label class="toc-overlay-icon toc-content-icon" for="__toc">
+<span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+</label>
+</div>
+<article id="furo-main-content" role="main">
+<section id="medical-nlp-and-utility-api">
+<h1>Medical NLP and Utility API<a class="headerlink" href="#medical-nlp-and-utility-api" title="Link to this heading">¶</a></h1>
+<p>This API primarily wraps others with the <a class="reference external" href="https://arxiv.org/abs/2109.03383">Zensols Framework</a> to provide easy
+way and reproducible method of utilization and experimentation with medical and
+clinical natural language text.  It provides the following functionality:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#umls-access-via-uts">UMLS Access via UTS</a></p></li>
+<li><p><a class="reference external" href="#medical-concept-and-entity-linking">Medical Concept and Entity Linking</a></p></li>
+<li><p><a class="reference external" href="#using-cui-as-word-embeddings">Using CUI as Word Embeddings</a></p></li>
+<li><p><a class="reference external" href="#entity-linking-with-ctakes">Entity Linking with cTAKES</a></p></li>
+</ul>
+<p>The rest of this document is structured as a cookbook style tutorial.  Each
+sub-section describes the examples in the <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example">examples</a> directory.</p>
+<p><strong>Important</strong>: many of the examples use <a class="reference external" href="https://www.nlm.nih.gov/research/umls/">UMLS</a> UTS service, which requires a
+key that is provided by NIH.  If you do not have a key, request one and add it
+to the <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example/uts-key.json">UTS key file</a>.</p>
+<section id="medical-concept-and-entity-linking">
+<h2>Medical Concept and Entity Linking<a class="headerlink" href="#medical-concept-and-entity-linking" title="Link to this heading">¶</a></h2>
+<p>Concept linking with <a class="reference external" href="https://www.nlm.nih.gov/research/umls/new_users/online_learning/Meta_005.html">CUIs</a> is provided using the same interface as the
+<a class="reference external" href="https://plandes.github.io/nlparse/doc/feature-doc.html">Zensols NLP parsing API</a>.  The resource library provided with this package
+creates a <code class="docutils literal notranslate"><span class="pre">mednlp_doc_parser</span></code> as shown in the [entity-example].  First we start
+with the configuration with file name <code class="docutils literal notranslate"><span class="pre">features.conf</span></code>, which starts with
+telling the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> to import the <a class="reference external" href="https://github.com/plandes/nlparse">Zensols NLP package</a> and this
+(<code class="docutils literal notranslate"><span class="pre">zensols.mednlp</span></code>) package:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[import]</span>
+<span class="na">sections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list: imp_conf</span>
+
+<span class="k">[imp_conf]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">importini</span>
+<span class="na">config_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list:</span>
+<span class="w">    </span><span class="na">resource(zensols.nlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/obj.conf,</span>
+<span class="w">    </span><span class="na">resource(zensols.nlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/mapper.conf,</span>
+<span class="w">    </span><span class="na">resource(zensols.mednlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/lang.conf</span>
+</pre></div>
+</div>
+<p>Next configure the parser with specific features, since otherwise, the parser
+will retain all medical and non-medical features:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mednlp_doc_parser]</span>
+<span class="na">token_feature_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">set: norm, is_ent, cui, cui_, pref_name_, detected_name_, is_concept, ent_, ent</span>
+</pre></div>
+</div>
+<p>Finally, declare the application, which is needed by the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> glue code to
+invoke the class we will write afterward:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[app]</span>
+<span class="na">class_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${program:name}.Application</span>
+<span class="na">doc_parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">instance: mednlp_doc_parser</span>
+</pre></div>
+</div>
+<p>Next comes the application class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Application</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#object" title="object"><span class="nb">object</span></a><span class="p">):</span>
+    <span class="n">doc_parser</span><span class="p">:</span> <span class="n">FeatureDocumentParser</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sent</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sent</span> <span class="o">=</span> <span class="s1">'He was diagnosed with kidney failure in the United States.'</span>
+        <span class="n">doc</span><span class="p">:</span> <span class="n">FeatureDocument</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_parser</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span>
+        <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="s1">'first three tokens:'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">it</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">token_iter</span><span class="p">(),</span> <span class="mi">3</span><span class="p">):</span>
+            <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">norm</span><span class="p">)</span>
+            <span class="n">tok</span><span class="o">.</span><span class="n">write_attributes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">include_type</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This uses the document parser to create the feature document, which has both
+the medical and linguistic features in tokens (provided by <code class="docutils literal notranslate"><span class="pre">token_iter()</span></code>) of the document.</p>
+<p>Use the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> API in the entry point to use the configuration and application
+class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">):</span>
+    <span class="n">CliHarness</span><span class="p">(</span>
+        <span class="n">app_config_resource</span><span class="o">=</span><span class="s1">'uts.conf'</span><span class="p">,</span>
+        <span class="n">app_config_context</span><span class="o">=</span><span class="n">ProgramNameConfigurator</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">'uts'</span><span class="p">)</span><span class="o">.</span><span class="n">create_section</span><span class="p">(),</span>
+        <span class="n">proto_args</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Running the program produces one such token data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">diagnosed</span>
+    <span class="n">cui</span><span class="o">=</span><span class="mi">11900</span>
+    <span class="n">cui_</span><span class="o">=</span><span class="n">C0011900</span>
+    <span class="n">detected_name_</span><span class="o">=</span><span class="n">diagnosed</span>
+    <span class="n">ent</span><span class="o">=</span><span class="mi">13188083023294932426</span>
+    <span class="n">ent_</span><span class="o">=</span><span class="n">concept</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">i_sent</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">idx</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">is_concept</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">is_ent</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">norm</span><span class="o">=</span><span class="n">diagnosed</span>
+    <span class="n">pref_name_</span><span class="o">=</span><span class="n">Diagnosis</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>See the full <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example/features">entity example</a> for the full example code, which will also output
+both linguistic and medical features as a <a class="reference external" href="https://pandas.pydata.org">Pandas</a> data frame.</p>
+</section>
+<section id="umls-access-via-uts">
+<h2>UMLS Access via UTS<a class="headerlink" href="#umls-access-via-uts" title="Link to this heading">¶</a></h2>
+<p>NIH provides a very rough REST client using the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library given as an
+example.  This API takes that example, adds some “rigor” and structure in a
+an easy to use class called <code class="docutils literal notranslate"><span class="pre">UTSClient</span></code>.  This is configured by first defining
+paths for where fetched entities are cached:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[default]</span>
+<span class="c1"># root directory given by the application, which is the parent directory</span>
+<span class="na">root_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${appenv:root_dir}/..</span>
+<span class="c1"># the directory to hold the cached UMLS data</span>
+<span class="na">cache_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${root_dir}/cache</span>
+</pre></div>
+</div>
+<p>Next, import the this package’s resource library (<code class="docutils literal notranslate"><span class="pre">zensols.mednlp</span></code>).  Note we
+have to refer to sections that substitute the <code class="docutils literal notranslate"><span class="pre">default</span></code> section’s data:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[import]</span>
+<span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list: uts, default</span>
+<span class="na">sections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list: imp_uts_key, imp_conf</span>
+
+<span class="k">[imp_conf]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">importini</span>
+<span class="na">config_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">resource(zensols.mednlp): resources/uts.conf</span>
+
+<span class="k">[imp_uts_key]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">json</span>
+<span class="na">default_section</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">uts</span>
+<span class="na">config_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${default:root_dir}/uts-key.json</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">imp_uts_key</span></code> points to a file where you put add your UTS key, which is
+given by NIH.</p>
+<p>Now indicate where to cache the <a class="reference external" href="https://www.nlm.nih.gov/research/umls/">UMLS</a> data and define our application we’ll
+write afterward:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># UTS (UMLS access)</span>
+<span class="k">[uts]</span>
+<span class="na">cache_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${default:cache_dir}/uts-request.dat</span>
+</pre></div>
+</div>
+<p>For brevity the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> application code and configuration is omitted (see <a class="reference external" href="#umls-access-via-uts">UMLS
+Access via UTS</a> for more detail).</p>
+<p>To use the API to first search a term, then print entity information, we can
+use the <code class="docutils literal notranslate"><span class="pre">search_term</span></code> method with <code class="docutils literal notranslate"><span class="pre">get_atoms</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Application</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#object" title="object"><span class="nb">object</span></a><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a> <span class="o">=</span> <span class="s1">'heart'</span><span class="p">):</span>
+        <span class="c1"># terms are returned as a list of pages with dictionaries of data</span>
+        <span class="n">pages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">search_term</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+        <span class="c1"># get all term dictionaries from the first page</span>
+        <span class="n">terms</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a><span class="p">,</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a><span class="p">]</span> <span class="o">=</span> <span class="n">pages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># get the concept unique identifier</span>
+        <span class="n">cui</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a> <span class="o">=</span> <span class="n">terms</span><span class="p">[</span><span class="s1">'ui'</span><span class="p">]</span>
+
+        <span class="c1"># print atoms of this concept</span>
+        <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="s1">'atoms:'</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">(</span><span class="n">cui</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This yields the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">atoms</span><span class="p">:</span>
+<span class="p">{</span><span class="s1">'ancestors'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+ <span class="s1">'classType'</span><span class="p">:</span> <span class="s1">'Atom'</span><span class="p">,</span>
+ <span class="s1">'code'</span><span class="p">:</span> <span class="s1">'https://uts-ws.nlm.nih.gov/rest/content/2020AA/source/MTH/NOCODE'</span><span class="p">,</span>
+ <span class="s1">'concept'</span><span class="p">:</span> <span class="s1">'https://uts-ws.nlm.nih.gov/rest/content/2020AA/CUI/C0018787'</span><span class="p">,</span>
+ <span class="s1">'contentViewMemberships'</span><span class="p">:</span> <span class="p">[{</span><span class="s1">'memberUri'</span><span class="p">:</span> <span class="s1">'https://uts-ws.nlm.nih.gov/rest/content-views/2020AA/CUI/C1700357/member/A0066369'</span><span class="p">,</span>
+                             <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'MetaMap NLP View'</span><span class="p">,</span>
+                             <span class="s1">'uri'</span><span class="p">:</span> <span class="s1">'https://uts-ws.nlm.nih.gov/rest/content-views/2020AA/CUI/C1700357'</span><span class="p">}],</span>
+ <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Heart'</span><span class="p">,</span>
+ <span class="s1">'obsolete'</span><span class="p">:</span> <span class="s1">'false'</span><span class="p">,</span>
+ <span class="s1">'rootSource'</span><span class="p">:</span> <span class="s1">'MTH'</span><span class="p">,</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See the full <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example/uts">UTS example</a> for the full example code.</p>
+</section>
+<section id="using-cui-as-word-embeddings">
+<h2>Using CUI as Word Embeddings<a class="headerlink" href="#using-cui-as-word-embeddings" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/1804.01486">cui2vec</a> was trained and can be in the same way as <a class="reference external" href="https://arxiv.org/abs/1301.3781">word2vec</a>.  Such examples
+is computing a similarity between <a class="reference external" href="https://www.nlm.nih.gov/research/umls/">UMLS</a> <a class="reference external" href="https://www.nlm.nih.gov/research/umls/new_users/online_learning/Meta_005.html">CUIs</a>.  This API provides access to
+the vectors directly along with all the functionality using <a class="reference external" href="https://arxiv.org/abs/1804.01486">cui2vec</a> with the
+<a class="reference external" href="https://radimrehurek.com/gensim/">gensim</a> package.  This example computes the similarity between two medical
+concepts.  For brevity the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> application code and configuration is omitted
+(see <a class="reference external" href="#umls-access-via-uts">UMLS Access via UTS</a> for more detail).</p>
+<p>Let’s jump right to how we import everything we need for the <a class="reference external" href="https://arxiv.org/abs/1804.01486">cui2vec</a> example,
+which the <code class="docutils literal notranslate"><span class="pre">uts</span></code> and <code class="docutils literal notranslate"><span class="pre">cui2vec</span></code> resource libraries:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[imp_conf]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">importini</span>
+<span class="na">config_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list:</span>
+<span class="w">    </span><span class="na">resource(zensols.mednlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/uts.conf,</span>
+<span class="w">    </span><span class="na">resource(zensols.mednlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/cui2vec.conf</span>
+</pre></div>
+</div>
+<p>The UTS configuration is given as in the <a class="reference external" href="#umls-access-via-uts">UMLS Access via UTS</a> section and the
+parser is configured as in the <a class="reference external" href="#medical-concept-and-entity-linking">Medical Concept and Entity Linking</a> section.</p>
+<p>With the high level classes given the configuration is class looks similar to
+what we’ve seen before, this time we define a <code class="docutils literal notranslate"><span class="pre">similarity</span></code> method/<a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> action:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Application</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'heart disease'</span><span class="p">,</span> <span class="n">topn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Next, get the <a class="reference external" href="https://radimrehurek.com/gensim/">gensim</a> <code class="docutils literal notranslate"><span class="pre">KeyedVectors</span></code> instance, which provides (among <em>many</em>
+other useful methods) one to compute the similarity between two words, or in
+our case, two medical <a class="reference external" href="https://www.nlm.nih.gov/research/umls/new_users/online_learning/Meta_005.html">CUIs</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">embedding</span><span class="p">:</span> <span class="n">Cui2VecEmbedModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cui2vec_embedding</span>
+        <span class="n">kv</span><span class="p">:</span> <span class="n">KeyedVectors</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">keyed_vectors</span>
+</pre></div>
+</div>
+<p>Next we use UTS to get the term we’re searching on, use <a class="reference external" href="https://radimrehurek.com/gensim/">gensim</a> to find
+similarities, and output them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">res</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">search_term</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+        <span class="n">cui</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'ui'</span><span class="p">]</span>
+        <span class="n">sims_by_word</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">similar_by_word</span><span class="p">(</span><span class="n">cui</span><span class="p">,</span> <span class="n">topn</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rel_cui</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">sims_by_word</span><span class="p">:</span>
+            <span class="n">rel_atom</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uts_client</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">(</span><span class="n">rel_cui</span><span class="p">)</span>
+            <span class="n">rel_name</span> <span class="o">=</span> <span class="n">rel_atom</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'Unknown'</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">rel_name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">rel_cui</span><span class="si">}</span><span class="s1">): </span><span class="si">{</span><span class="n">proba</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output contains the top (<code class="docutils literal notranslate"><span class="pre">topn</span></code>) 5 matches and their similarity to the
+search term in the example <code class="docutils literal notranslate"><span class="pre">heart</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Heart</span> <span class="n">failure</span> <span class="p">(</span><span class="n">C0018801</span><span class="p">):</span> <span class="mf">72.03</span><span class="o">%</span>
+<span class="n">Atrial</span> <span class="n">Premature</span> <span class="n">Complexes</span> <span class="p">(</span><span class="n">C0033036</span><span class="p">):</span> <span class="mf">71.53</span><span class="o">%</span>
+<span class="n">Chronic</span> <span class="n">myocardial</span> <span class="n">ischemia</span> <span class="p">(</span><span class="n">C0264694</span><span class="p">):</span> <span class="mf">69.68</span><span class="o">%</span>
+<span class="n">Right</span> <span class="n">bundle</span> <span class="n">branch</span> <span class="n">block</span> <span class="p">(</span><span class="n">C0085615</span><span class="p">):</span> <span class="mf">69.34</span><span class="o">%</span>
+<span class="n">First</span> <span class="n">degree</span> <span class="n">atrioventricular</span> <span class="n">block</span> <span class="p">(</span><span class="n">C0085614</span><span class="p">):</span> <span class="mf">69.09</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>See the full <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example/cui2vec">cui2vec example</a> for the full example code.</p>
+</section>
+<section id="entity-linking-with-ctakes">
+<h2>Entity Linking with cTAKES<a class="headerlink" href="#entity-linking-with-ctakes" title="Link to this heading">¶</a></h2>
+<p>This package provides an interface to <a class="reference external" href="https://ctakes.apache.org">cTAKES</a>, which primarily manages the
+file system and invokes the Java program to produce results.  It then uses the
+<a class="reference external" href="https://pypi.org/project/ctakes-parser">ctakes-parser</a> to create a data frame of features and linked entities from
+tokens of the source text.</p>
+<p>The configuration is a bit more involved since you have to indicate where the
+<a class="reference external" href="https://ctakes.apache.org">cTAKES</a> program is installed, and provide your NIH key as detailed in the
+<a class="reference external" href="#umls-access-via-uts">UMLS Access via UTS</a> section:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[import]</span>
+<span class="c1"># refer to sections for which we need substitution in this file</span>
+<span class="na">references</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list: default, ctakes, uts</span>
+<span class="na">sections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list: imp_env, imp_uts_key, imp_conf</span>
+
+<span class="c1"># expose the user HOME environment variable</span>
+<span class="k">[imp_env]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">environment</span>
+<span class="na">section_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">env</span>
+<span class="na">includes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">set: HOME</span>
+
+<span class="c1"># import the Zensols NLP UTS resource library</span>
+<span class="k">[imp_conf]</span>
+<span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">importini</span>
+<span class="na">config_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">list:</span>
+<span class="w">    </span><span class="na">resource(zensols.mednlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/uts.conf,</span>
+<span class="w">    </span><span class="na">resource(zensols.mednlp)</span><span class="o">:</span><span class="w"> </span><span class="s">resources/ctakes.conf</span>
+
+<span class="c1"># indicate where Apache cTAKES is installed</span>
+<span class="k">[ctakes]</span>
+<span class="na">home</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${env:home}/opt/app/ctakes-4.0.0.1</span>
+<span class="na">source_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">${default:cache_dir}/ctakes/source</span>
+</pre></div>
+</div>
+<p>For brevity the <a class="reference external" href="https://plandes.github.io/util/doc/command-line.html">CLI</a> application code and configuration is omitted, and other
+configuration given in previous sections (see <a class="reference external" href="#umls-access-via-uts">UMLS Access via UTS</a> for more
+detail). See the full <a class="reference external" href="https://github.com/plandes/mednlp/tree/master/example/ctakes">cTAKES example</a> for the full example code.</p>
+<p>The pertinent snippet to get the <a class="reference external" href="https://pandas.pydata.org">Pandas</a> data frame from the medical text is
+very simple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Application</span><span class="p">(</span><a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#object" title="object"><span class="nb">object</span></a><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sent</span><span class="p">:</span> <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/stdtypes.html#str" title="str"><span class="nb">str</span></a> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sent</span> <span class="o">=</span> <span class="s1">'He was diagnosed with kidney failure in the United States.'</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctakes_stash</span><span class="o">.</span><span class="n">set_documents</span><span class="p">([</span><span class="n">sent</span><span class="p">])</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctakes_stash</span><span class="p">[</span><span class="s1">'0'</span><span class="p">]</span>
+        <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+            <a class="sphinx-codeautolink-a" href="https://docs.python.org/3/library/functions.html#print" title="print"><span class="nb">print</span></a><span class="p">(</span><span class="sa">f</span><span class="s1">'wrote: </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">set_documents</span></code> expects a list of text, which is saved to disk.  When
+<a class="reference external" href="https://ctakes.apache.org">cTAKES</a> is run, the directory where this list of text is saved (one file per
+element in the list).  The access to the <a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.Stash">Stash</a> accesses the first document by
+element ID.  <strong>Note</strong>: the element ID has to be a string to follow the <a class="reference external" href="https://plandes.github.io/util/api/zensols.persist.html#zensols.persist.domain.Stash">Stash</a>
+API.</p>
+<!-- links --></section>
+</section>
+</article>
+</div>
+<footer>
+<div class="related-pages">
+<a class="next-page" href="../api.html">
+<div class="page-info">
+<div class="context">
+<span>Next</span>
+</div>
+<div class="title">API Reference</div>
+</div>
+<svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+</a>
+<a class="prev-page" href="../index.html">
+<svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+<div class="page-info">
+<div class="context">
+<span>Previous</span>
+</div>
+<div class="title">Medical natural language parsing and utility library</div>
+</div>
+</a>
+</div>
+<div class="bottom-of-page">
+<div class="left-details">
+<div class="copyright">
+                Copyright © 2025 Paul Landes
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+</div>
+<div class="right-details">
+</div>
+</div>
+</footer>
+</div>
+<aside class="toc-drawer">
+<div class="toc-sticky toc-scroll">
+<div class="toc-title-container">
+<span class="toc-title">
+            On this page
+          </span>
+</div>
+<div class="toc-tree-container">
+<div class="toc-tree">
+<ul>
+<li><a class="reference internal" href="#">Medical NLP and Utility API</a><ul>
+<li><a class="reference internal" href="#medical-concept-and-entity-linking">Medical Concept and Entity Linking</a></li>
+<li><a class="reference internal" href="#umls-access-via-uts">UMLS Access via UTS</a></li>
+<li><a class="reference internal" href="#using-cui-as-word-embeddings">Using CUI as Word Embeddings</a></li>
+<li><a class="reference internal" href="#entity-linking-with-ctakes">Entity Linking with cTAKES</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</div><script src="../_static/documentation_options.js?v=f333a941"></script>
+<script src="../_static/doctools.js?v=9a2dae69"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+<script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+<script src="../_static/copybutton.js?v=f281be69"></script>
+</body>
+</html>

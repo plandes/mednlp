@@ -1,0 +1,19 @@
+Medical natural language parsing and utility library.
+=====================================================
+A natural language medical domain parsing library.
+
+.. toctree::
+   :maxdepth: 3
+   :glob:
+
+   Overview <index.md>
+   doc/*
+   API Reference <api.rst>
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

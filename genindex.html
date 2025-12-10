@@ -1,0 +1,916 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#"><link rel="search" title="Search" href="search.html">
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.09.25 --><title>Index - Medical natural language parsing and utility library. 1.9.3 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-codeautolink.css?v=b2176991" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/codeautolink.css?v=57550ae3" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="top.html"><div class="brand">Medical natural language parsing and utility library. 1.9.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="top.html">
+  
+  <span class="sidebar-brand-text">Medical natural language parsing and utility library. 1.9.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc/api-usage.html">Medical NLP and Utility API</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/zensols.mednlp.html">zensols.mednlp package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#Z"><strong>Z</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.AuthenticationError.__annotations__">__annotations__ (zensols.mednlp.uts.AuthenticationError attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.NoResultsError.__annotations__">(zensols.mednlp.uts.NoResultsError attribute)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSError.__annotations__">(zensols.mednlp.uts.UTSError attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.__init__">__init__() (zensols.mednlp.app.Application method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.cli.ApplicationFactory.__init__">(zensols.mednlp.cli.ApplicationFactory method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.__init__">(zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.__init__">(zensols.mednlp.entlink.Entity method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource.__init__">(zensols.mednlp.entlink.EntityLinkerResource method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntitySimilarity.__init__">(zensols.mednlp.entlink.EntitySimilarity method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator.__init__">(zensols.mednlp.entlink.LinkFeatureTokenDecorator method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.__init__">(zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser.__init__">(zensols.mednlp.parser.MedCatFeatureDocumentParser method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.__init__">(zensols.mednlp.resource.MedCatResource method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.__init__">(zensols.mednlp.tok.MedicalFeatureToken method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.__init__">(zensols.mednlp.uts.Authentication method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.AuthenticationError.__init__">(zensols.mednlp.uts.AuthenticationError method)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.__init__">(zensols.mednlp.uts.UTSClient method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.domain.MedNLPError.__module__">__module__ (zensols.mednlp.domain.MedNLPError attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.AuthenticationError.__module__">(zensols.mednlp.uts.AuthenticationError attribute)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.NoResultsError.__module__">(zensols.mednlp.uts.NoResultsError attribute)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSError.__module__">(zensols.mednlp.uts.UTSError attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.aliases">aliases (zensols.mednlp.entlink.Entity attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.api_key">api_key (zensols.mednlp.uts.Authentication attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.api_key">(zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application">Application (class in zensols.mednlp.app)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.cli.ApplicationFactory">ApplicationFactory (class in zensols.mednlp.cli)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.atom">atom() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.auth_endpoint">auth_endpoint (zensols.mednlp.uts.Authentication attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.AUTH_URI">AUTH_URI (zensols.mednlp.uts.Authentication attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication">Authentication (class in zensols.mednlp.uts)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.AuthenticationError">AuthenticationError</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.GroupInfo.byname">byname (zensols.mednlp.app.GroupInfo attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource.cache_global">cache_global (zensols.mednlp.entlink.EntityLinkerResource attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.cache_global">(zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.cat">cat (zensols.mednlp.resource.MedCatResource property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.cat_config">cat_config (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.cdb_resource">cdb_resource (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.clear">clear() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.clear">(zensols.mednlp.resource.MedCatResource method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.config_factory">config_factory (zensols.mednlp.app.Application attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.config_factory">(zensols.mednlp.lib.MedicalLibrary attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.context_similarity">context_similarity (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.GroupInfo.csv">csv (zensols.mednlp.app.GroupInfo attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.ctakes">ctakes() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash">CTakesParserStash (class in zensols.mednlp.ctakes)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.cui">cui (zensols.mednlp.entlink.Entity attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.cui">(zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.cui2vec_embedding">cui2vec_embedding (zensols.mednlp.lib.MedicalLibrary property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.cui_">cui_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator.decorate">decorate() (zensols.mednlp.entlink.LinkFeatureTokenDecorator method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.define">define() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.definition">definition (zensols.mednlp.entlink.Entity attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.definition_">definition_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.detected_name_">detected_name_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.doc_parser">doc_parser (zensols.mednlp.app.Application attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.ent">ent (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.ent_">ent_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity">Entity (class in zensols.mednlp.entlink)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.entity_linker_resource">entity_linker_resource (zensols.mednlp.lib.MedicalLibrary attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource">EntityLinkerResource (class in zensols.mednlp.entlink)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntitySimilarity">EntitySimilarity (class in zensols.mednlp.entlink)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.entry_point_bin">entry_point_bin (zensols.mednlp.ctakes.CTakesParserStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.entry_point_cmd">entry_point_cmd (zensols.mednlp.ctakes.CTakesParserStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.exists">exists() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator.feature_format">feature_format (zensols.mednlp.entlink.LinkFeatureTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator.feature_id">feature_id (zensols.mednlp.entlink.LinkFeatureTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.FEATURE_IDS">FEATURE_IDS (zensols.mednlp.tok.MedicalFeatureToken attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.FEATURE_IDS_BY_TYPE">FEATURE_IDS_BY_TYPE (zensols.mednlp.tok.MedicalFeatureToken attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.features">features() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.filter_groups">filter_groups (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.filter_tuis">filter_tuis (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_atom">get_atom() (zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.get_atoms">get_atoms() (zensols.mednlp.uts.UTSClient method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.cli.ApplicationFactory.get_doc_parser">get_doc_parser() (zensols.mednlp.cli.ApplicationFactory class method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_entities">get_entities() (zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource.get_linked_entity">get_linked_entity() (zensols.mednlp.entlink.EntityLinkerResource method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_linked_entity">(zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_new_ctakes_parser_stash">get_new_ctakes_parser_stash() (zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.get_related_cuis">get_related_cuis() (zensols.mednlp.uts.UTSClient method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.get_relations">get_relations() (zensols.mednlp.lib.MedicalLibrary method)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.get_relations">(zensols.mednlp.uts.UTSClient method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.getst">getst() (zensols.mednlp.uts.Authentication method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.gettgt">gettgt() (zensols.mednlp.uts.Authentication method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.group">group() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.GroupInfo">GroupInfo (class in zensols.mednlp.app)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.groups">groups (zensols.mednlp.resource.MedCatResource property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.home">home (zensols.mednlp.ctakes.CTakesParserStash attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.installer">installer (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.is_concept">is_concept (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.keys">keys() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator.lib">lib (zensols.mednlp.entlink.LinkFeatureTokenDecorator attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.library">library (zensols.mednlp.app.Application attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource.linker">linker (zensols.mednlp.entlink.EntityLinkerResource property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.LinkFeatureTokenDecorator">LinkFeatureTokenDecorator (class in zensols.mednlp.entlink)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.load">load() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.cli.main">main() (in module zensols.mednlp.cli)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.mc_status_resource">mc_status_resource (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.medcat_resource">medcat_resource (zensols.mednlp.lib.MedicalLibrary attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser.medcat_resource">(zensols.mednlp.parser.MedCatFeatureDocumentParser attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser">MedCatFeatureDocumentParser (class in zensols.mednlp.parser)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource">MedCatResource (class in zensols.mednlp.resource)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken">MedicalFeatureToken (class in zensols.mednlp.tok)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary">MedicalLibrary (class in zensols.mednlp.lib)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.domain.MedNLPError">MedNLPError</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.MISSING_VALUE">MISSING_VALUE (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp">zensols.mednlp</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.app">zensols.mednlp.app</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.cli">zensols.mednlp.cli</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.ctakes">zensols.mednlp.ctakes</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.domain">zensols.mednlp.domain</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.entlink">zensols.mednlp.entlink</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.lib">zensols.mednlp.lib</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.parser">zensols.mednlp.parser</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.resource">zensols.mednlp.resource</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.tok">zensols.mednlp.tok</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.uts">zensols.mednlp.uts</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.name">name (zensols.mednlp.entlink.Entity attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.NO_RESULTS_ERR">NO_RESULTS_ERR (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.NoResultsError">NoResultsError</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.output_dir">output_dir (zensols.mednlp.ctakes.CTakesParserStash attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.package_manager">package_manager (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntityLinkerResource.params">params (zensols.mednlp.entlink.EntityLinkerResource attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.pref_name_">pref_name_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.prime">prime() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.REL_ID_REGEX">REL_ID_REGEX (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.request_stash">request_stash (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.requirements">requirements (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.search">search() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.search_term">search_term() (zensols.mednlp.uts.UTSClient method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.Authentication.SERVICE">SERVICE (zensols.mednlp.uts.Authentication attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.set_documents">set_documents() (zensols.mednlp.ctakes.CTakesParserStash method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.show">show() (zensols.mednlp.app.Application method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.app.Application.similarity">similarity() (zensols.mednlp.app.Application method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.similarity_by_term">similarity_by_term() (zensols.mednlp.lib.MedicalLibrary method)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.EntitySimilarity.similiarty">similiarty (zensols.mednlp.entlink.EntitySimilarity attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.source_dir">source_dir (zensols.mednlp.ctakes.CTakesParserStash attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.ctakes.CTakesParserStash.source_stash">source_stash (zensols.mednlp.ctakes.CTakesParserStash property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.spacy_enable_components">spacy_enable_components (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.sub_names">sub_names (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.surpress_warnings">surpress_warnings() (in module zensols.mednlp)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser.token_class">token_class (zensols.mednlp.parser.MedCatFeatureDocumentParser attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser.TOKEN_FEATURE_IDS">TOKEN_FEATURE_IDS (zensols.mednlp.parser.MedCatFeatureDocumentParser attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.parser.MedCatFeatureDocumentParser.token_feature_ids">token_feature_ids (zensols.mednlp.parser.MedCatFeatureDocumentParser attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.tui_descs_">tui_descs_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.entlink.Entity.tuis">tuis (zensols.mednlp.entlink.Entity attribute)</a>
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.tuis">(zensols.mednlp.resource.MedCatResource property)</a>
+</li>
+          <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.tuis">(zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.tuis_">tuis_ (zensols.mednlp.tok.MedicalFeatureToken property)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.umls_groups">umls_groups (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.umls_tuis">umls_tuis (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.URI">URI (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.lib.MedicalLibrary.uts_client">uts_client (zensols.mednlp.lib.MedicalLibrary attribute)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient">UTSClient (class in zensols.mednlp.uts)</a>
+</li>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSError">UTSError</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.uts.UTSClient.version">version (zensols.mednlp.uts.UTSClient attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.resource.MedCatResource.vocab_resource">vocab_resource (zensols.mednlp.resource.MedCatResource attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/zensols.mednlp.html#zensols.mednlp.tok.MedicalFeatureToken.WRITABLE_FEATURE_IDS">WRITABLE_FEATURE_IDS (zensols.mednlp.tok.MedicalFeatureToken attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Z" class="genindex-section">
+  <h2>Z</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    zensols.mednlp
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.app
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.app">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.cli
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.cli">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.ctakes
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.ctakes">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.domain
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.domain">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.entlink
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.entlink">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    zensols.mednlp.lib
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.lib">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.parser
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.parser">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.resource
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.resource">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.tok
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.tok">module</a>
+</li>
+        </ul></li>
+        <li>
+    zensols.mednlp.uts
+
+        <ul>
+          <li><a href="api/zensols.mednlp.html#module-zensols.mednlp.uts">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025 Paul Landes
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f333a941"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
