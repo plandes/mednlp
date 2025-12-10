@@ -3,7 +3,7 @@
 """
 __author__ = 'Paul Landes'
 
-from typing import List, Dict, Any, ClassVar
+from typing import Tuple, Dict, Any
 from dataclasses import dataclass, field, InitVar
 import logging
 from scispacy.linking import EntityLinker
@@ -18,28 +18,23 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Entity(Dictable):
-    """A convenience container class that Wraps a SciSpacy entity.
+    """A UMLS entity that has its name, CUI, definition and aliases.
 
     """
-    _DICTABLE_ATTRIBUTES: ClassVar[List[str]] = 'cui name definition'.split()
+    name: str = field()
+    """The canonical name of the entity."""
 
-    sci_spacy_entity: SciSpacyEntity = field(repr=False)
-    """The entity identified by :mod:`scispacy.linking_utils`."""
+    cui: str = field()
+    """The unique concept identifier."""
 
-    @property
-    def name(self) -> str:
-        """The canonical name of the entity."""
-        return self.sci_spacy_entity.canonical_name
+    definition: str = field()
+    """The human readable description of the entity."""
 
-    @property
-    def definition(self) -> str:
-        """The human readable description of the entity."""
-        return self.sci_spacy_entity.definition
+    aliases: Tuple[str, ...] = field()
+    """Aliases for the term."""
 
-    @property
-    def cui(self) -> str:
-        """The unique concept identifier."""
-        return self.sci_spacy_entity.concept_id
+    tuis: Tuple[str, ...] = field()
+    """Type union IDs."""
 
     def __str__(self) -> str:
         return f'{self.name} ({self.cui})'
@@ -53,6 +48,7 @@ class EntitySimilarity(Entity):
     """A similarity measure of a medical concept in cui2vec.
 
     :see: :meth:`.MedCatFeatureDocumentParser.similarity_by_term`
+
     """
     similiarty: float = field()
 
@@ -82,19 +78,11 @@ class EntityLinkerResource(object):
     @persisted('_linker')
     def linker(self) -> EntityLinker:
         """The ScispaCy entity linker."""
-        self._silence_scispacy_warn()
+        # should ahve no bearing since we're simply doing a CUI looking
+        import warnings
+        s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
+        warnings.filterwarnings('ignore', message=s)
         return EntityLinker(**self.params)
-
-    @staticmethod
-    def _silence_scispacy_warn():
-        """This warning has should have no bearing on this application as we're
-        simply doing a CUI looking.
-
-        """
-        # import warnings
-        # s = '.*Trying to unpickle estimator Tfidf(?:Transformer|Vectorizer) from version.*'
-        # warnings.filterwarnings('ignore', message=s)
-        pass
 
     def get_linked_entity(self, cui: str) -> Entity:
         """Get a scispaCy linked entity.
@@ -105,23 +93,39 @@ class EntityLinkerResource(object):
         linker: EntityLinker = self.linker
         se: SciSpacyEntity = linker.kb.cui_to_entity.get(cui)
         if se is not None:
-            return Entity(se)
+            return Entity(
+                name=se.canonical_name,
+                cui=se.concept_id,
+                definition=se.definition,
+                aliases=se.aliases,
+                tuis=se.types)
 
 
 @dataclass
 class LinkFeatureTokenDecorator(FeatureTokenDecorator):
-    """Adds linked SciSpacy definitions to tokens using the
+    """Adds linked SciSpacy definitions (when available) to tokens using the
     :class:`.MedicalLibrary`.
 
     """
     lib: MedicalLibrary = field(default=None)
     """The medical library used for linking entities."""
 
+    feature_id: str = field(default='definition_')
+    """The feature ID to use when adding linked entities (when available)."""
+
+    feature_format: str = field(default="{definition}")
+    """The formatting of the feature, which uses :meth:`.Entity.asdict` as the
+    parameters available to the format.
+
+    """
     def decorate(self, token: FeatureToken):
         e: SciSpacyEntity = self.lib.get_linked_entity(token.cui_)
+        val: str = FeatureToken.NONE
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(f'entity: {token.cui_} -> {e} ({id(token)})')
         if e is not None:
             if logger.isEnabledFor(logging.DEBUG):
-                logger.debug(f'entity def: {e.definition}')
-            token.set_feature('definition_', e.definition)
+                logger.debug(f'entity: {e}')
+            val = self.feature_format.format(**e.asdict())
+            val = FeatureToken.NONE if val == 'None' else val
+        token.set_feature(self.feature_id, val)

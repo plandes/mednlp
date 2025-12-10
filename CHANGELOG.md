@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [1.9.3] - 2025-12-10
+### Changed
+- `entlink.Entity` is now independent of sciSpacy.
+- `LinkFeatureTokenDecorator` provides a general format configuration and
+  ID when formatting the text on the `FeatureToken`.
+- Guard on accessing entities when not configured with resource library
+  `resources/entlink.conf`.
+
+
 ## [1.9.2] - 2025-07-27
 ### Removed
 - `pyrush` dependency.
@@ -194,7 +203,8 @@ Downstream moderate risk update release.
 
 
 <!-- links -->
-[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.9.2...HEAD
+[Unreleased]: https://github.com/Paul Landes/mednlp/compare/v1.9.3...HEAD
+[1.9.3]: https://github.com/Paul Landes/mednlp/compare/v1.9.2...v1.9.3
 [1.9.2]: https://github.com/Paul Landes/mednlp/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/Paul Landes/mednlp/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/Paul Landes/mednlp/compare/v1.8.0...v1.9.0

@@ -55,8 +55,8 @@ doc:
   api_config:
     intersphinx_mapping:
       util:
-        modules: [zensols.util, zensols.persist, zensols.config, zensols.cli, zensols.multi]
-        url: '{RP_DOC_IM_URL}/{package}/'
+        modules: ['zensols.util']
+        url: "{RP_DOC_IM_URL}/{package}/"
       deepnlp:
         modules: ['zensols.deepnlp']
         url: '{RP_DOC_IM_URL}/{package}/'

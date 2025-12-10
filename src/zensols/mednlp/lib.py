@@ -4,9 +4,12 @@
 from __future__ import annotations
 __author__ = 'Paul Landes'
 from typing import Any, List, Dict, Tuple
+import logging
 from dataclasses import dataclass, field
 from zensols.config import ConfigFactory, Dictable
 from . import MedCatResource, UTSClient
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -33,7 +36,10 @@ class MedicalLibrary(Dictable):
         :return: concepts as a multi-tiered dict
 
         """
-        return self.medcat_resource.cat.get_entities(text)
+        ent: Dict[str, Any] = self.medcat_resource.cat.get_entities(text)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'entity {text} -> {ent}')
+        return ent
 
     def get_linked_entity(self, cui: str) -> 'Entity':
         """Get a scispaCy linked entity.
@@ -44,7 +50,9 @@ class MedicalLibrary(Dictable):
         from .entlink import Entity
         ent: Entity = None
         if self.entity_linker_resource is not None:
-            self.entity_linker_resource.get_linked_entity(cui)
+            ent = self.entity_linker_resource.get_linked_entity(cui)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'linked entity {cui} -> {ent}')
         return ent
 
     def get_atom(self, cui: str) -> Dict[str, str]:
@@ -57,7 +65,10 @@ class MedicalLibrary(Dictable):
         :return: a list of atom entries in dictionary form
 
         """
-        return self.uts_client.get_atoms(cui, preferred=True)
+        atom: Dict[str, str] = self.uts_client.get_atoms(cui, preferred=True)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'atom {cui} -> {atom}')
+        return atom
 
     def get_relations(self, cui: str) -> List[Dict[str, Any]]:
         """Get the UMLS related concepts connected to a concept by ID.
@@ -68,7 +79,10 @@ class MedicalLibrary(Dictable):
                  returned by UTS
 
         """
-        return self.uts_client.get_relations(cui)
+        rel: List[Dict[str, Any]] = self.uts_client.get_relations(cui)
+        if logger.isEnabledFor(logging.DEBUG):
+            logger.debug(f'relation {cui} -> {rel}')
+        return rel
 
     def get_new_ctakes_parser_stash(self) -> 'CTakesParserStash':
         """Return a new instance of a ctakes parser stash.
